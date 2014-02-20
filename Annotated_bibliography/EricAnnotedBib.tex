@@ -12,7 +12,7 @@
 % --- End of Author Metadata ---
 
 \title{
-Evolving Programs at Bytecode Level
+Evolving Compiled Programs
 }
 %
 % You need the command \numberofauthors to handle the 'placement
@@ -29,7 +29,7 @@ Evolving Programs at Bytecode Level
 % we ask you to refrain from putting more than six authors
 % (two rows with three columns) beneath the article title.
 % More than six makes the first-page appear very cluttered indeed.
-%
+%ers tend to contribute at least one new thing to further work in an area, and the authors usually describe their contributions by situating their work compared to other (previous) work in the area. Key points of your paper show your understanding of contributions of your sources.
 % Use the \alignauthor commands to handle the names
 % and affiliations for an 'aesthetic maximum' of six authors.
 % Add names, affiliations, addresses for
@@ -61,7 +61,7 @@ Eric C. Collom
 
 \maketitle
 \begin{abstract}
-This paper discusses using x86 assembly language and Java Bytecode to evolve programs. 
+This paper discusses using x86 assembly language and Java Bytecode to evolve programs. The benefits to evolving code at the Java bytecode and machine code level are: it's not limited by source code syntax, can evolve more than one type of language,it is possible to evolve the entire program. 
 \end{abstract}
 
 
@@ -76,10 +76,64 @@ This paper discusses using x86 assembly language and Java Bytecode to evolve pro
 \mycomment{I will change the keywords later}
 
 \section{Introduction}
-I plan to focus on the topic of taking programs that aren't designed to be evolved and evolving them through bytecode.  
+I plan to focus on the topic of taking programs that aren't designed to be evolved and evolving them through Java bytecode and x86.
+
+My two key papers will be "Flight of the FINCH through the Java Wilderness"~\cite{FINCH:2010} and "Automated Program Repair through the Evolution of Assembly Code"~\cite{Assembly:2010}. Sipper's et al. ~\cite{FINCH:2010} research addresses if it is viable to evolve programs through Java bytecode. Forrest's et al. ~\cite{Assembly:2010} research address if it possible to fix simple bug's of code in Assembly. 
+
+
+\section{Background}
+
+\subsection{Evolutionary Computation}
+I will start off my background by describing Evolutionary computation. I will explain terminology such as mutation, crossover, fitness value, and tournament (and other things). I will also explain how they work individually and together as a big picture ~\cite{Nic:2008}.Also, Forrest et al. ~\cite{Assembly:2010} have a well done background on EC so I might use it as well. Sipper and Orlov ~\cite{FINCH:2010} have a good description on crossover.
+\subsection{Assembly}
+I will explain enough about assembly and how it works so that the reader can understand the rest of the paper. For background on this so far I only have ~\cite{x86:2014} as a reference which I need to actually read and understand yet. I feel like I will need more but I'm still not sure.
+\subsection{Java Bytecode}
+Java source code is first compiled to platform independent Java bytecode. The Java virtual machine (JVM) then checks the bytecode for errors. If it finds an error it throws an exception if not it begins to interpret the bytecode until it decides it should compile it into assembly ~\cite{FINCH:2010}.
+
+
+\section{Why Evolve Jave Bytecode and X86}
+It is beneficial to evolve Java bytecode and x86 assembly because the entire program can be evolved and not just small parts. FINCH, for example, can evolve a program that is nowhere near the final solution and is lacking much of the framework to solve the problem ~\cite{FINCH:2010}. 
+
+Evolving the entire program at this level is much simple that evolving at the source code level.This is because the bytecode and x86 grammar sets are a lot smaller and with source code there are lots of syntax constraints ~\cite{FINCH:2010} ~\cite{Assembly:2010}.
+
+If we would want to try to solve this problem by evolving at the source code level then basically a new compiler would need to be developed in order for the evolving program to interpret the syntax and then act accordingly~\cite{FINCH:2010}.
+
+Any program that compiles into Java bytecode or x86 can be evolved. This provides a large pool of languages~\cite{FINCH:2010} ~\cite{Assembly:2010}. For example, Scala, Groovy, Jython, Kawa, JavaFx Script, and Clojure all compile to Java bytecode ~\cite{FINCH:2010}. Thus, FINCH could actually evolve programs written in these languages.
+
+\section{How the FINCH evolves code}
+The main EC tool that FINCH used was crossover which it applies 90\% of the time. It applied crossover to two parents programs that already compile. It then checks if the offspring compiles. If it doesn't it then tries to produces another good offspring. It does this until either a good offspring is produced or a specified amount of attempts have been made ~\cite{FINCH:2010}.
+
+After the offspring population is generated then tournament selection is performed to select the next generation of programs ~\cite{FINCH:2010}.
+
+Deals with halting issues by counting function executions and terminating after the count reaches a predetermined amount.
+
+\section{Using Assembly for Software repair}
+Forrest et al. ~\cite{Assembly:2010} used tests to evaluate the fitness. The initial individual usually had five tests that it passed and one test that it didn't. Large to small sized programs were used for evolution. They evolved programs written in C, java, and Haskell.The program would stop evolving the program once an individual was found that passed all six tests. A 90\% chance Mutation was used and crossover the rest of the time ~\cite{Assembly:2010}.
+
+
+\section{Results}
+\subsection{Assembly Results}
+The results for repairing programs through assembly language looked promising. It was shown that evolving code at the assembly to fix small bugs such as infinite loops or buffer overflows~\cite{Assembly:2010}.
+
+It was discovered that complex operators were very ineffective and would slow down the process~\cite{Assembly:2010}.
+
+\subsection{FINCH Results}
+The results using the FINCH ~\cite{FINCH:2010} to evolve Java bytecode also looked promising. Their results showed that FINCH was just as fast and dependable as traditional EC methods. They were able to show that evolving programs at bytcode level to solve traditional EC problems is feasible and works.
+
+\subsection{Future Work}
+Would be nice to see the FINCH solve problems with a much larger source code. They could also solve issues where recursive methods were evolved that didn't terminate but were returned as the methods with the highest fitness. This was due to the way they set up FINCH to deal with the halting issue. 
+	
+For the assembly project the results were not consistent from language to language even though they were all evolved at assembly language level. Also, would be nice to see them work on programs that are more object oriented heavy. 
+	
+	
+\section{Conclusion} 	
+
+
+
+
 
 In plan to use the following sources:~\cite{Assembly:2010} and ~\cite{FINCH:2010} as my main
-sources. I will possibly use ~\cite{GISMOE:2012} and ~\cite{UCL:2012} as more information on evolving programs for different EC purposes such as problem solving or debugging. Will use ~\cite{x86:2014} and ~\cite{Oracle:2013} as background into x86 assembly language and Java bytecode. I also have ~\cite{NeuralNetworks:2013} and ~\cite{HeuristicLab:2013} as more research into using FINCH as an EC tool. However since these articles are so short and brief I don't think I will use them as sources in my final paper. 
+sources. I will possibly use ~\cite{GISMOE:2012} and ~\cite{UCL:2012} as more information on evolving programs for different EC purposes such as problem solving or debugging. I will use ~\cite{x86:2014} and ~\cite{Oracle:2013} as background into x86 assembly language and Java bytecode. I also have~\cite{Nic:2008}for background on EC.
 
 % The following two commands are all you need in the
 % initial runs of your .tex file to
