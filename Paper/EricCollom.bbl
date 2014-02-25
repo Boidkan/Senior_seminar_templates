@@ -1,0 +1,29 @@
+\begin{thebibliography}{1}
+
+\bibitem{BNF:2014}
+Backus-naur form.
+\newblock January 2014.
+\newblock \\ {\it This provides background for Backus-Naur Form (wikipedia) }.
+
+\bibitem{FINCH:2010}
+M.~Orlov and M.~Sipper.
+\newblock Flight of the finch through the java wilderness.
+\newblock {\em Evolutionary Computation, IEEE Transactions on}, 15(2):166--182,
+  April 2011.
+\newblock \\ {\it This will be one of the backbones of my paper. Talks about a
+  program called FINCH that the authors developed. Finch is used to evolve
+  programs at the Java bytecode level. This paper Has lots of information and
+  they have about six examples where they evolved programs using FINCH }.
+
+\bibitem{Assembly:2010}
+E.~Schulte, S.~Forrest, and W.~Weimer.
+\newblock Automated program repair through the evolution of assembly code.
+\newblock In {\em Proceedings of the IEEE/ACM International Conference on
+  Automated Software Engineering}, ASE '10, pages 313--316, New York, NY, USA,
+  2010. ACM.
+\newblock \\ {\it This will be a main source for my paper. It talks about
+  evolving programs at assembly language level and its benefits. These authors
+  focus more on doing this to use EC to debug, refactor, and repair programs.
+  It also breifly mentions FINCH }.
+
+\end{thebibliography}
