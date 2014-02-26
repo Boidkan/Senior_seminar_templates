@@ -1,9 +1,11 @@
 \begin{thebibliography}{1}
 
-\bibitem{BNF:2014}
-Backus-naur form.
-\newblock January 2014.
-\newblock \\ {\it This provides background for Backus-Naur Form (wikipedia) }.
+\bibitem{FINCH2:2009}
+M.~Orlov and M.~Sipper.
+\newblock Genetic programming in the wild: Evolving unrestricted bytecode.
+\newblock In {\em Proceedings of the 11th Annual Conference on Genetic and
+  Evolutionary Computation}, GECCO '09, pages 1043--1050, New York, NY, USA,
+  2009. ACM.
 
 \bibitem{FINCH:2010}
 M.~Orlov and M.~Sipper.
