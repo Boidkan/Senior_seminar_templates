@@ -1,11 +1,30 @@
 \begin{thebibliography}{1}
 
+\bibitem{VIII:2011}
+{\em Genetic Programming Theory and Practice VIII}.
+\newblock Springer New York, 2011.
+\newblock \\ {\it This book provides good information on how the JVM works,
+  FINCH grammar logic and crossover. Brings an aditional perspective. }.
+
+\bibitem{BNF:2014}
+Backus-naur form.
+\newblock January 2014.
+\newblock \\ {\it This provides background for Backus-Naur Form }.
+
+\bibitem{JavaBytecode:2014}
+Java bytcode.
+\newblock Febuary 2014.
+\newblock \\ {\it Wikipedia on bytcode (not just Java). }.
+
 \bibitem{FINCH2:2009}
 M.~Orlov and M.~Sipper.
 \newblock Genetic programming in the wild: Evolving unrestricted bytecode.
 \newblock In {\em Proceedings of the 11th Annual Conference on Genetic and
   Evolutionary Computation}, GECCO '09, pages 1043--1050, New York, NY, USA,
   2009. ACM.
+\newblock \\ {\it This is Sipper's and Orlov's first paper on FINCH. I'm using
+  this because it descripes crossover and how it interacts with the JVM alot
+  bettter than their journal paper. }.
 
 \bibitem{FINCH:2010}
 M.~Orlov and M.~Sipper.

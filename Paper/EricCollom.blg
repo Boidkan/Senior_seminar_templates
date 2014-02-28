@@ -3,55 +3,53 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: EricCollom.aux
 The style file: abbrv.bst
 Database file #1: EricBibliography.bib
-I was expecting an "="---line 73 of file EricBibliography.bib
- : author = {Harman, Mark and Langdon, William B. and Jia, Yue and White, David R. and Arcuri, Andrea and Clark, John A.}, I 
- :                                                                                                                           also have ~\cite{NeuralNetworks:2013} and ~\cite{HeuristicLab:2013} as more research into using FINCH as an EC tool. However since these articles are so short and brief I don't think I will use them as sources in my final paper.
-I'm skipping whatever remains of this entry
-Illegal end of database file---line 221 of file EricBibliography.bib
- : 
- : 
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "BNF:2014"
-You've used 3 entries,
+Warning--to sort, need author, editor, or key in VIII:2011
+Warning--to sort, need author or key in JavaBytecode:2014
+Warning--to sort, need author or key in BNF:2014
+Warning--empty author and editor in VIII:2011
+Warning--empty author in BNF:2014
+Warning--empty journal in BNF:2014
+Warning--empty author in JavaBytecode:2014
+Warning--empty journal in JavaBytecode:2014
+You've used 6 entries,
             2118 wiz_defined-function locations,
-            528 strings with 4924 characters,
-and the built_in function-call counts, 1368 in all, are:
-= -- 151
-> -- 44
+            544 strings with 5531 characters,
+and the built_in function-call counts, 1910 in all, are:
+= -- 204
+> -- 47
 < -- 2
-+ -- 17
++ -- 20
 - -- 14
-* -- 90
-:= -- 208
-add.period$ -- 13
-call.type$ -- 3
-change.case$ -- 16
+* -- 127
+:= -- 280
+add.period$ -- 23
+call.type$ -- 6
+change.case$ -- 24
 chr.to.int$ -- 0
-cite$ -- 3
-duplicate$ -- 59
-empty$ -- 109
+cite$ -- 14
+duplicate$ -- 92
+empty$ -- 169
 format.name$ -- 14
-if$ -- 310
+if$ -- 429
 int.to.chr$ -- 0
-int.to.str$ -- 3
-missing$ -- 3
-newline$ -- 20
+int.to.str$ -- 6
+missing$ -- 6
+newline$ -- 36
 num.names$ -- 6
-pop$ -- 12
+pop$ -- 27
 preamble$ -- 1
-purify$ -- 13
+purify$ -- 19
 quote$ -- 0
-skip$ -- 50
+skip$ -- 70
 stack$ -- 0
-substring$ -- 108
-swap$ -- 23
+substring$ -- 123
+swap$ -- 24
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 12
-warning$ -- 0
+type$ -- 22
+warning$ -- 8
 while$ -- 13
-width$ -- 4
-write$ -- 45
-(There were 2 error messages)
+width$ -- 7
+write$ -- 75
+(There were 8 warnings)

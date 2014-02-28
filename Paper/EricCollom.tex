@@ -118,7 +118,7 @@ Eric C. Collom \\
 \maketitle
 \begin{abstract}
 
-
+Stuff
 \end{abstract}
 
 
@@ -140,7 +140,9 @@ Eric C. Collom \\
 \subsection{Assembly}
 Machine code that runs on a physical machine.
 \subsection{Java Bytecode}
-Bytecode that runs on a virtual machine and can be further compiled into machine code. 
+Java bytecode is compiled Java source code that runs on the Java Virtual Machine(JVM). It "is the intermediate, platform-independent representation of Java programs\cite{VIII:2011}." Each bytecode operation code (opcode) is one byte in length. However, some opcodes, that take perimeters, are multiple bytes long\cite{JavaBytecode:2014}.
+
+
 \subsection{Grammar Stuff}
 Talk about syntactic and semantic constraints and BNF.
 
@@ -156,15 +158,26 @@ One problem with trying to evolve entire programs at the source code level is th
 Java bytecode and x86 Assembly contain a small alphabet of primitives~\cite{Assembly:2010}. Also they are a lot less syntactical. This means that there is a lot less risk of producing a non-compilable program during evolution. Sipper et al. ~\cite{FINCH:2010} simply deals with the cases where a non-compilable program is produced by simply re-evolving the programs ~\cite{FINCH:2010}. Since, the check to see if a program is compilable is cheap enough and the rate of which a program produced is compilable is high enough this is feasible. 
 
 \subsection{Evolve As Is}
-For traditional EC, a program has to be designed specifically to be evolved. However, evolving programs in bytecode or x86 only requiGPW:1569901.1570042res that the program can compile to one of the two. It doesn't require the program to be designed specifically for evolution~\cite{Assembly:2010}~\cite{FINCH:2010}. Many programming languages compile into Java bytecode and x86 and thus can be evolved. For example, Scala, groovy, Jython, Kawa, JavaFx Script, and clojure all compile into Java bytcode ~\cite{FINCH:2010}. The only thing required is an algorithm to compute the fitness. 
+For traditional EC, a program has to be designed specifically to be evolved. However, evolving programs in bytecode or x86 only require that the program can compile to one of the two. It doesn't require the program to be designed specifically for evolution~\cite{Assembly:2010}~\cite{FINCH:2010}. Many programming languages compile into Java bytecode and x86 and thus can be evolved. For example, Scala, groovy, Jython, Kawa, JavaFx Script, and clojure all compile into Java bytcode ~\cite{FINCH:2010}. The only thing required is an algorithm to compute the fitness. 
 
 Another benefit to evolving bytecode and x86 is that you can evolve the entire program. In traditional EC when a program is designed it is more common to evolve an expressions or formulae ~\cite{FINCH:2010} within the program. Most of the program as a whole would be already written and remain the same after evolution. In evolving bytecode and x86 most of the program doesn't even need to be written to be able to evolve it and find a solution. Also, the final product can be drastically different from the original program since the entire program was evolved. This allows for a lot more flexibility in evolving a programs. This also allows us to solve the problem as a whole instead of a small section of the problem.
 
 
 \section{How the FINCH Evolves Code}
 
+\subsection{Selecting Good Offspring}
+Evolving Java Byte code only reduces the chance of evolving non-compilable bytecode to a curtain extent. Even though byte code is less syntactical it still is syntactical. Sipper et al.\cite{FINCH2:2009} addresses this issue by checking if a good offspring has been created before letting it join the evolved population. This is done by checking if it compiles. It it doesn't it then makes another offspring with the same parents. It repeats this process until a good offspring is produced or a specified number of attempts have been made.\par
+The checks that are made make sure that all the variables will be read, written, type-compatible, and will not cause stack underflow\cite{VIII:2011}.
+It is important that only good offspring is selected because this provides good variability in the population. If non-comparable code would result in a fitness score of zero. Since noncompilable code would occur frequently enough it would cause a large portion of the population to have a zero fitness score.
+
 \subsection{Crossover}
-The FINCH uses two-point crossover to evolve bytecode. It takes two programs A and B and extracts sections a and b of bytecode respectively. It then takes section a and inserts it into where section b used to be. It only selects an a that uses "the stack and the local variables array in a depth-compatible and type compatible manner." \mycomment{need to gain more knowledge on this so that  can use my own words to describe what is going on.} This is done so that the chance of producing a good offspring is high. Otherwise, the chance of producing a noncompilable program would be high. Sipper et al.~\cite{FINCH:2010}~\cite{FINCH2:2009} state that it is important to produce compatible bytecode in order to have effective evolution. Also, take into account that just because a can replace b in B does not imply that b can replace a in A. In other words the relationship is not biconditional.
+
+
+The FINCH uses two-point crossover to evolve bytecode. It takes two programs A and B and extracts sections a and b of bytecode respectively. It then takes section a and inserts it into where section b used to be. It only selects an a that will compile after being inserted into B. Take into account that just because a can replace b in B does not imply that b can replace a in A. In other words it is not a biconditional relationship.
+
+
+
+
 
 \subsection{Variable Access Sets}
 \cite{FINCH2:2009} \mycomment{much hard}
