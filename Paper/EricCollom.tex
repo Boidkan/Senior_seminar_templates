@@ -128,7 +128,7 @@ Stuff
 
 \section{Introduction}
 	The limitation of only being able to evolve small parts of programs is an issue in evolutionary computation (EC). Much of these constraints are due to there is no graceful way to evolve programs, as a whole, directly at the source code. This is because source code exists to make it easier for humans to read and write programs. However, it is very hard to create a genetic algorithm (GA) that would evolve source code do to syntactical constraints.\par
-	A solution to this problem is to to compile the program to bytecode or machine code and evolve it there. This has been done in Java bytecode and x86 assembly~\cite{FINCH:2010}~\cite{Assembly:2010} which I will discuss thoroughly in this paper ~\mycomment{add more}.
+	A solution to this problem is to to compile the program to bytecode or machine code and evolve it there. This has been done in Java bytecode and x86 assembly~\cite{FINCH:2011}~\cite{Assembly:2010} which I will discuss thoroughly in this paper ~\mycomment{add more}.
 	
 
 	
@@ -140,7 +140,8 @@ Stuff
 \subsection{Assembly}
 Machine code that runs on a physical machine.
 \subsection{Java Bytecode}
-Java bytecode is compiled Java source code that runs on the Java Virtual Machine(JVM). It "is the intermediate, platform-independent representation of Java programs\cite{VIII:2011}." Each bytecode operation code (opcode) is one byte in length. However, some opcodes, that take perimeters, are multiple bytes long\cite{JavaBytecode:2014}.
+Java bytecode is compiled source code that runs on the Java Virtual Machine(JVM). It "is the intermediate, platform-independent representation of Java programs\cite{VIII:2011}." Each bytecode operation code (opcode) is one byte in length. However, some opcodes, that take parameters, are multiple bytes long\cite{JavaBytecode:2014}.
+There are more higher-level languages than just Java that compile into Java Bytecode. These languages are Scala, Groovy, Jython, Kawa, JavaFx Script, and Clojure\cite{FINCH:2011}.
 
 
 \subsection{Grammar Stuff}
@@ -153,28 +154,29 @@ There are many problems we run into when trying to evolve source code. One probl
 
 
 \subsection{Source Code Grammar Constraints}
-One problem with trying to evolve entire programs at the source code level is that there is a very high risk of producing a non-compilable program. This is due to the fact that high-level programming languages are designed to make it easy for humans to read and write programs. Most high-level programming languages are defined in Backus-Naur Form (BNF) which is purely syntactical~\cite{BNF:2014}~\cite{FINCH:2010}. This means that the grammar does not represent the semantic constraints of a program. So for example, the BNF form does not capture the languages type system, variable visibility and accessibility, and other constraints ~\cite{FINCH:2010}. In order to write a program to evolve source code we would have to deal with all these constraints. While this task is possible it would require writing a full-scale compiler. This would be a very taxing task. \par
+One problem with trying to evolve entire programs at the source code level is that there is a very high risk of producing a non-compilable program. This is due to the fact that high-level programming languages are designed to make it easy for humans to read and write programs. Most high-level programming languages are defined in Backus-Naur Form (BNF) which is purely syntactical\cite{BNF:2014}\cite{FINCH:2011}. This means that the grammar does not represent the semantic constraints of a program. For example, the BNF form does not capture the languages type system, variable visibility and accessibility, and other constraints ~\cite{FINCH:2011}. In order to write a program to evolve source code we would have to deal with all these constraints. While this task is possible it would require writing a full-scale compiler which would be a very taxing task. \par
 
-Java bytecode and x86 Assembly contain a small alphabet of primitives~\cite{Assembly:2010}. Also they are a lot less syntactical. This means that there is a lot less risk of producing a non-compilable program during evolution. Sipper et al. ~\cite{FINCH:2010} simply deals with the cases where a non-compilable program is produced by simply re-evolving the programs ~\cite{FINCH:2010}. Since, the check to see if a program is compilable is cheap enough and the rate of which a program produced is compilable is high enough this is feasible. 
+Java bytecode and x86 Assembly contain a small alphabet of primitives~\cite{Assembly:2010}. Also they are a lot less syntactical. This means that there is a lot less risk of producing a non-compilable program during evolution. Sipper et al.\cite{FINCH:2011} simply deals with the cases where a non-compilable program is produced by simply re-evolving the programs. Since, the check to see if a program is compilable is cheap enough and the rate of which a program produced is compilable is high enough this is feasible. 
 
-\subsection{Evolve As Is}
-For traditional EC, a program has to be designed specifically to be evolved. However, evolving programs in bytecode or x86 only require that the program can compile to one of the two. It doesn't require the program to be designed specifically for evolution~\cite{Assembly:2010}~\cite{FINCH:2010}. Many programming languages compile into Java bytecode and x86 and thus can be evolved. For example, Scala, groovy, Jython, Kawa, JavaFx Script, and clojure all compile into Java bytcode ~\cite{FINCH:2010}. The only thing required is an algorithm to compute the fitness. 
-
-Another benefit to evolving bytecode and x86 is that you can evolve the entire program. In traditional EC when a program is designed it is more common to evolve an expressions or formulae ~\cite{FINCH:2010} within the program. Most of the program as a whole would be already written and remain the same after evolution. In evolving bytecode and x86 most of the program doesn't even need to be written to be able to evolve it and find a solution. Also, the final product can be drastically different from the original program since the entire program was evolved. This allows for a lot more flexibility in evolving a programs. This also allows us to solve the problem as a whole instead of a small section of the problem.
+\subsection{Evolve Entire Program As Is}
+For traditional EC, a program has to be designed specifically to be evolved. Evoling, bytcode or x86 doesn't require the program to be designed specifically for evolution~\cite{Assembly:2010}~\cite{FINCH:2011}. Thus, any language that can compile into either bytecode or x86 can be evolved. The only thing required is an algorithm to compute the fitness. Also, the entire program can be evolved. In traditional EC when a program is designed it is more common to evolve an expressions or formulae ~\cite{FINCH:2011} within the program. Most of the program as a whole would be already written and remain the same after evolution. In evolving bytecode and x86 most of the program doesn't even need to be written to be able to evolve it and find a solution. Also, the final product can be drastically different from the original program since the entire program was evolved. This allows for a lot more flexibility in evolving a programs. This also allows us to solve the problem as a whole instead of a small section of the problem.
 
 
-\section{How the FINCH Evolves Code}
+\section{How the FINCH Works}
 
 \subsection{Selecting Good Offspring}
-Evolving Java Byte code only reduces the chance of evolving non-compilable bytecode to a curtain extent. Even though byte code is less syntactical it still is syntactical. Sipper et al.\cite{FINCH2:2009} addresses this issue by checking if a good offspring has been created before letting it join the evolved population. This is done by checking if it compiles. It it doesn't it then makes another offspring with the same parents. It repeats this process until a good offspring is produced or a specified number of attempts have been made.\par
-The checks that are made make sure that all the variables will be read, written, type-compatible, and will not cause stack underflow\cite{VIII:2011}.
-It is important that only good offspring is selected because this provides good variability in the population. If non-comparable code would result in a fitness score of zero. Since noncompilable code would occur frequently enough it would cause a large portion of the population to have a zero fitness score.
+Evolving Java Byte code only reduces the chance of evolving non-compilable bytecode to a certain extent. Even though byte code is less a lot less syntactical, than source code, it still is syntactical. Sipper et al.\cite{FINCH2:2009} addresses this issue by checking if a good offspring has been created before letting it join the evolved population. This is done by checking if it compiles. If it doesn't then another offspring with the same parents is made. This process is repeated until a good offspring is produced or a predetermined number of attempts have been made.\par
+The checks that are made make sure that all the variables will be read, written, type-compatible, and will not cause stack underflow\cite{VIII:2011}.\par
+It is important that only good offspring is selected because this provides good variability in the population. Non-compilable code would result in a fitness score of zero. Since noncompilable code would occur frequently enough it would cause a large portion of the population to have a zero fitness score.
 
 \subsection{Crossover}
 
 
 The FINCH uses two-point crossover to evolve bytecode. It takes two programs A and B and extracts sections a and b of bytecode respectively. It then takes section a and inserts it into where section b used to be. It only selects an a that will compile after being inserted into B. Take into account that just because a can replace b in B does not imply that b can replace a in A. In other words it is not a biconditional relationship.
 
+\subsection{Non-Halting Bytecode}
+Another issue that arises from evolving unrestricted bytcode is that the resulting program might enter a non-halting state. These problems don't arise when the check to see if program compiles. Instead, this is a runtime issue. This, is especially true when evolving programs that contain loops and recursion.
+The way that Sipper et al.\cite{FINCH:2011} deal with this is, before running the program, count how many calls are made to each function. If too many calls are made to a function than an exception is thrown.
 
 
 
