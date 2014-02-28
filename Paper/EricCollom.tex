@@ -137,6 +137,16 @@ Stuff
 \section{Background}
 
 \subsection{Evolutionary Computation}
+Definition of genetic operator?
+
+\subsubsection{Crossover}
+\subsubsection{Mutation}
+Mutate-insert,mutate-delete,mutate-swap
+\subsubsection{Fitness}
+\subsubsection{Tournament Selection}
+
+
+
 \subsection{Assembly}
 Machine code that runs on a physical machine.
 \subsection{Java Bytecode}
@@ -176,7 +186,7 @@ The FINCH uses two-point crossover to evolve bytecode. It takes two programs A a
 
 \subsection{Non-Halting Bytecode}
 Another issue that arises from evolving unrestricted bytcode is that the resulting program might enter a non-halting state. These problems don't arise when the check to see if program compiles. Instead, this is a runtime issue. This, is especially true when evolving programs that contain loops and recursion.
-The way that Sipper et al.\cite{FINCH:2011} deal with this is, before running the program, count how many calls are made to each function. If too many calls are made to a function than an exception is thrown.
+The way that Sipper et al.\cite{FINCH:2011} deal with this, before running the program, is count how many calls are made to each function. If too many calls are made to a function than an exception is thrown.
 
 
 
@@ -186,6 +196,9 @@ The way that Sipper et al.\cite{FINCH:2011} deal with this is, before running th
 
 
 \section{Evolving Assembly Code}
+	Forrest et al.\cite{Assembly:2010} unlike Sipper et al.\cite{FINCH:2011} does not check to see if their evolved bytecode is noncomilable. Also, instead of checking if their program will enter a non-halting state during runtime, instead they terminate program after an eight second wait.
+
+
 
 \section{Results}
 \subsection{FINCH}
