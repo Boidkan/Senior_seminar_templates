@@ -158,7 +158,7 @@ There are more higher-level languages than just Java that compile into Java Byte
 Talk about syntactic and semantic constraints and BNF.
 
 
-\section{Why Evolve Java Bytecode and X86}
+\section{Why Evolve Machine Code?}
 
 There are many problems we run into when trying to evolve source code. One problem is that it is extremely difficult to evolve an entire program due to source code syntactical constraints. Another problem is that we cannot just take a program and evolve it, we have to design the program to be evolvable. Evolving bytecode and x86 bypasses both of these problems.
 
@@ -202,6 +202,14 @@ The way that Sipper et al.\cite{FINCH:2011} deal with this, before running the p
 
 \section{Results}
 \subsection{FINCH}
+\subsubsection{Symbolic Regression}
+	Symbolic regression is a method of finding a mathematical function that best fits a a set of points between two intervals. Here, the simple was that was solved first was twenty random points from \begin{math}x^4+x^3+x^2+x\end{math}. The initial population given to Finch to work on had a starting fitness of zero. The initial equation was \begin{math} e^(x/(x-sinx) - ln|lnx^2|)\end{math} \mycomment{figure out how to fix this equation}. A population of 500 programs,a crossover probability of 90\%, no mutation, and binary tournament selection was used.
+\subsubsection{Artificial Ant}
+\subsubsection{Intertwined Spirals}
+\subsubsection{Array Sum}
+\subsubsection{Tic-Tac-Toe}
+
+
 \subsection{x86}
 
 \subsection{Future Work}
