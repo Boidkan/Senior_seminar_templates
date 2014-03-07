@@ -216,8 +216,23 @@ The way that Sipper et al.\cite{FINCH:2011} deal with this, before running the p
 \section{Results}
 \subsection{FINCH}
 \subsubsection{Symbolic Regression}
-	Symbolic regression is a method of finding a mathematical function that best fits a a set of points between two intervals. Here, the simple was that was solved first was twenty random points from \begin{math}x^4+x^3+x^2+x\end{math}. The initial population given to Finch to work on had a starting fitness of zero. The initial equation was \begin{math} e^(x/(x-sinx) - ln|lnx^2|)\end{math} \mycomment{figure out how to fix this equation}. A population of 500 programs,a crossover probability of 90\%, no mutation, and binary tournament selection was used.
+Symbolic regression is a method of finding a mathematical function that best fits a a set of points between two intervals.
+\paragraph{Simple Regression}
+	 As a simple problem, Orlov et al.~\cite{FINCH:2011}, decided to first solve for twenty random points between -1 and 1 from the polynomial \begin{math}x^4+x^3+x^2+x\end{math}. An initial population of 500 programs was used with a crossover probability of 90\%. Binary tournament selection was used to determine what individuals to evolve\mycomment{Binary Tourney. Selection is between 2 individual?}. The initial population were all copies of a zero fitness program. The program contained the function set \{-,+,*,\%\}. Bytcode segments where chosen at random with 1000 possible retries.
+		
+	The average number of retries was between 16 and 24 and an ideal individual was found 99\% of the time.
+
+	
+\paragraph{complex regression}		
+	As a more complex problem Orlov et al. decided to evolve the exact set up as for simple regression. However, the fitness algorithm was changed to reward individuals that provided a partial solution. This was done by checking ``if all twenty points are within a \begin{math}10^-8\end{math} of a distance of a degree-n polynomial's output''\mycomment{more detail}. Also, the growth factor was changed from four to five.
+	
+	With these changes, FINCH was able to find an optimal solution every single run.
+	
 \subsubsection{Artificial Ant}
+	The artificial ant problem is a problem that involves moving an ant on a square grid trying to find all the food on the grid. The and starts off on the upper right hand corner of the grid facing to the left. The terminals used to control the ant are LEFT,RIGHT, and MOVE. LEFT and RIGHT turn the ant 90 degrees to its left and right respectively. The move function moves the ant forward. Additional functions that can be used is IF-FOOD-AHEAD,PROGN2,and PROGN3. IF-FOOD-AHEAD is a test which checks if there is food in front of the ant. PROGN2 and PROGN3 allow for two and tree sequence operations respectively.
+	
+	The initial population consisted of an individual of zero fitness. It contained all the terminals and functions. A limit of 100 non-eating moves was placed so that an individual that traversed the entire grid wasn't produced.
+
 \subsubsection{Intertwined Spirals}
 \subsubsection{Array Sum}
 \subsubsection{Tic-Tac-Toe}

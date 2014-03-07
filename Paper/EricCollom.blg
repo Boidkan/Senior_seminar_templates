@@ -3,6 +3,18 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: EricCollom.aux
 The style file: abbrv.bst
 Database file #1: EricBibliography.bib
+I was expecting an "="---line 18 of file EricBibliography.bib
+ : // 
+ :    note={\\
+I'm skipping whatever remains of this entry
+I was expecting an "="---line 41 of file EricBibliography.bib
+ : // 
+ :    note={\\
+I'm skipping whatever remains of this entry
+I was expecting an "="---line 129 of file EricBibliography.bib
+ : // 
+ :    note={\\
+I'm skipping whatever remains of this entry
 Warning--to sort, need author, editor, or key in VIII:2011
 Warning--to sort, need author or key in JavaBytecode:2014
 Warning--to sort, need author or key in BNF:2014
@@ -13,16 +25,16 @@ Warning--empty author in JavaBytecode:2014
 Warning--empty journal in JavaBytecode:2014
 You've used 6 entries,
             2118 wiz_defined-function locations,
-            544 strings with 5531 characters,
-and the built_in function-call counts, 1910 in all, are:
-= -- 204
+            538 strings with 4578 characters,
+and the built_in function-call counts, 1856 in all, are:
+= -- 192
 > -- 47
 < -- 2
 + -- 20
 - -- 14
 * -- 127
-:= -- 280
-add.period$ -- 23
+:= -- 268
+add.period$ -- 17
 call.type$ -- 6
 change.case$ -- 24
 chr.to.int$ -- 0
@@ -30,13 +42,13 @@ cite$ -- 14
 duplicate$ -- 92
 empty$ -- 169
 format.name$ -- 14
-if$ -- 429
+if$ -- 417
 int.to.chr$ -- 0
 int.to.str$ -- 6
 missing$ -- 6
-newline$ -- 36
+newline$ -- 30
 num.names$ -- 6
-pop$ -- 27
+pop$ -- 33
 preamble$ -- 1
 purify$ -- 19
 quote$ -- 0
@@ -51,5 +63,5 @@ type$ -- 22
 warning$ -- 8
 while$ -- 13
 width$ -- 7
-write$ -- 75
-(There were 8 warnings)
+write$ -- 63
+(There were 3 error messages)
