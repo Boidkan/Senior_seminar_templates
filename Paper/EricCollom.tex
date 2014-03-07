@@ -139,11 +139,11 @@ Stuff
 \subsection{Evolutionary Computation}
 Definition of genetic operator?
 
-\subsubsection{Crossover}
-\subsubsection{Mutation}
+\paragraph{Crossover}
+\paragraph{Mutation}
 Mutate-insert,mutate-delete,mutate-swap
-\subsubsection{Fitness}
-\subsubsection{Tournament Selection}
+\paragraph{Fitness}
+\paragraph{Tournament Selection}
 
 
 
@@ -231,9 +231,17 @@ Symbolic regression is a method of finding a mathematical function that best fit
 \subsubsection{Artificial Ant}
 	The artificial ant problem is a problem that involves moving an ant on a square grid trying to find all the food on the grid. The and starts off on the upper right hand corner of the grid facing to the left. The terminals used to control the ant are LEFT,RIGHT, and MOVE. LEFT and RIGHT turn the ant 90 degrees to its left and right respectively. The move function moves the ant forward. Additional functions that can be used is IF-FOOD-AHEAD,PROGN2,and PROGN3. IF-FOOD-AHEAD is a test which checks if there is food in front of the ant. PROGN2 and PROGN3 allow for two and tree sequence operations respectively.
 	
-	The initial population consisted of an individual of zero fitness. It contained all the terminals and functions. A limit of 100 non-eating moves was placed so that an individual that traversed the entire grid wasn't produced.
+	The initial population consisted of an individual of zero fitness. It contained all the terminals and functions. A limit of 100 non-eating moves was placed so that an individual that traversed the entire grid wasn't produced. Also, a maximal growth factor of 4 was placed to prevent very large programs. A population of 500, 2,000, and 10,000 individuals was used with a 90\% probability of crossover. Tournament selection of seven was performed to help chose individuals for crossover. Fitness was calculated as the number of food pellets eaten by the ant. Bytecode segments where chosen from random before checking for crossover compatibility.
+	
+	With a population of 500 2\% of the time a individual with maximum fitness was produced. For the population sizes 2,000 and 10,000 a maximum fitness was produced 11\% and 35\% of the time. 
 
 \subsubsection{Intertwined Spirals}
+The intertwined spirals problem involves creating a mathematical equation that best fits 194 point on two spirals. For this problem Orlov et al.~\cite{FINCH:2011} used mutation instead of crossover \mycomment{look into Gaussian-distributed random value for mutation probability}. The function set used was \{-,+,*,$arctan^2$,sine, and hypotenuse(x,y)\}. Sine and $arctan^2$ were used to facilitate the producing a spiral like equation. 
+
+	10\% of the time an individual with a maximum fitness was found. When further testing the ten best-of run individuals against sample points twice and ten times as dense FINCH produced better results than previous experiments done by Koza\mycomment{should i include this? if so get citation} who used more tradition EC methods. For seven of the individuals all the points on both denser sets matched 100\%. For the other 3 individuals it was 99\%. 
+
+
+
 \subsubsection{Array Sum}
 \subsubsection{Tic-Tac-Toe}
 
