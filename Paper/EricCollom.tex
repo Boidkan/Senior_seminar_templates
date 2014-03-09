@@ -128,7 +128,7 @@ Stuff
 
 \section{Introduction}
 	The limitation of only being able to evolve small parts of programs is an issue in evolutionary computation (EC). Much of these constraints are due to there is no graceful way to evolve programs, as a whole, directly at the source code. This is because source code exists to make it easier for humans to read and write programs. However, it is very hard to create a genetic algorithm (GA) that would evolve source code do to syntactical constraints.\par
-	A solution to this problem is to to compile the program to bytecode or machine code and evolve it there. This has been done in Java bytecode and x86 assembly~\cite{FINCH:2011}~\cite{Assembly:2010} which I will discuss thoroughly in this paper ~\mycomment{add more}.
+	A solution to this problem is to to compile the program bytecode or machine code and evolve it there. This has been done in Java bytecode and x86 assembly~\cite{FINCH:2011}~\cite{Assembly:2010} which I will discuss thoroughly in this paper ~\mycomment{add more}.
 	
 
 	
@@ -137,32 +137,36 @@ Stuff
 \section{Background}
 
 \subsection{Evolutionary Computation}
-Definition of genetic operator?
+Evolutionary Computation (EC) is a field of computer science and Artificial Intelligence that uses many of the concepts of biological evolution to evolve programs. EC is useful because it allows us to not know the structure of a solution in order to find it. \par
 
-\paragraph{Crossover}
-\paragraph{Mutation}
-Mutate-insert,mutate-delete,mutate-swap
-\paragraph{Fitness}
-\paragraph{Tournament Selection}
+Genetic Programming(GP) consists of evolving an initial population of programs either until the best solution to the problem is found, or the maximum number of generations is reached. Each individuals is rated with a fitness value. The fitness value determines how likely the individual is going to procreate or proceed to the next generation. One way that individuals are chosen to procreate is through tournament selection. In tournament selection a certain amount of individuals are chosen to compete. The individual with the highest fitness wins and then is selected for procreation. A way that procreating is represented in GP is through the genetic operator called crossover. Crossover is the process of taking two individuals and extracting a section of code from one and replacing it with a section from the other program to form an offspring. Another genetic operator that is used to produce offspring is mutation. Mutation, takes a program and then randomly changes a section of it. Mutation can be used along with crossover to produce offspring. Also, in some cases, the most fit individuals are passed on to the next generation unchanged which is called elitism.
 
 
+\subsection{x86 Assembly \& Java Bytecode}
+\paragraph{x86 Assembly}
+X86 assembly is a low level programming language designed for specific computer architectures. This means that it is designed to only run on certain physical machines. Assembly instructions consist of operands that are a byte or more in size which are called operation codes (opcode).
 
-\subsection{Assembly}
-Machine code that runs on a physical machine.
-\subsection{Java Bytecode}
-Java bytecode is compiled source code that runs on the Java Virtual Machine(JVM). It "is the intermediate, platform-independent representation of Java programs\cite{VIII:2011}." Each bytecode operation code (opcode) is one byte in length. However, some opcodes, that take parameters, are multiple bytes long\cite{JavaBytecode:2014}.
-There are more higher-level languages than just Java that compile into Java Bytecode. These languages are Scala, Groovy, Jython, Kawa, JavaFx Script, and Clojure\cite{FINCH:2011}.
+\paragraph{Java Bytcode}
+Java bytecode is compiled source code that runs on the Java Virtual Machine(JVM). The programming langauges whos source code compile into Java Bytecode are Scala, Groovy, Jython, Kawa, JavaFx Script, and Clojure~\cite{FINCH:2011}. Java bytecode ``is the intermediate, platform-independent representation of Java programs~\cite{VIII:2011}.'' Since Java Bytcode runs on a virtual machine this means that it is portable across multiple architectures. However, this also means that it needs to be interpreted or compiled for the desired architecture. For example, Java Bytcode can be compiled to x86 assembly. Many bytecode opcodes are one byte in length. However, some opcodes, that take parameters, are multiple bytes long~\cite{JavaBytecode:2014}.
 
-\mycomment{Example of Bytcode here}
+
+\mycomment{Should I include examples of bytecode and x86?}
 
 
 \subsection{Grammar Stuff}
-Talk about syntactic and semantic constraints and BNF.
+
+\paragraph{Backus-Naur Form}
+	Backus-Naur Form(BNF)~\cite{BNF:2014} is a notation technique used for context free grammars and is used to represent the syntax of computer programming languages.
+
+
 
 
 \section{Why Evolve Machine Code?}
 
 There are many problems we run into when trying to evolve source code. One problem is that it is extremely difficult to evolve an entire program due to source code syntactical constraints. Another problem is that we cannot just take a program and evolve it, we have to design the program to be evolvable. Evolving bytecode and x86 bypasses both of these problems.
+
+\begin{figure}
+\centering
 {\tt
 \begin{verbatim}
 float x; 
@@ -175,33 +179,46 @@ System.out.println(x);
 
 \end{verbatim}
 }
+\caption{Going to use this figure as an example for section 3}
+\end{figure}
 
 \subsection{Source Code Grammar Constraints}
-One problem with trying to evolve entire programs at the source code level is that there is a very high risk of producing a non-compilable program. This is due to the fact that high-level programming languages are designed to make it easy for humans to read and write programs. Most high-level programming languages are defined in Backus-Naur Form (BNF) which is purely syntactical\cite{BNF:2014}\cite{FINCH:2011}. This means that the grammar does not represent the semantic constraints of a program. For example, the BNF form does not capture the languages type system, variable visibility and accessibility, and other constraints ~\cite{FINCH:2011}. In order to write a program to evolve source code we would have to deal with all these constraints. While this task is possible it would require writing a full-scale compiler which would be a very taxing task. \par
+One problem with trying to evolve entire programs at the source code level is that there is a very high risk of producing a non-compilable program. This is due to the fact that high-level programming languages are designed to make it easy for humans to read and write programs. Most high-level programming languages are defined in BNF which is used to represent the syntax of the programming language. This means that the grammar does not represent the semantic constraints of a program. For example, the BNF form does not capture the languages type system, variable visibility and accessibility, and other constraints ~\cite{FINCH:2011}. In order to write a program to evolve source code we would have to deal with all these constraints. While this task is possible it would require writing a full-scale compiler. \par
 
-Java bytecode and x86 Assembly contain a small alphabet of primitives~\cite{Assembly:2010}. Also they are a lot less syntactical. This means that there is a lot less risk of producing a non-compilable program during evolution. Sipper et al.\cite{FINCH:2011} simply deals with the cases where a non-compilable program is produced by simply re-evolving the programs. Since, the check to see if a program is compilable is cheap enough and the rate of which a program produced is compilable is high enough this is feasible. 
+Java bytecode and x86 assembly contain a small alphabet of instructions~\cite{Assembly:2010}. Also they are less syntactical and there is less statistical constraints to violate. This means that there is a lot less risk of producing a noncompilable program during evolution. 
 
 \subsection{Evolve Entire Program As Is}
-For traditional EC, a program has to be designed specifically to be evolved. Evoling, bytcode or x86 doesn't require the program to be designed specifically for evolution~\cite{Assembly:2010}~\cite{FINCH:2011}. Thus, any language that can compile into either bytecode or x86 can be evolved. The only thing required is an algorithm to compute the fitness. Also, the entire program can be evolved. In traditional EC when a program is designed it is more common to evolve an expressions or formulae ~\cite{FINCH:2011} within the program. Most of the program as a whole would be already written and remain the same after evolution. In evolving bytecode and x86 most of the program doesn't even need to be written to be able to evolve it and find a solution. Also, the final product can be drastically different from the original program since the entire program was evolved. This allows for a lot more flexibility in evolving a programs. This also allows us to solve the problem as a whole instead of a small section of the problem.
+For traditional EC, a program has to be designed specifically to be evolved. Evoling, bytcode or x86 doesn't require the program to be designed specifically for evolution~\cite{Assembly:2010}~\cite{FINCH:2011}. Thus, any language that can compile into either bytecode or x86 can be evolved. The only thing required is an algorithm to compute the fitness. Also, the entire program can be evolved. In traditional EC when a program is designed it is more common to evolve expressions or formulae ~\cite{FINCH:2011} within the program. Most of the program as a whole would be already written and remain the same after evolution. In evolving bytecode and x86 most of the program doesn't even need to be written to be able to evolve it and find a solution\mycomment{need example}. Also, the final product can be drastically different from the original program since the entire program was evolved. This allows for a lot more flexibility in evolving programs. This also allows us to solve the problem as a whole instead of a small section of the problem.
 
 
 \section{How the FINCH Works}
 
 \subsection{Selecting Good Offspring}
-Evolving Java Byte code only reduces the chance of evolving non-compilable bytecode to a certain extent. Even though byte code is less a lot less syntactical, than source code, it still is syntactical. Sipper et al.\cite{FINCH2:2009} addresses this issue by checking if a good offspring has been created before letting it join the evolved population. This is done by checking if it compiles. If it doesn't then another offspring with the same parents is made. This process is repeated until a good offspring is produced or a predetermined number of attempts have been made.\par
+Evolving Java Byte code only reduces the chance of evolving non-compilable bytecode to a certain extent. Even though byte code is less syntactical, than source code, it still is syntactical. Sipper et al.\cite{FINCH2:2009} addresses this issue by checking if a good offspring has been created before letting it join the evolved population. This is done by checking if it compiles. If it doesn't then another offspring with the same parents is made. This process is repeated until a good offspring is produced or a predetermined number of attempts have been made.\par
 The checks that are made make sure that all the variables will be read, written, type-compatible, and will not cause stack underflow\cite{VIII:2011}.\par
 It is important that only good offspring is selected because this provides good variability in the population. Non-compilable code would result in a fitness score of zero. Since noncompilable code would occur frequently enough it would cause a large portion of the population to have a zero fitness score.
 
 \subsection{Crossover}
 
 
-The FINCH uses two-point crossover to evolve bytecode. It takes two programs A and B and extracts sections a and b of bytecode respectively. It then takes section a and inserts it into where section b used to be. It only selects an a that will compile after being inserted into B. Take into account that just because a can replace b in B does not imply that b can replace a in A. In other words it is not a biconditional relationship.
+The FINCH uses two-point crossover to evolve bytecode. It takes two programs A and B and extracts sections $\alpha$ and $\beta$ of bytecode respectively. It then takes section $\alpha$ and inserts it into where section $\beta$ used to be. It only selects an $\alpha$ that will compile after being inserted into B. Take into account that just because $\alpha$ can replace $\beta$ in B does not imply that $\beta$ can replace $\alpha$ in A. In other words it is not a biconditional relationship.
 
-\subsection{Non-Halting Bytecode}
+\subsection{Non-Halting Offspring}
 Another issue that arises from evolving unrestricted bytcode is that the resulting program might enter a non-halting state. These problems don't arise when the check to see if program compiles. Instead, this is a runtime issue. This, is especially true when evolving programs that contain loops and recursion.
 The way that Sipper et al.\cite{FINCH:2011} deal with this, before running the program, is count how many calls are made to each function. If too many calls are made to a function than an exception is thrown.
 
 
+\begin{figure}
+\centering
+\psfig{file=ant.pdf,width =3in}
+\caption{Artificial Ant Grid}
+\end{figure}
+
+\begin{figure}
+\centering
+\psfig{file=spiral.pdf,width =3in}
+\caption{194 points on a Spiral}
+\end{figure}
 
 
 \subsection{Variable Access Sets}
@@ -209,12 +226,32 @@ The way that Sipper et al.\cite{FINCH:2011} deal with this, before running the p
 
 
 \section{Evolving Assembly Code}
-	Forrest et al.\cite{Assembly:2010} unlike Sipper et al.\cite{FINCH:2011} does not check to see if their evolved bytecode is noncomilable. Also, instead of checking if their program will enter a non-halting state during runtime, instead they terminate program after an eight second wait.
+
+\subsubsection{Fitness and Selecting Good Offspring } 
+ Eric, et al, focus evolving x86 and Java Bytecode for the purpose of program repair and debugging. In their tests they took medium to large sized programs in Java, C, and Haskell that contained a bug. The types of bugs they used were human prone bugs such as a for loop index off by one.\par
+
+Each program to be evolved was provided with a set of tests that passed and one test that failed. The failed test was used to check if an offspring fixed the bug. The tests that passed were used to make sure the program retained functionality. For each offspring they compiled them into either an executable binary(x86) or class file (Java). If the program failed to compile then it would obtain a fitness of zero. If the program does compile then it is run with the tests. The fitness score is calculated as the weighted sum of tests passed, the negative test being worth more.
+
+In selecting offspring a different path was chosen than Olov, et al. They decided to not make sure produced offspring were compilable. Instead they decided to let all produced offspring into the next generation. This produced a considerable amount of individuals with fitness zero due to being noncompilable.   
+
+\subsubsection{Genetic Operators}
+Eric, et al., used mutation on 90\% of each population and crossover on the rest to produce the offspring population. Multiple tournaments consisting of three individuals were performed to select fit individuals for reproduction. They used mutation over crossover 90\% of the time because it produced better results for the type of problems they were solving. Since, each bug was a minor change, such as change a zero to a one, using a large amount of crossover or more complex operators generally slowed their search time.  
+
+\subsubsection{Non-Halting Offspring}
+
+Eric, et al., also chose a different approach than that of Olav, et al., when dealing with non-halting offspring. They decided to not check for non-halting and instead run the individual on a virtual machine(VM) with an eight second timeout on the process. Olov, et al., voted against this due to two main issues. First it is hard to define how long a program should run which can vary greatly depending on the cpu load. Thus if good time limit is not selected then it can be waste to cpu resources. The second issue is that limiting the runtime requires running the program on a separate thread. Killing the thread can be unreliable and can be unsafe for the GP as a whole. Eric, et al., ran into the problem where sometimes programs would not respond to termination requests.
+They also ran into "Stack Smashing" which is where the stack of the application or operator overflow which can cause the program and system as a whole to crash. However, since they ran each individual in a VM this was not a problem.  
+
 
 
 
 \section{Results}
 \subsection{FINCH}
+Orlov et al.~\cite{FINCH:2011} focused on evolving small programs to solve problems. The five problems they focused on were symbolic regression, artificial ant, intertwined spirals, array sum, and tic-tac-toe. Their program, FINCH, was able to evolve programs and solve each of these problems.
+
+In each of tests FINCH was given each time a program that had a zero fitness. Usually the only stuff included in the programs was the minimal components to successfully evolve and solve the problem. For example, in the case of symbolic regression the initial population contained the mathematical function set \{+,-,*,\%,$sin$,$cos$,$e$, $ln$\} and double objects. 
+
+
 \subsubsection{Symbolic Regression}
 Symbolic regression is a method of finding a mathematical function that best fits a a set of points between two intervals.
 \paragraph{Simple Regression}
@@ -229,24 +266,27 @@ Symbolic regression is a method of finding a mathematical function that best fit
 	With these changes, FINCH was able to find an optimal solution every single run.
 	
 \subsubsection{Artificial Ant}
-	The artificial ant problem is a problem that involves moving an ant on a square grid trying to find all the food on the grid. The and starts off on the upper right hand corner of the grid facing to the left. The terminals used to control the ant are LEFT,RIGHT, and MOVE. LEFT and RIGHT turn the ant 90 degrees to its left and right respectively. The move function moves the ant forward. Additional functions that can be used is IF-FOOD-AHEAD,PROGN2,and PROGN3. IF-FOOD-AHEAD is a test which checks if there is food in front of the ant. PROGN2 and PROGN3 allow for two and tree sequence operations respectively.
+	The artificial ant problem is a problem that involves moving an ant on a square grid trying to find all the food on a grid; shown in figure 2. The ant starts off on the upper right hand corner of the grid facing to the left. The terminals used to control the ant are LEFT,RIGHT, and MOVE. LEFT and RIGHT turn the ant 90 degrees to its left and right respectively. The move function moves the ant forward. Additional functions that can be used is IF-FOOD-AHEAD,PROGN2,and PROGN3. IF-FOOD-AHEAD is a test which checks if there is food in front of the ant. PROGN2 and PROGN3 allow for two and tree sequence operations respectively.
 	
 	The initial population consisted of an individual of zero fitness. It contained all the terminals and functions. A limit of 100 non-eating moves was placed so that an individual that traversed the entire grid wasn't produced. Also, a maximal growth factor of 4 was placed to prevent very large programs. A population of 500, 2,000, and 10,000 individuals was used with a 90\% probability of crossover. Tournament selection of seven was performed to help chose individuals for crossover. Fitness was calculated as the number of food pellets eaten by the ant. Bytecode segments where chosen from random before checking for crossover compatibility.
 	
-	With a population of 500 2\% of the time a individual with maximum fitness was produced. For the population sizes 2,000 and 10,000 a maximum fitness was produced 11\% and 35\% of the time. 
+	With a population of 500, 2\% of the time a individual with maximum fitness was produced. For the population sizes 2,000 and 10,000 a maximum fitness was produced 11\% and 35\% of the time. 
 
 \subsubsection{Intertwined Spirals}
-The intertwined spirals problem involves creating a mathematical equation that best fits 194 point on two spirals. For this problem Orlov et al.~\cite{FINCH:2011} used mutation instead of crossover \mycomment{look into Gaussian-distributed random value for mutation probability}. The function set used was \{-,+,*,$arctan^2$,sine, and hypotenuse(x,y)\}. Sine and $arctan^2$ were used to facilitate the producing a spiral like equation. 
+The intertwined spirals problem involves creating a mathematical equation that best fits 194 point on two spirals as shown in figure 3. For this problem Orlov et al.~\cite{FINCH:2011} used mutation instead of crossover \mycomment{look into Gaussian-distributed random value for mutation probability}. The function set used was \{-,+,*,$arctan^2$,sine, and hypotenuse(x,y)\}. Sine and $arctan^2$ were used to facilitate producing a spiral like equation. The fitness was calculated as the number of points correctly classified. a population of 2000 individuals was used with a total of 251 generations. 
 
 	10\% of the time an individual with a maximum fitness was found. When further testing the ten best-of run individuals against sample points twice and ten times as dense FINCH produced better results than previous experiments done by Koza\mycomment{should i include this? if so get citation} who used more tradition EC methods. For seven of the individuals all the points on both denser sets matched 100\%. For the other 3 individuals it was 99\%. 
-
-
-
 \subsubsection{Array Sum}
-\subsubsection{Tic-Tac-Toe}
+The array sum problem consists of adding up all the values in an array. This problem was chosen because it would require a loop or recursion to solve it. This is important because it shows that FINCH can evolve more complex programs.\par
+FINCH was able to solve this problem quite easily though recursion and a for loop. It was also able to evolve different list abstractions such as List and ArrayList.
 
 
 \subsection{x86}
+
+
+
+
+
 
 \subsection{Future Work}
 
