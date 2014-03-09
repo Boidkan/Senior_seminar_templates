@@ -118,9 +118,8 @@ Eric C. Collom \\
 \maketitle
 \begin{abstract}
 
-Stuff
 \end{abstract}
-evolutionary computation,x86 assembly code,Java bytecode
+evolutionary computation, x86 assembly code, Java bytecode
 
 \keywords{}
 
@@ -297,15 +296,18 @@ FINCH was able to solve this problem quite easily though recursion and a for loo
 
 
 \subsection{x86}
+\mycomment{looking into other research/papers by this group to get more to write about.}
 
 Eric,et al., were able to show that it is possible to fix human programming errors though bytecode and assembly. They were able to successfully debug various programs containing bugs such as infinite loops and remote buffer overflows.
 
-even though they produced a considerable amount of offspring with fitness zero this did not seem to hurt their result very much. 
+Even though they produced a considerable amount of offspring with fitness zero this did not seem to hurt their result very much. The average number of fitness evaluations required to produce an offspring that passed all the tests was 63.6 for C and 74.4 for assembly. This indicates that not much more work is needed to to evolve repairs in assembly. Even programs that contained thousands of lines of code only required a few runs. This shows that evolving programs in assembly is feasible. \mycomment{include weighted path?}
 
-
+It was also discovered that most repairs only required a small number of operations. This was also due to optimization of mutation.\mycomment{not much info is provided on this}
 
 
 \subsection{Future Work}
+
+
 
 \section{Conclusion}
 
