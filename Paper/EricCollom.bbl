@@ -1,5 +1,11 @@
 \begin{thebibliography}{1}
 
+\bibitem{Nic:2008}
+{\em A Field Guide to Genetic Programming}.
+\newblock 2008.
+\newblock \\ //{\it //This will prived general definitions/descriptions for EC
+  terminology. //}.
+
 \bibitem{VIII:2011}
 {\em Genetic Programming Theory and Practice VIII}.
 \newblock Springer New York, 2011.
@@ -11,6 +17,12 @@ Backus-naur form.
 \bibitem{JavaBytecode:2014}
 Java bytcode.
 \newblock Febuary 2014.
+
+\bibitem{koza:1992}
+J.~Koza.
+\newblock {\em Genetic Programming: On the Programming of Computers by Means of
+  Natural Selection}.
+\newblock A Bradford book. Bradford, 1992.
 
 \bibitem{FINCH2:2009}
 M.~Orlov and M.~Sipper.
@@ -31,5 +43,11 @@ E.~Schulte, S.~Forrest, and W.~Weimer.
 \newblock In {\em Proceedings of the IEEE/ACM International Conference on
   Automated Software Engineering}, ASE '10, pages 313--316, New York, NY, USA,
   2010. ACM.
+
+\bibitem{x86tomachine:2013}
+Wikibooks.
+\newblock X86 assembly/machine language conversion --- wikibooks{,} the free
+  textbook project, 2013.
+\newblock [Online; accessed 23-March-2014].
 
 \end{thebibliography}
