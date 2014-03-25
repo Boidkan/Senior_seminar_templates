@@ -1,14 +1,16 @@
 \begin{thebibliography}{1}
 
-\bibitem{Nic:2008}
-{\em A Field Guide to Genetic Programming}.
-\newblock 2008.
-\newblock \\ //{\it //This will prived general definitions/descriptions for EC
-  terminology. //}.
-
 \bibitem{VIII:2011}
 {\em Genetic Programming Theory and Practice VIII}.
 \newblock Springer New York, 2011.
+
+\bibitem{Oracle:2013}
+{\em The Java Language Specification}.
+\newblock Oracles America, Inc. And/or affiliates, 500 Oracle Parkway, Redwood
+  City, California 94065, U.S.A., 2013.
+\newblock \\ //{\it //This provides some needed background on the JVM,
+  compiler, and Java bytecode. It is too long to read it all but will be a good
+  //reference for any questions about the JVM //}.
 
 \bibitem{BNF:2014}
 Backus-naur form.
