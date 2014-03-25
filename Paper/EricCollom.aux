@@ -18,28 +18,25 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}X86}{\thepage }}
 \citation{VIII:2011}
 \citation{FINCH:2011}
-\citation{BNF:2014}
 \citation{Oracle:2013}
 \citation{Assembly:2010}
 \citation{FINCH:2011}
 \citation{Assembly:2010}
 \citation{FINCH:2011}
-\citation{FINCH:2011}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Both (a) and (b) are valid code syntactically however only (a) is valid semanticly.}}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Example of a possible starting program to evolve and solve symbolic regression.}}{\thepage }}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2} Bytcode And The JVM}{\thepage }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Grammar Stuff}{\thepage }}
-\@writefile{toc}{\contentsline {paragraph}{Backus-Naur Form}{\thepage }}
-\@writefile{toc}{\contentsline {section}{\numberline {3}The Benefits}{\thepage }}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Instruction-level Code Benefits}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Source Code Constraints}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Istore\_n pushes an element from index n from frame onto stack. Iadd pops two elements from operand stack add them together and then pushes to the result to the stack. Ireturn pops an element from the stack and returns it}}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Evolving As Is}{\thepage }}
+\citation{FINCH:2011}
 \citation{Assembly:2010}
 \citation{FINCH2:2009}
 \citation{FINCH:2011}
 \citation{FINCH2:2009}
 \citation{VIII:2011}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Iconst\_n pushes an int n onto the stack. Istore pops the stack and saves the element on the frame. storesIstore\_n pushes an element from index n from frame onto stack. Iadd pops two elements from operand stack add them together and then pushes to the result to the stack. Ireturn pops an element from the stack and returns it}}{\thepage }}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces This is an example of good and bad crossover. iconst\_n pushes onto the stack an int of value n. istore\_n pops the stack and saves the value on the frame at index n. Look at figure 3 for a description of iload,iadd,isub,and ireturn.}}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {4}FINCH}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Crossover}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Selecting Offspring}{\thepage }}
@@ -64,15 +61,17 @@
 \bibcite{VIII:2011}{1}
 \bibcite{Oracle:2013}{2}
 \bibcite{BNF:2014}{3}
-\bibcite{JavaBytecode:2014}{4}
-\bibcite{koza:1992}{5}
-\bibcite{FINCH2:2009}{6}
-\bibcite{FINCH:2011}{7}
-\bibcite{Assembly:2010}{8}
-\bibcite{x86tomachine:2013}{9}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces FINCH's solution to the intial program presented in Figure 5.}}{\thepage }}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Initial population function, for array sum, that enters into infinite recursion in the if statement.}}{\thepage }}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2}Array Sum}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}x86}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Future Work}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {8}Acknowledgments}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {9}References}{\thepage }}
+\bibcite{JavaBytecode:2014}{4}
+\bibcite{koza:1992}{5}
+\bibcite{FINCH2:2009}{6}
+\bibcite{FINCH:2011}{7}
+\bibcite{Assembly:2010}{8}
+\bibcite{x86tomachine:2013}{9}

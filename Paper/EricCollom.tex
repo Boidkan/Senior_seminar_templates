@@ -141,7 +141,6 @@ EC is a field of computer science and artificial intelligence that involves cont
 
 \subsection{x86 Assembly \& Java Bytecode}
 
-\mycomment{need to explain stacks and frames}
 
 Through out the rest of the paper I will use the term instruction-level code when referring to both Java bytecode and x86 assembly together. Instruction level code consist of operation codes (opcodes) which are each one byte in length. Hover, some opcodes that take parameters are multiple bytes long~\cite{JavaBytecode:2014,x86tomachine:2013}.
 
@@ -149,21 +148,15 @@ Through out the rest of the paper I will use the term instruction-level code whe
 x86 is a family of backward compatible low-level programming languages~\cite{x86:2014} created by Intel and designed for specific computer architectures. This means that it is designed to only run on certain physical machines. This is one of the main differences between x86 assembly and Java bytcode. 
 
 \subsubsection{ Bytcode And The JVM}
-Java bytecode ``is the intermediate, platform-independent representation''~\cite{VIII:2011} originaly designed for the Java compiler. However, other high-level languages now also have compilers for the Java Virtual Machine (JVM). Some of those languages are Scala, Groovy, Jython, Kawa, JavaFx Script, Clojure~\cite{FINCH:2011}, Erjang, and JRuby. 
+Java bytecode ``is the intermediate, platform-independent representation''~\cite{VIII:2011} originaly designed for the Java compiler. However, other high-level languages now also have compilers for the Java Virtual Machine (JVM). Some of those languages are Scala, Groovy, Jython, Kawa, JavaFx Script, Clojure~\cite{FINCH:2011}, Erjang, and JRuby.
 
-The JVM executes bytecode through a stack-based architecture. Each JVM thread has a private stack, and each stack stores frames. Each frame contains an array of local variables, its own operand stack, and a reference to the class of the current method. Only the frame of the current executing method can be active at a time.
+The JVM executes bytecode through a stack-based architecture. Each JVM thread has a private stack, and each stack stores frames. Each frame contains an array of local variables, its own operand stack, and a reference to the class of the current method. Only the frame of the current executing method can be active at a time. Stack can only be popped and pushed to.
 
-
-\subsection{Grammar Stuff}
-
-\paragraph{Backus-Naur Form}
-	Backus-Naur Form(BNF)~\cite{BNF:2014} is a notation technique used for context free grammars (CFG) and is used to represent the syntax of computer programming languages.
+Figure 3 is a simple example of what Java bytecode looks like and how the stack works. In this example we are assuming that the frame already contains the integers 1 and 3 to retain simplicity. After iload\_1 is executed it takes the element from the frame at index 1 and pushes it onto the stack. Iload\_2 does the same thing but with index 2. Iadd pops to elements from the stack, which both must be of type int, and then adds them and pushes the result on the stack. Ireturn simply pops the stack and returns that element. 
 
 
 
-
-
-\section{The Benefits}
+\section{Instruction-level Code Benefits}
 
 There are many problems we run into when trying to evolve source code. One problem is that it is extremely difficult to evolve an entire program due to source code syntactical constraints. Another problem is that we cannot just take a program and evolve it, we have to design  a GP for that specific problem. Evolving instruction-level code bypasses both of these problems.
 
@@ -217,8 +210,8 @@ ireturn
 Execute iload_1  Execute iload_2   
 
     Stack            Stack            
-      1                1               
-                       3
+      1                3               
+                       1
                        
 Execute iadd     Execute ireturn
 
@@ -232,11 +225,6 @@ Execute iadd     Execute ireturn
 \caption{Istore\_n pushes an element from index n from frame onto stack. Iadd pops two elements from operand stack add them together and then pushes to the result to the stack. Ireturn pops an element from the stack and returns it}
 \end{figure}
 
-%\begin{figure}
-%\centering
-%\psfig{file=bytecode.pdf}
-%\caption{Java Bytcode}
-%\end{figure}
 
 
 
@@ -277,13 +265,16 @@ FINCH is a program developed by Orlov et al.,~\cite{FINCH2:2009,FINCH:2011} that
           
 \end{verbatim}
 }
-\caption{Iconst\_n pushes an int n onto the stack. Istore pops the stack and saves the element on the frame. storesIstore\_n pushes an element from index n from frame onto stack. Iadd pops two elements from operand stack add them together and then pushes to the result to the stack. Ireturn pops an element from the stack and returns it}
+\caption{This is an example of good and bad crossover. iconst\_n pushes onto the stack an int of value n. istore\_n pops the stack and saves the value on the frame at index n. Look at figure 3 for a description of iload,iadd,isub,and ireturn.}
 \end{figure}
 
 
 The FINCH uses two-point crossover to evolve Java bytecode. It takes two programs A and B and extracts sections $\alpha$ and $\beta$ respectively. It then takes section $\alpha$ and inserts it into where section $\beta$ used to be. It only selects an $\alpha$ that will compile after being inserted into B. Take into account that just because $\alpha$ can replace $\beta$ in B does not imply that $\beta$ can replace $\alpha$ in A. In other words it is not a biconditional relationship.
 
-For example in Figure 4 let the Java bytecode snippets 4(A) and 4(B) be A and B. Let $\alpha$ be line 6 from A and $\beta$ be line 5 from B. A(C) is the product of replacing $\beta$ with $\alpha$ in B. A(C) is good crossover. Now let $\alpha$ be lines 3-4 in A and $\beta$ be lines 2-3 in B. A(D) is the result of replacing $\beta$ with $\alpha$ in B. However in this case A(D) is incorrect crossover since only one integer is saved on the frame and at line 3 istore\_2 tries to pop an empty stack causing stack underflow.
+For example in Figure 4 let the Java bytecode snippets 4(A) and 4(B) be A and B. Let $\alpha$ be line 6 from A and $\beta$ be line 5 from B. A(C) is the product of replacing $\beta$ with $\alpha$ in B.
+
+
+ Now let $\alpha$ be lines 3-4 in A and $\beta$ be lines 2-3 in B. A(D) is the result of replacing $\beta$ with $\alpha$ in B. However in this case A(D) is incorrect crossover since only one integer is saved on the frame and at line 3 istore\_2 tries to pop an empty stack causing stack underflow.
 
 
 \subsection{Selecting Offspring}
@@ -298,11 +289,11 @@ The following checks are done within the bytcode to make sure that by inserting 
 First, variables written by $\alpha$ must have identical or narrower types that are read after $\beta$. It is also made sure that all variables read after $\beta$ and not written by $\alpha$ must be written before $\beta$.Finally, all variables read by $\alpha$ must be written before $\beta$.
 
 \paragraph{Control flow}
-These checks are done to make sure that when jumps within the bytcode is done that it doesn't cause the program to break. First, a check is done to make sure that there are no jumps in $\beta$ and jumps out of $\alpha$. Secondly, a check is done to make sure that the code before $\beta$ transitions into $\beta$ and that $\alpha$ transitions into code post $\alpha$.  
+These checks are done to make sure that when jumps within the bytcode is done that it doesn't cause the program to break. First, a check is done to make sure that there are no jumps in $\beta$ and jumps out of $\alpha$. Secondly, a check is done to make sure that the code before $\beta$ transitions into $\beta$ and that $\alpha$ transitions into code post $\alpha$.\par
 
 
 The checks make sure that all the variables will be read, written, type-compatible, and will not cause stack underflow\cite{VIII:2011}. For example, in figure 1, if 1.(b) was the result of two parent programs then it would be rejected as a good offspring due to its failure to comply to semantical constraints stated Section 3.1.\par
-It is important that only good offspring is selected because this provides good variability in the population. Good variability is where there are many that vary in code and fitness. Noncompilable code would result in a fitness score of zero. Since noncompilable code would occur frequently enough it would cause a large portion of the population to have a zero fitness score. This would possibly result in having individuals with a zero fitness being selected for procreation and thus consistently resulting in bad crossover and bad offspring.
+It is important that only good offspring is selected because this provides good variability in the population. Good variability is where there are many individuals that vary in code and fitness. Noncompilable code would result in a fitness score of zero. Since noncompilable code would occur frequently enough it would cause a large portion of the population to have a zero fitness score. This would possibly result in having individuals with a zero fitness being selected for procreation and thus consistently resulting in bad crossover and bad offspring.
 
 
 Orlov et al.~\cite{FINCH:2011} focused on evolving small programs to solve problems. The five problems they focused on were symbolic regression, artificial ant, intertwined spirals, array sum, and tic-tac-toe. We will discuss their results from the symbolic regression and array sum problems. Their program, FINCH, was able to evolve programs and solve each of these problems.
@@ -311,10 +302,7 @@ In each of tests FINCH was given each time a program that had a zero fitness. Th
 
 \subsection{Non-Halting Offspring}
 Another issue that arises from evolving unrestricted bytcode is that the resulting program might enter a non-halting state. These problems do not arise when the check to see if an offspring is good bytecode. Instead, this is a runtime issue. This, is especially true when evolving programs that contain loops and recursion.
-The way that Orlov et al.,~\cite{FINCH:2011} deal with this, before running the program, is count how many calls are made to each function. If too many calls are made to a function than an exception is thrown. They do not specify what fitness is assigned to an individual that fails this test.
-
-
-
+The way that Orlov et al.,~\cite{FINCH:2011} deal with this, before running the program, is count how many calls are made to each function. If too many calls are made to a function than an exception is thrown. The lowest possible fitness is assigned to an individual who fails this test.
 
 
 
@@ -325,10 +313,12 @@ In selecting offspring a different path was chosen than Olov, et al. They decide
 
 Each program to be evolved was provided with a set of tests that passed and one test that failed. The failed test was used to check if an offspring fixed the bug. The tests that passed were used to make sure the program retained functionality. For each offspring they compiled them into either an executable binary(x86) or class file (Java). If the program failed to compile then it would obtain a fitness of zero. If the program did compile then it was ran with the tests. The fitness score is calculated as the weighted sum of tests passed, the negative test being worth more. This a great weight was placed on the non passing testing since that was the main goal.
 
-  
+
 
 \subsection{Genetic Operators}
-Eric, et al., used mutation on 90\% of each population and crossover on the rest to produce the offspring population. Multiple tournaments consisting of three individuals were performed to select fit individuals for reproduction. They used mutation over crossover 90\% of the time because it produced better results for the type of problems they were solving. Since, each bug was a minor change, such as change a zero to a one, using a large amount of crossover or more complex operators generally slowed their search time.  
+Eric, et al., used mutation on 90\% of each population and crossover on the rest to produce the offspring population. Multiple tournaments consisting of three individuals were performed to select fit individuals for reproduction. They used mutation over crossover 90\% of the time because it produced better results for the type of problems they were solving. Since, each bug was a minor change, such as change a zero to a one, using a large amount of crossover or more complex operators generally slowed their search time.
+
+They use three mutation operators mutate-insert selects an instruction based of off its positive weight. Mutate-delete selects and instruction by proportionally by negative weight. Mutate-swap operator select to instruction proportionally by negative weight and swaps them. They also implement a simple version of crossover that swaps sections from two programs creating two new offspring.
 
 \subsection{Non-Halting Offspring}
 
@@ -346,39 +336,54 @@ In each of tests FINCH was given each time a program that had a zero fitness. Th
 
 
 \subsubsection{Symbolic Regression}
-Symbolic regression is a method of finding a mathematical function that best fits a a set of points between two intervals. Olov, et al.,~\cite{FINCH:2011} chose to use 20 random points, between -1 and 1, from various polynomials. Fitness was calculated as the number of points hit by the function. The function set \{+, -, *, \%, sin, cos, $e$, $ln$\}(note: referring to $e$ as a function in the Java.lang.Math library) was used for most of their experiments. This was done in order to mimic previous experimentation done~\cite{koza:1992} in order to compare the results to traditional GP. They were able to evolve up to a 9-degree polynomial with just the function set \{+, *\}.
+Symbolic regression is a method of finding a mathematical function that best fits a a set of points between two intervals. Olov, et al.,~\cite{FINCH:2011} chose to use 20 random points, between -1 and 1, from various polynomials. Fitness was calculated as the number of points hit by the function. The function set \{+, -, *, \%, sin, cos, math.$e$, $ln$\} was used for most of their experiments. This was done in order to mimic previous experimentation done~\cite{koza:1992} in order to compare the results to traditional GP. They were able to evolve up to a 9-degree polynomial with just the function set \{+, *\}.
 
 A more complex fitness was also tested. This symbolic regression consisted of a fitness that checked if all twenty points were within $10^{-8}$ degree of they polynomials output. 
 
-For each experiment they started off with an offspring of fitness zero and usually with a minimal amount of code, such as in figure 2. They evolved the programs with a 90\% crossover. Using the simple fitness algorithm 99\% of the time a maximum fitness individual was found. With the more complex fitness algorithm a maximum fitness individual was found 100\% of the time.
+For each experiment they started off with an offspring of fitness zero and usually with a minimal amount of code, such as in figure 2. Figure 2 only contains a simple function set of {+, \*} and a number object. However they were able to evolve programs like this to full-fledged programs that solved symbolic regression of up to 9-degree polynomials. 
+They evolved the programs with a 90\% crossover. Using the simple fitness algorithm 99\% of the time a maximum fitness individual was found. With the more complex fitness algorithm a maximum fitness individual was found 100\% of the time.
 
+\begin{figure}
+\centering
+\psfig{file=infrec.pdf}
+\caption{FINCH's solution to the intial program presented in Figure 5.}
+\end{figure}
+
+\begin{figure}
+\centering
+\psfig{file=recsolution.pdf}
+\caption{Initial population function, for array sum, that enters into infinite recursion in the if statement.}
+\end{figure}
 
 \subsubsection{Array Sum}
-The array sum problem consists of adding up all the values in an array. This problem is important because it would require evolving a loop or recursion to solve it. This would show that FINCH is capable of evolveing more complex programs\par
-FINCH was able to solve this problem quite easily though recursion and a for loop. This experiment also showed that FINCH is able to evolve different list abstractions such as List and ArrayList.\mycomment{this section in the papscannerer is short. Should I include some their code to show their results and as an example?} 
+The array sum problem consists of adding up all the values in an array. This problem is important because it would require evolving a loop or recursion to solve it. This would show that FINCH is capable of evolving more complex programs\par
+FINCH was able to solve this problem quite easily though recursion and a for loop. This experiment also showed that FINCH is able to evolve different list abstractions such as List and ArrayList.
+
+When evolving array sum with recursion the initial population consisted of an individual which entered infinite recursion as shown in figure 5. Due to the way FINCH deals with non-halting programs this wasn't a problem and evolution was able to ensure. The resulting code from evolving Figure 5 is shown in Figure 6.
 
 
 \subsection{x86}
 \mycomment{looking into other research/papers by this group to get more to write about.}
 
-Eric,et al., were able to show that it is possible to fix human programming errors though bytecode and assembly. They were able to successfully debug various programs containing bugs such as infinite loops and remote buffer overflows.
+Eric,et al., were able to show that it is possible to fix human programming errors though bytecode and assembly. They were able to successfully debug various programs containing bugs such as infinite loops and remote buffer overflows. The interesting thing about these experiments was that it was done on real programs with real buts and at times the programs consisted of thousands of lines of code. Another interesting thing that they discovered was that there were some bug repairs the they were able to solve through x86 assembly that were not possible in the source code. 
 
-Even though they produced a considerable amount of offspring with fitness zero this did not seem to hurt their result very much. The average number of fitness evaluations required to produce an offspring that passed all the tests was 63.6 for C and 74.4 for assembly. This indicates that not much more work is needed to to evolve repairs in assembly. Even programs that contained thousands of lines of code only required a few runs. This shows that evolving programs in assembly is feasible. \mycomment{include weighted path?}
+Even though they produced a considerable amount of offspring with fitness zero this did not seem to hurt their result very much. The average number of fitness evaluations required to produce an offspring that passed all the tests was 63.6 for C and 74.4 for assembly. This indicates that not much more work is needed to to evolve repairs in assembly. Even programs that contained thousands of lines of code only required a few runs. This shows that evolving programs in assembly is feasible.
 
-It was also discovered that most repairs only required a small number of operations. This was also due to optimization of mutation.\mycomment{not much info is provided on this}
-
+It was also discovered that most repairs only required a small number of operations. This was also due to optimization of mutation. 
 
 \subsection{Future Work}
+Future work that could be done, thought evolving instruction-level code is trying to evolve programs who's solutions are much longer and complicated. Even though Orlov et al., proved that using bytecode evolution it is possible to solve many simple problems. Most of the problems only consisted of a few lines of code.
 
+For the work done by Eric et al., it would be nice to see debugging done on less focused areas. Possibly a program as a whole. This would be a good development since it would greatly reduce how much scaffolding is required to set up the evolution.
 
 
 \section{Conclusion}
-
+There are things that evolving at the instruction-level can be done that can not be done at the source code level. Benefits such as evolving the program as a whole and reduced scaffolding to the GP, and no scaffolding for the program being evolved. Eric et al., and Orlov et al., showed that evolving instruction-level code is just as good as source code and at times even better due to the fact there some things that you can only do at the the instruction-level. In conclusion, evolving instruction-level is feasible and exiting for the field of EC since it opens up many possibilities that were not always available.
 %\end{document}  % This is where a 'short' article might terminate
 
 %ACKNOWLEDGMENTS are optional
 \section{Acknowledgments}
-
+Nic Mcphee, Elena Machkasova
 
 %
 % The following two commands are all you need in the
