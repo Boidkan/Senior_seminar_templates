@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.13 (TeX Live 2013/dev) (format=pdflatex 2013.9.23)  25 MAR 2014 14:46
+This is pdfTeX, Version 3.1415926-2.5-1.40.13 (TeX Live 2013/dev) (format=pdflatex 2013.9.23)  26 MAR 2014 16:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -357,58 +357,74 @@ LaTeX Warning: Citation `x86:2014' on page \thepage  undefined on input line 14
 
 
 ]
-Overfull \hbox (8.56444pt too wide) in paragraph at lines 159--159
-[]\secfnt INSTRUCTION-LEVEL CODE BEN-E-FITS 
- []
+LaTeX Font Info:    Try loading font information for T1+aett on input line 159.
 
-LaTeX Font Info:    Try loading font information for T1+aett on input line 165.
 
 (/usr/share/texlive/texmf-dist/tex/latex/ae/t1aett.fd
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 )
-Overfull \hbox (0.51228pt too wide) in paragraph at lines 177--177
+Overfull \hbox (0.51228pt too wide) in paragraph at lines 171--171
 []\T1/aett/m/n/9 }System.out.println(x);      System.out.println(z);[] 
  []
 
+
+Overfull \hbox (278.75198pt too wide) in paragraph at lines 201--201
+[]\T1/aett/m/n/9 The initial population can also almost contain no code in it i
+n order for the GP to find a desirable solution. 
+ []
+
+
+Overfull \hbox (8.56444pt too wide) in paragraph at lines 207--207
+[]\secfnt INSTRUCTION-LEVEL CODE BEN-E-FITS 
+ []
+
 [2]
-Overfull \hbox (3.84094pt too wide) in paragraph at lines 281--281
+
+LaTeX Warning: Citation `FINCH:2009' on page \thepage  undefined on input line 
+219.
+
+
+Overfull \hbox (3.84094pt too wide) in paragraph at lines 230--230
 \T1/aer/m/n/9 ing non-compilable byte-code to a cer-tain ex-tent. Even though
  []
 
-[3] [4] <infrec.pdf, id=25, 252.79866pt x 95.38315pt>
+[3] [4] <infrec.pdf, id=26, 252.79866pt x 95.38315pt>
 File: infrec.pdf Graphic file (type pdf)
  <use infrec.pdf>
-Package pdftex.def Info: infrec.pdf used on input line 348.
+Package pdftex.def Info: infrec.pdf used on input line 338.
 (pdftex.def)             Requested size: 252.79803pt x 95.3829pt.
 
-Overfull \hbox (12.79803pt too wide) in paragraph at lines 348--349
+Overfull \hbox (12.79803pt too wide) in paragraph at lines 338--339
  [][] 
  []
 
-<recsolution.pdf, id=26, 258.1348pt x 104.72134pt>
+<recsolution.pdf, id=27, 258.1348pt x 104.72134pt>
 File: recsolution.pdf Graphic file (type pdf)
  <use recsolution.pdf>
-Package pdftex.def Info: recsolution.pdf used on input line 354.
+Package pdftex.def Info: recsolution.pdf used on input line 344.
 (pdftex.def)             Requested size: 258.13416pt x 104.72108pt.
 
-Overfull \hbox (18.13416pt too wide) in paragraph at lines 354--355
+Overfull \hbox (18.13416pt too wide) in paragraph at lines 344--345
  [][] 
  []
 
 
-Overfull \hbox (12.95622pt too wide) in paragraph at lines 375--376
+Overfull \hbox (12.95622pt too wide) in paragraph at lines 365--366
 []\T1/aer/m/n/9 Future work that could be done, thought evolv-ing instruction-
  []
 
-(./EricCollom.bbl [5 <./infrec.pdf> <./recsolution.pdf>]) [6
+
+Underfull \vbox (badness 3312) has occurred while \output is active []
+
+ [5 <./infrec.pdf> <./recsolution.pdf>] (./EricCollom.bbl) [6
 
 ] (./EricCollom.aux) ) 
 Here is how much of TeX's memory you used:
- 3344 strings out of 495063
- 43288 string characters out of 3182194
- 113882 words of memory out of 3000000
- 6437 multiletter control sequences out of 15000+200000
- 51153 words of font info for 69 fonts, out of 3000000 for 9000
+ 3349 strings out of 495063
+ 43330 string characters out of 3182194
+ 116882 words of memory out of 3000000
+ 6439 multiletter control sequences out of 15000+200000
+ 53306 words of font info for 72 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  41i,11n,28p,1696b,258s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.en
@@ -424,7 +440,7 @@ uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/urw/times/utmri8a.pfb>
-Output written on EricCollom.pdf (6 pages, 883878 bytes).
+Output written on EricCollom.pdf (6 pages, 886931 bytes).
 PDF statistics:
  205 PDF objects out of 1000 (max. 8388607)
  142 compressed objects within 2 object streams

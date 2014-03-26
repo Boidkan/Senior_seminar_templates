@@ -19,53 +19,52 @@ Warning--I didn't find a database entry for "FINCH2:2011"
 Warning--I didn't find a database entry for "x86:2014"
 Warning--to sort, need author or key in JavaBytecode:2014
 Warning--to sort, need author, editor, or key in VIII:2011
-Warning--to sort, need author or key in BNF:2014
+Warning--to sort, need author, editor, or key in JVMspec:2013
 Warning--to sort, need author, editor, or key in Oracle:2013
 Warning--empty author and editor in VIII:2011
 Warning--empty author and editor in Oracle:2013
-Warning--empty author in BNF:2014
-Warning--empty journal in BNF:2014
+Warning--empty author and editor in JVMspec:2013
 Warning--empty author in JavaBytecode:2014
 Warning--empty journal in JavaBytecode:2014
 You've used 9 entries,
             2118 wiz_defined-function locations,
-            558 strings with 5217 characters,
-and the built_in function-call counts, 2480 in all, are:
-= -- 252
+            557 strings with 5238 characters,
+and the built_in function-call counts, 2506 in all, are:
+= -- 255
 > -- 62
 < -- 2
-+ -- 28
++ -- 29
 - -- 18
-* -- 154
-:= -- 368
-add.period$ -- 27
+* -- 153
+:= -- 372
+add.period$ -- 28
 call.type$ -- 9
-change.case$ -- 33
+change.case$ -- 32
 chr.to.int$ -- 0
-cite$ -- 19
-duplicate$ -- 124
-empty$ -- 237
+cite$ -- 18
+duplicate$ -- 127
+empty$ -- 243
 format.name$ -- 18
-if$ -- 556
+if$ -- 565
 int.to.chr$ -- 0
 int.to.str$ -- 9
 missing$ -- 9
-newline$ -- 45
+newline$ -- 46
 num.names$ -- 10
-pop$ -- 53
+pop$ -- 52
 preamble$ -- 1
 purify$ -- 27
 quote$ -- 0
-skip$ -- 89
+skip$ -- 88
 stack$ -- 0
-substring$ -- 139
-swap$ -- 27
+substring$ -- 140
+swap$ -- 28
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 30
-warning$ -- 10
+type$ -- 28
+warning$ -- 9
 while$ -- 17
 width$ -- 10
-write$ -- 95
+write$ -- 99
 (There were 3 error messages)

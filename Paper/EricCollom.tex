@@ -119,20 +119,20 @@ Eric C. Collom \\
 \begin{abstract}
 
 \end{abstract}
-
+This paper provides an overview of applying genetic programming to Java Bytecode and x86 to solve problems.
 
 \keywords{evolutionary computation, x86 assembly code, Java bytecode, FINCH, automated bug repair}
 
 \section{Introduction}
-Evolutionary Computation (EC) is a methodology, based off of evolutionary biology, that is used to solve problems. Similarly Genetic Programming (GP) is used to solve programs as the problem. However, traditional GP has been used mostly to solve only specific parts of problems, in programs, and not full-fledged programs themselves. Orlov et al.,~\cite{FINCH2:2009} purposes a method of applying GP to full-fledged programs. This method only requires a program to be able to be compiled to Java bytecode. Once in Java bytecode GP is applied to the program to solve the desired problem. Eric et al.,~\cite{Assembly:2010} also apply a similar method with bot Java bytecode and x86 assembly.\par
-	Both Orlov et al.,~\cite{FINCH:2011} and Eric et al.,~\cite{Assembly:2010} show that this methodology is feasible by solving an array of problems. Orlov et al.,~\cite{FINCH2:2011} focused on automating solving simple programs while Eric et al., ~\cite{Assembly:2010} focused on automated bug repair in programs. 
+Genetic Programming (GP) is a set of techniques used to automate computer problem solving. This is done by evolving programs with a genetic algorithm (GA) that,that imitate natural selection, to find a solution. Evolving a program is to make changes to the program thus changing how it works. Traditional GP has been used mostly to evolve only specific parts of programs and not full-fledged programs themselves. Orlov et al.,~\cite{FINCH2:2009} propose a method of applying GP to full-fledged programs which only requires a program to be compiled to Java bytecode. Once in Java bytecode a GA is applied to the program to solve the desired problem. Eric et al.,~\cite{Assembly:2010} also apply a similar method with bot Java bytecode and x86 assembly.\par
+	This paper will examine how both Both Orlov et al.,~\cite{FINCH:2011} and Eric et al.,~\cite{Assembly:2010} apply GP to solve programs in Java bytecode and x86 assembly . We will show that this methodology is feasible by solving an array of problems. Orlov et al.,~\cite{FINCH2:2011} focused on automating solving simple programs while Eric et al.,~\cite{Assembly:2010} focused on automated bug repair in programs. 
 	
 Section 2 covers the background needed to understand this paper. It contains information on Evolutionary Computation (EC), x86 assembly, and Java bytecode. Section 3 covers the benefits of evolving assembly and bytcode. Section 4 discusses how Orlov, et al.,~\cite{FINCH:2011} evolve Java bytcode. We will cover similar work in section 5 by Eric, et al., on both x86 assembly and Java bytecode. In section 6 we will discuss the results from both Orlov et al.,~\cite{FINCH:2011} and Eric et al.,~\cite{Assembly:2010} experiments. In section 7 we will discuss future work that could be achieved with evolving 
 	
 	
 
 \section{Background}
-In this section we will explain what EC and GP, their components, and how they are used.
+In this section we will explain what evolutionary computation (EC) and GP is, their components, and how they are used.
 We will also discuss what x86 and Java bytecode is. Additionally we will also go over basic details of the JVM.
 \subsection{Evolutionary Computation}
 
@@ -150,15 +150,9 @@ x86 is a family of backward compatible low-level programming languages~\cite{x86
 \subsubsection{ Bytcode And The JVM}
 Java bytecode ``is the intermediate, platform-independent representation''~\cite{VIII:2011} originaly designed for the Java compiler. However, other high-level languages now also have compilers for the Java Virtual Machine (JVM). Some of those languages are Scala, Groovy, Jython, Kawa, JavaFx Script, Clojure~\cite{FINCH:2011}, Erjang, and JRuby.
 
-The JVM executes bytecode through a stack-based architecture. Each JVM thread has a private stack, and each stack stores frames. Each frame contains an array of local variables, its own operand stack, and a reference to the class of the current method. Only the frame of the current executing method can be active at a time. Stack can only be popped and pushed to.
+The JVM executes bytecode through a stack-based architecture. Each JVM thread has a private stack which can only be popped and pushed to. The private stack stores frames. Each frame contains an array of local variables, its own operand stack, and a reference to the class of the current method\footnote{It is a reference to the runtime constant pool of the class of the current method. More details can be found in chapter 2.5.5 of ~\cite{JVMspec:2013}}. A new frame is created when a method is invoked. When the the method is done executing the frame is destroyed~\cite{Oracle:2013}. Only the frame of the current executing method can be active at a time.
 
-Figure 3 is a simple example of what Java bytecode looks like and how the stack works. In this example we are assuming that the frame already contains the integers 1 and 3 to retain simplicity. After iload\_1 is executed it takes the element from the frame at index 1 and pushes it onto the stack. Iload\_2 does the same thing but with index 2. Iadd pops to elements from the stack, which both must be of type int, and then adds them and pushes the result on the stack. Ireturn simply pops the stack and returns that element. 
-
-
-
-\section{Instruction-level Code Benefits}
-
-There are many problems we run into when trying to evolve source code. One problem is that it is extremely difficult to evolve an entire program due to source code syntactical constraints. Another problem is that we cannot just take a program and evolve it, we have to design  a GP for that specific problem. Evolving instruction-level code bypasses both of these problems.
+Figure 3 is a simple example of what Java bytecode looks like and how the stack works. In this example we are assuming that the frame already contains the local variables 1 and 3 to retain simplicity. After iload\_1 is executed it takes the element from the frame at index 1 and pushes it onto the stack. Iload\_2 does the same thing but with index 2. Iadd pops two elements from the stack, which both must be of type int, and then adds them and pushes the result on the stack. Ireturn simply pops the stack and returns that element. 
 
 \begin{figure}
 \centering
@@ -179,31 +173,15 @@ if(y>=0){                   if(y>=0){
 \caption{Both (a) and (b) are valid code syntactically however only (a) is valid semanticly.}
 \end{figure}
 
-
 \begin{figure}
 \centering
 {\tt
-\begin{verbatim}
-class SymbolicRegression{
-    Number symbolicRegression(Number num){
-        double x = num.doubleValue();
-        return Double.valueOf((x+x)*x);
-    }
-}
-\end{verbatim}
-}
-\caption{Example of a possible starting program to evolve and solve symbolic regression.}
-\end{figure}
-
-\begin{figure}
-\centering
-{\tt
-\begin{verbatim}
-Bytcode    Frame1  
-
-iload_1	   class	
-iload_2    1
-iadd       3
+\begin{verbatim}The initial population can also almost contain no code in it in order for the GP to find a desirable solution.
+Bytcode        Frame1  
+           
+iload_1	   |class| 1 | 3 |	
+iload_2    
+iadd       
 ireturn
 
 
@@ -222,60 +200,31 @@ Execute iadd     Execute ireturn
           
 \end{verbatim}
 }
-\caption{Istore\_n pushes an element from index n from frame onto stack. Iadd pops two elements from operand stack add them together and then pushes to the result to the stack. Ireturn pops an element from the stack and returns it}
+\caption{Index zero of the frame is a reference to the methods current class. Istore\_n pushes an element from index n from frame onto stack. Iadd pops two elements from operand stack add them together and then pushes to the result to the stack. Ireturn pops an element from the stack and returns it}
 \end{figure}
 
 
+\section{Instruction-level Code Benefits}
 
+There are many problems we run into when trying to evolve source code. One problem is that it is extremely difficult to evolve an entire program due to source code syntactical constraints. Another problem is that we cannot just take a program and evolve it, we have to design a GA for that specific problem. At times we have to modify the program so that it can be evolved or use templating. Evolving instruction-level code bypasses both of these problems.
 
 \subsection{Source Code Constraints}
 One problem with trying to evolve entire programs at the source code level is that there is a very high risk of producing a non-compilable program. This is due to the fact that high-level programming languages are designed to make it easy for humans to read and write programs. Most high-level programming languages are defined using grammars which are used to represent the syntax of the programming language~\cite{Oracle:2013,Assembly:2010}. This means that the grammar does not represent the semantic constraints of a program. The grammar does not capture the languages type system, variable visibility and accessibility, and other constraints ~\cite{FINCH:2011}. For example, in figure 1 both 1.(a) and 1.(b) comply to the syntactical rules of Java. However, when taking into account semantics 1.(b) is illegal code. In 1.(b) variable \texttt{y} is uninitialized before the test in the if statement, and assigning \texttt{y} to \texttt{x} violates a type constraint. Plus, variable \texttt{z} is not defined anywhere.  In order to write a program to evolve source code we would have to deal with all these constraints. While this task is possible it would require creating a full-scale compiler to check for these semantic constraints. Thus, it is easier to evolve instruction-level code. \par
 
-Instruction-level code consist of a small set of instructions~\cite{Assembly:2010}. They are simpler syntactically and there are less semantic constraints to violate. This means that there is a lower risk of producing a noncompilable program during evolution. 
+Instruction-level code consist of a smaller set of instructions~\cite{Assembly:2010}. They are simpler syntactically and there are less semantic constraints to violate. This means that there is a lower risk of producing a noncompilable program during evolution. 
 
 \subsection{Evolving As Is}
 In tradition EC when creating a GP to evolve a program there is a lot of scaffolding that has to be done. Usually we have to design the GP for that specific program. When a GP is designed it is common to just evolve expressions or formulae ~\cite{FINCH:2011} within the program. Most of the program as a whole would be already written and remain the same after evolution. The GP has to know what it can evolve and where it is located. Also, usually the GP isn't useful in evolving other programs to contain different problems. Instead an entirely new GP would have to be designed and the program along with it.
 
-When evolving instruction-level code there is no requirement for the program being evolved to be designed for the GP. The GP doesn't have to focus on a specific part of the program or even be aware of what is in the program for the most part. Instead the program that is being evolved stays as is and the GP goes through minor modifications to fit the problem trying to be solved. The GP has to be given a fitness algorithm in order to attempt to find a desirable individual. It also needs to know what genetic operator and the desired number of generations is needed. Depending on the on the program being evolved one might also have to put a growth limit on the code or implement protected division or logarithm. For example, Orlov et al.,~\cite{FINCH:2011} enforced a growth limit when performing crossover on code so that the programs would not become too large. The initial population can also almost contain no code in it in order for the GP to find a desirable solution. 
+When evolving instruction-level code the program does not have to be "intentionally written for the purpose of serving as a GP representation".~\cite{FINCH2:2009} The only requirement is that it can be compiled to instruction-level code~\cite{FINCH:2009}~\cite{Assembly:2010}, even without access to the source code. The GP doesn't have to focus on a specific part of the program in order to evolve it. Instead the program that is being evolved stays as is and the GP goes through minor modifications to fit the problem trying to be solved. The GP has to be given a fitness algorithm in order to attempt to find a desirable individual. It also needs to know what genetic operator and the desired number of generations is needed. Also, depending on the on the program being evolved one might also have to put a growth limit on the code. For example, Orlov et al.,~\cite{FINCH:2011} enforced a growth limit when performing crossover on code so that the programs would not become too large. 
 
-A huge benefit that comes from most of the scaffolding happening on GP end is that the initial program being evolved does not have to contain a whole lot of code. The GP can evolve a minimal amount of code into a full-scale working program. However, evolving instruction-level code is also capable of being very focused like traditional GP is on source code. For example, Eric et al.,~\cite{Assembly:2010} in their research focused on only evolving small areas of code and would only make minor changes to the code as a whole. The result code would usually only have one line of code changed. 
+A huge benefit that comes from most of the scaffolding happening on GP end is that the initial program being evolved does not have to contain a whole lot of code. The GP can evolve a minimal amount of code into a full-scale working program. However, evolving instruction-level code is also capable of being very focused like traditional GP is on source code. For example, Eric et al.,~\cite{Assembly:2010} in their research focused on only evolving small areas of code and would only make minor changes to the code as a whole. The result code would usually only have one line of code changed. However, since they were evolving instruction-level code they were able to fix bugs such as incorrect type declarations, which was not possible in their earlier work done in source code. 
 
-
+As previously stated, in traditional GP the program being evolved is mostly all written before hand and only a section of it is evolved. For evolving instruction-level code this is not the case. Infact, a program can contain the bare minimum elements needed for evolution. This will be further shown in Section 6.1.1. 
 
 
 \section{FINCH}
-FINCH is a program developed by Orlov et al.,~\cite{FINCH2:2009,FINCH:2011} that evolves programs that have already been compiled into Java bytecode.
-
-\subsection{Crossover}
-
-\begin{figure}
-\centering
-{\tt
-\begin{verbatim}
-1.   iconst_1    iconst_4    iconst_4    iconst_4
-2.   iconst_3    iconst_2    iconst_2    istore_1
-3    istore_1    istore_1    istore_1    istore_2
-4    istore_2    istore_2    istore_2    istore_2
-5.   iload_1     iload_1     iload_2     iload_2
-6.   iload_2     iload_2     iload_2     iload_1
-7.   iadd        isub        isub        isub
-8.   ireturn     ireturn     ireturn     ireturn
-9.                          
-      (A)          (B)         (C)          (D)
-          
-\end{verbatim}
-}
-\caption{This is an example of good and bad crossover. iconst\_n pushes onto the stack an int of value n. istore\_n pops the stack and saves the value on the frame at index n. Look at figure 3 for a description of iload,iadd,isub,and ireturn.}
-\end{figure}
-
-
-The FINCH uses two-point crossover to evolve Java bytecode. It takes two programs A and B and extracts sections $\alpha$ and $\beta$ respectively. It then takes section $\alpha$ and inserts it into where section $\beta$ used to be. It only selects an $\alpha$ that will compile after being inserted into B. Take into account that just because $\alpha$ can replace $\beta$ in B does not imply that $\beta$ can replace $\alpha$ in A. In other words it is not a biconditional relationship.
-
-For example in Figure 4 let the Java bytecode snippets 4(A) and 4(B) be A and B. Let $\alpha$ be line 6 from A and $\beta$ be line 5 from B. A(C) is the product of replacing $\beta$ with $\alpha$ in B.
-
-
- Now let $\alpha$ be lines 3-4 in A and $\beta$ be lines 2-3 in B. A(D) is the result of replacing $\beta$ with $\alpha$ in B. However in this case A(D) is incorrect crossover since only one integer is saved on the frame and at line 3 istore\_2 tries to pop an empty stack causing stack underflow.
-
+FINCH is a program developed by Orlov et al.,~\cite{FINCH2:2009,FINCH:2011} that evolves programs that have already been compiled into Java bytecode. FINCH also makes sure that all offspring produced are executable Java bytecode through a set of strict rules. 
 
 \subsection{Selecting Offspring}
 Evolving Java Byte code only reduces the chance of evolving non-compilable bytecode to a certain extent. Even though Java byte code has a simpler syntax than source code, it still has syntactical constraints. Orlov et al.,\cite{FINCH2:2009} address this issue by checking if a good offspring has been created before letting it join the evolved population, thus ensuring offspring produced through crossover contain valid bytcode. If an illegal offspring is produced then another offspring with the same parents is made. This process is repeated until a good offspring is produced or a predetermined number of attempts have been made.\par
@@ -300,10 +249,38 @@ Orlov et al.~\cite{FINCH:2011} focused on evolving small programs to solve probl
 
 In each of tests FINCH was given each time a program that had a zero fitness. The elements included in the programs were the minimal components to successfully evolve and solve the problem. For example, in the case of symbolic regression the initial population contained the mathematical function set \{+, -, *, \%, $sin$, $cos$, $e$,  $ln$\} and number types.
 
+
+\subsection{Crossover}
+
+\begin{figure}
+\centering
+{\tt
+\begin{verbatim}
+1.   iconst_1    iconst_4    iconst_4    iconst_4
+2.   iconst_3    iconst_2    iconst_2    istore_1
+3    istore_1    istore_1    istore_1    istore_2
+4    istore_2    istore_2    istore_2    istore_2
+5.   iload_1     iload_1     iload_2     iload_2
+6.   iload_2     iload_2     iload_2     iload_1
+7.   iadd        isub        isub        isub
+8.   ireturn     ireturn     ireturn     ireturn
+9.                          
+      (A)          (B)         (C)          (D)
+          
+\end{verbatim}
+}
+\caption{This is an example of good and bad crossover. iconst\_n pushes onto the stack an int of value n. istore\_n pops the stack and saves the value on the frame at index n. Look at figure 3 for a description of iload,iadd,isub,and ireturn.}
+\end{figure}
+
+
+The FINCH uses two-point crossover to evolve Java bytecode. It takes two programs A and B and extracts sections $\alpha$ and $\beta$ respectively. It then takes section $\alpha$ and inserts it into where section $\beta$ used to be. It only selects an $\alpha$ that will compile after being inserted into B.
+For example in Figure 4 let the Java bytecode snippets 4(A) and 4(B) be A and B. Let $\alpha$ be line 6 from A and $\beta$ be line 5 from B. A(C) is the product of replacing $\beta$ with $\alpha$ in B. This is considered good crossover because the value at index 2 on the frame can be called twice. It is also an int type which keep isub from breaking. Now let $\alpha$ be lines 3-4 in A and $\beta$ be lines 2-3 in B. A(D) is the result of replacing $\beta$ with $\alpha$ in B. However in this case A(D) is incorrect crossover since only one integer is saved on the frame and at line 3 istore\_2 tries to pop an empty stack causing stack underflow. 
+
 \subsection{Non-Halting Offspring}
 Another issue that arises from evolving unrestricted bytcode is that the resulting program might enter a non-halting state. These problems do not arise when the check to see if an offspring is good bytecode. Instead, this is a runtime issue. This, is especially true when evolving programs that contain loops and recursion.
 The way that Orlov et al.,~\cite{FINCH:2011} deal with this, before running the program, is count how many calls are made to each function. If too many calls are made to a function than an exception is thrown. The lowest possible fitness is assigned to an individual who fails this test.
 
+Orlov et al., chose to count the calls to each function before running the code to prevent from having to either run it on a separate thread or setting a run time limit. They decided against running each program on a separate thread because killing a thread at times can be unreliable and be unsafe for GP as a whole. They also decided against setting a time limit due to the difficult of defining how long a program should run. How long a program runs could vary greatly depending on the program being run and CPU load. Also, this would limit the search space since program that is a desired solution could run longer than the time limit.
 
 
 \section{Evolving Assembly Code}
@@ -322,7 +299,7 @@ They use three mutation operators mutate-insert selects an instruction based of 
 
 \subsection{Non-Halting Offspring}
 
-Eric, et al., also chose a different approach than that of Olav, et al., when dealing with non-halting offspring. They decided to not check for non-halting and instead run the individual on a virtual machine(VM) with an eight second timeout on the process. Olov, et al., decided against this due to two main issues. First it is hard to define how long a program should run which can vary greatly depending on the cpu load. Thus if good time limit is not selected then it can be waste to cpu resources. The second issue is that limiting the runtime requires running the program on a separate thread. Killing the thread can be unreliable and can be unsafe for the GP as a whole. Eric, et al., ran into the problem where sometimes programs would not respond to termination requests.
+Eric, et al., also chose a different approach than that of Olav, et al., when dealing with non-halting offspring. They decided to not check for non-halting and instead run the individual on a virtual machine(VM) with an eight second timeout on the process.  Eric, et al., ran into the problem where sometimes programs would not respond to termination requests.
 They also ran into "Stack Smashing" which is where the stack of the application or operator overflow which can cause the program and system as a whole to crash. However, since they ran each individual on a VM stack smashing was not a significant problem.
 
 
@@ -334,7 +311,20 @@ Orlov et al.~\cite{FINCH:2011} focused on evolving small programs to solve probl
 
 In each of tests FINCH was given each time a program that had a zero fitness. The elements included in the programs were the minimal components to successfully evolve and solve the problem. For example, in the case of symbolic regression the initial population contained the mathematical function set \{+, -, *, \%, $sin$, $cos$, $e$,  $ln$\} and number types.
 
-
+\begin{figure}
+\centering
+{\tt
+\begin{verbatim}
+class SymbolicRegression{
+    Number symbolicRegression(Number num){
+        double x = num.doubleValue();
+        return Double.valueOf((x+x)*x);
+    }
+}
+\end{verbatim}
+}
+\caption{Example of a possible starting program to evolve and solve symbolic regression.}
+\end{figure}
 \subsubsection{Symbolic Regression}
 Symbolic regression is a method of finding a mathematical function that best fits a a set of points between two intervals. Olov, et al.,~\cite{FINCH:2011} chose to use 20 random points, between -1 and 1, from various polynomials. Fitness was calculated as the number of points hit by the function. The function set \{+, -, *, \%, sin, cos, math.$e$, $ln$\} was used for most of their experiments. This was done in order to mimic previous experimentation done~\cite{koza:1992} in order to compare the results to traditional GP. They were able to evolve up to a 9-degree polynomial with just the function set \{+, *\}.
 
