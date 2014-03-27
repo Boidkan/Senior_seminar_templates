@@ -1,24 +1,15 @@
 \begin{thebibliography}{1}
 
-\bibitem{VIII:2011}
-{\em Genetic Programming Theory and Practice VIII}.
-\newblock Springer New York, 2011.
-
 \bibitem{Oracle:2013}
 {\em The Java Language Specification}.
 \newblock Oracles America, Inc. And/or affiliates, 500 Oracle Parkway, Redwood
   City, California 94065, U.S.A., 2013.
-\newblock \\ //{\it //This provides some needed background on the JVM,
-  compiler, and Java bytecode. It is too long to read it all but will be a good
-  //reference for any questions about the JVM //}.
+\newblock \\.
 
 \bibitem{JVMspec:2013}
 {\em The Java Virtual Machine Spefication}.
 \newblock Oracles America, Inc. And/or affiliates, 500 Oracle Parkway, Redwood
   City, California 94065, U.S.A., 2013.
-\newblock \\ //{\it //This provides some needed background on the JVM,
-  compiler, and Java bytecode. It is too long to read it all but will be a good
-  //reference for any questions about the JVM //}.
 
 \bibitem{JavaBytecode:2014}
 Java bytcode.
@@ -54,6 +45,11 @@ E.~Schulte, S.~Forrest, and W.~Weimer.
 Wikibooks.
 \newblock X86 assembly/machine language conversion --- wikibooks{,} the free
   textbook project, 2013.
+\newblock [Online; accessed 23-March-2014].
+
+\bibitem{x86assembly:2014}
+Wikipedia.
+\newblock X86 assembly language --- wikipedia{,} the free encyclopedia, 2014.
 \newblock [Online; accessed 23-March-2014].
 
 \end{thebibliography}
