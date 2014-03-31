@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.13 (TeX Live 2013/dev) (format=pdflatex 2013.9.23)  26 MAR 2014 22:42
+This is pdfTeX, Version 3.1415926-2.5-1.40.13 (TeX Live 2013/dev) (format=pdflatex 2013.9.26)  31 MAR 2014 15:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -345,83 +345,86 @@ Underfull \hbox (badness 5316) in paragraph at lines 118--118
 []\crnotice This work is li-censed un-der the Cre-ative Com-mons Attribution-
  []
 
-[1{/usr/share/texlive/texmf/fonts/map/pdftex/updmap/pdftex.map}
+<ECdiagram.pdf, id=1, 268.00125pt x 709.65125pt>
+File: ECdiagram.pdf Graphic file (type pdf)
+ <use ECdiagram.pdf>
+Package pdftex.def Info: ECdiagram.pdf used on input line 142.
+(pdftex.def)             Requested size: 109.17375pt x 289.07999pt.
+ [1{/usr/share/texlive/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
-]
-LaTeX Font Info:    Try loading font information for T1+aett on input line 159.
+ <./ECdiagram.pdf>]
+LaTeX Font Info:    Try loading font information for T1+aett on input line 170.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/ae/t1aett.fd
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 )
-Overfull \hbox (0.51228pt too wide) in paragraph at lines 171--171
+Overfull \hbox (0.51228pt too wide) in paragraph at lines 182--182
 []\T1/aett/m/n/9 }System.out.println(x);      System.out.println(z);[] 
  []
 
 
-Overfull \hbox (8.56444pt too wide) in paragraph at lines 207--207
+Overfull \hbox (8.56444pt too wide) in paragraph at lines 220--220
 []\secfnt INSTRUCTION-LEVEL CODE BEN-E-FITS 
  []
 
 [2]
-Overfull \hbox (3.84094pt too wide) in paragraph at lines 230--230
+Overfull \hbox (3.84094pt too wide) in paragraph at lines 243--243
 \T1/aer/m/n/9 ing non-compilable byte-code to a cer-tain ex-tent. Even though
  []
 
-[3] [4] <infrec.pdf, id=25, 252.79866pt x 95.38315pt>
+[3] [4] <infrec.pdf, id=73, 252.79866pt x 95.38315pt>
 File: infrec.pdf Graphic file (type pdf)
  <use infrec.pdf>
-Package pdftex.def Info: infrec.pdf used on input line 331.
+Package pdftex.def Info: infrec.pdf used on input line 348.
 (pdftex.def)             Requested size: 252.79803pt x 95.3829pt.
 
-Overfull \hbox (12.79803pt too wide) in paragraph at lines 331--332
+Overfull \hbox (12.79803pt too wide) in paragraph at lines 348--349
  [][] 
  []
 
-<recsolution.pdf, id=26, 258.1348pt x 104.72134pt>
+<recsolution.pdf, id=74, 258.1348pt x 104.72134pt>
 File: recsolution.pdf Graphic file (type pdf)
  <use recsolution.pdf>
-Package pdftex.def Info: recsolution.pdf used on input line 337.
+Package pdftex.def Info: recsolution.pdf used on input line 355.
 (pdftex.def)             Requested size: 258.13416pt x 104.72108pt.
 
-Overfull \hbox (18.13416pt too wide) in paragraph at lines 337--338
+Overfull \hbox (18.13416pt too wide) in paragraph at lines 355--356
  [][] 
  []
 
-
-Overfull \hbox (13.23515pt too wide) in paragraph at lines 358--359
+[5 <./infrec.pdf> <./recsolution.pdf>]
+Overfull \hbox (13.23515pt too wide) in paragraph at lines 376--377
 []\T1/aer/m/n/9 Future work that could be done, through evolv-ing instruction-
  []
 
-[5 <./infrec.pdf> <./recsolution.pdf>] (./EricCollom.bbl) [6
-
-] (./EricCollom.aux) ) 
+(./EricCollom.bbl) [6] (./EricCollom.aux) ) 
 Here is how much of TeX's memory you used:
- 3346 strings out of 495063
- 43302 string characters out of 3182194
- 114882 words of memory out of 3000000
- 6436 multiletter control sequences out of 15000+200000
+ 3357 strings out of 495063
+ 43451 string characters out of 3182194
+ 113930 words of memory out of 3000000
+ 6446 multiletter control sequences out of 15000+200000
  53306 words of font info for 72 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 41i,11n,28p,1646b,258s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.en
-c}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/
-uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/urw/times/utmri8a.pfb>
-Output written on EricCollom.pdf (6 pages, 883795 bytes).
+ 41i,11n,28p,1344b,258s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texlive/texmf-dist/fonts
+/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-dist/font
+s/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
+helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on EricCollom.pdf (6 pages, 920773 bytes).
 PDF statistics:
- 205 PDF objects out of 1000 (max. 8388607)
- 142 compressed objects within 2 object streams
+ 253 PDF objects out of 1000 (max. 8388607)
+ 171 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
