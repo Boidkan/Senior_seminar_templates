@@ -272,25 +272,25 @@ These checks are important because they ensure good offspring and variability in
 \subsection{Crossover}
 
 \begin{figure}
-\centering
-{\tt
-\begin{verbatim}
-1.   iconst_1    iconst_4    iconst_4    iconst_4
-2.   iconst_3    iconst_2    iconst_2    istore_1
-3    istore_1    istore_1    istore_1    istore_2
-4    istore_2    istore_2    istore_2    istore_2
-5.   iload_1     iload_1     iload_2     iload_2
-6.   iload_2     iload_2     iload_2     iload_1
-7.   iadd        isub        isub        isub
-8.   ireturn     ireturn     ireturn     ireturn
-                          
-      (A)          (B)         (C)          (D)
-          
-\end{verbatim}
-}
+\begin{tabular}{|c|l|l|l|l|}
+
+\hline
+Line \#&(A)&(B)&(C)&(D)\\  \hline
+1&iconst\_1&iconst\_4&iconst\_4&iconst\_4\\
+2&iconst\_3&iconst\_2&iconst\_2&istore\_1\\
+3&istore\_1&istore\_1&istore\_1&istore\_2\\
+4&istore\_2&istore\_2&istore\_2&istore\_2\\
+5&iload\_1&iload\_1&iload\_2&iload\_2\\
+6&iload\_2&iload\_2&iload\_2&iload\_1\\
+7&iadd&isub&isub&isub\\
+8&ireturn&ireturn&ireturn&ireturn\\
+\hline
+\end{tabular}
 \caption{This is an example of good and bad crossover. iconst\_n pushes onto the stack an int of value n. istore\_n pops the stack and saves the value on the frame at index n. Look at figure~\ref{stack} for a description of iload,iadd,isub,and ireturn.}
 \label{crossover}
+  
 \end{figure}
+
 
 
 The FINCH uses two-point crossover to evolve Java bytecode. It takes two programs A and B and extracts sections $\alpha$ and $\beta$ respectively. It then takes section $\alpha$ and inserts it into where section $\beta$ used to be. It only selects an $\alpha$ that will compile after being inserted into B.
