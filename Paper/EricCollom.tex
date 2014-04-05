@@ -100,7 +100,6 @@
 \author{
 % You can go ahead and credit any number of authors here,
 % e.g. one 'row of three' or two rows (consisting o
-f one row of three
 % and a second row of one, two or three).
 %
 % The command \alignauthor (no curly braces needed) should
@@ -118,16 +117,20 @@ Eric C. Collom \\
 
 \maketitle
 \begin{abstract}
-
+Traditional genetic programming has not been able to evolve entire programs at the source code level. Instead only small sections within in the programs are usually evolved. A proven method that solves this problem is by evolving programs in either bytecode or assembly language. This paper provides an overview of applying genetic programming to Java Bytecode and x86 to solve problems. We will discuss solving different problems that these methods have been proven to solve.
 \end{abstract}
-This paper provides an overview of applying genetic programming to Java Bytecode and x86 to solve problems.
+
 
 \keywords{evolutionary computation, x86 assembly code, Java bytecode, FINCH, automated bug repair}
 
 \section{Introduction}
-Genetic Programming (GP) is a set of techniques used to automate computer problem solving. This is done by evolving programs with an evolutionary algorithm (EA) that imitates natural selection, to find a solution. Traditional GP has been used mostly to evolve only specific parts of programs and not full-fledged programs themselves. Orlov et al.,~\cite{FINCH2:2009} propose a method of applying GP to full-fledged programs which only requires a program to be compiled to Java bytecode. Once in Java bytecode a EA is applied to the program to solve the desired problem. Eric et al.,~\cite{Assembly:2010} also apply a similar method with bot Java bytecode and the x86 assembly family. These methods are important because they show that evolving entire programs is possible, which has yet to be done with traditional GP in source code. This is also useful since once the EA has been created there is little modification that has to be done to it to evolve different programs. We will discuss this in more detail in Section 3.\par
+Genetic Programming (GP) is a set of techniques used to automate computer problem solving. This is done by evolving programs with an evolutionary algorithm (EA) that imitates natural selection, to find a solution. Traditional GP has been used mostly to evolve only specific parts of programs and not full-fledged programs themselves. This is because traditionally we have to understand the structure of the program being evolved. A EA is usually designed for a specific program with knowledge about how the program works. Being able to evolve an entire program without knowing its structure would allow more flexibility in GP. A method that allows for this flexibility is by evolving bytecode and assembly instead of source code. This is possible because bytecode and assembly languages are less restrictive syntactically than source code. This will be further explained in Section 3.\par 
 
-	This paper will examine how both Both Orlov et al.,~\cite{FINCH:2011} and Eric et al.,~\cite{Assembly:2010} apply GP to solve programs in Java bytecode and x86 assembly. We will also show that this methodology is feasible by solving an array of problems. Orlov et al.,~\cite{FINCH:2011} focused on automating solving simple programs while Eric et al.,~\cite{Assembly:2010} focused on automated bug repair in programs.\par 
+Orlov et al.,~\cite{FINCH2:2009} propose a method of applying GP to full-fledged programs which only requires a program to be compiled to Java bytecode. Once in Java bytecode a EA is applied to the program to solve the desired problem. Eric et al.,~\cite{Assembly:2010} also apply a similar method with bot Java bytecode and the x86 assembly family. 
+
+These methods are important because they show that evolving entire programs is possible, which has yet to be done with traditional GP in source code. This is also useful since once the EA has been created there is little modification that has to be done to it to evolve different programs and the structure of the program being evolved does not have to be known.\par
+
+	This paper will examine how both Both Orlov et al.,~\cite{FINCH:2011} and Eric et al.,~\cite{Assembly:2010} apply GP to solve programs in Java bytecode and x86 assembly. We will also show that this methodology is feasible by solving an array of problems in Section 6. Orlov et al.,~\cite{FINCH:2011} focused on automating solving simple programs while Eric et al.,~\cite{Assembly:2010} focused on automated bug repair in programs.\par 
 	
 This paper is organized as follows. Section 2 covers the background needed to understand this paper. It contains information on Evolutionary Computation (EC), x86 assembly, and Java bytecode. Section 3 describes the benefits of evolving assembly and bytcode. Section 4 dexampleiscusses how Orlov, et al.,~\cite{FINCH:2011} evolve Java bytcode. In Section 5  we will discuss how Eric, et al., evolve both x86 assembly and Java bytecode. In section 6 we summarize the results from both Orlov et al.,~\cite{FINCH:2011} and Eric et al.,~\cite{Assembly:2010} experiments. In section 7 we will discuss possible future work and ideas.
 	
