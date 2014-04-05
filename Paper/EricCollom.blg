@@ -15,57 +15,49 @@ I was expecting an "="---line 147 of file EricBibliography.bib
  : // 
  :    note={\\
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 234 of file EricBibliography.bib
- : 
- : @book{VIII:2011,
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-Warning--to sort, need author or key in JavaBytecode:2014
 Warning--to sort, need author, editor, or key in JVMspec:2013
 Warning--to sort, need author, editor, or key in Oracle:2013
 Warning--empty author and editor in Oracle:2013
 Warning--empty author and editor in JVMspec:2013
-Warning--empty author in JavaBytecode:2014
-Warning--empty journal in JavaBytecode:2014
 You've used 10 entries,
             2118 wiz_defined-function locations,
-            558 strings with 5200 characters,
-and the built_in function-call counts, 3061 in all, are:
-= -- 315
-> -- 91
+            556 strings with 5230 characters,
+and the built_in function-call counts, 3093 in all, are:
+= -- 317
+> -- 97
 < -- 3
-+ -- 41
-- -- 28
-* -- 184
-:= -- 462
++ -- 43
+- -- 30
+* -- 177
+:= -- 473
 add.period$ -- 32
 call.type$ -- 10
-change.case$ -- 41
+change.case$ -- 42
 chr.to.int$ -- 0
-cite$ -- 17
-duplicate$ -- 144
-empty$ -- 280
-format.name$ -- 28
-if$ -- 688
+cite$ -- 14
+duplicate$ -- 141
+empty$ -- 284
+format.name$ -- 30
+if$ -- 696
 int.to.chr$ -- 0
 int.to.str$ -- 10
-missing$ -- 9
+missing$ -- 8
 newline$ -- 51
-num.names$ -- 14
-pop$ -- 62
+num.names$ -- 16
+pop$ -- 66
 preamble$ -- 1
-purify$ -- 34
+purify$ -- 35
 quote$ -- 0
 skip$ -- 107
 stack$ -- 0
 substring$ -- 178
-swap$ -- 38
+swap$ -- 39
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 34
-warning$ -- 7
-while$ -- 24
+warning$ -- 4
+while$ -- 26
 width$ -- 12
-write$ -- 113
-(There were 4 error messages)
+write$ -- 114
+(There were 3 error messages)
