@@ -197,39 +197,6 @@ if(y>=0){                   if(y>=0){
 \label{stack}
 \end{figure}
 
-
-%\begin{figure}
-%\centering
-%{\tt
-%\begin{verbatim}
-%Bytcode        Frame1  
-           
-%iload_1	   |class| 1 | 3 |	
-%iload_2    
-%iadd       
-%ireturn
-
-
-%Execute iload_1  Execute iload_2   
-
-%    Stack            Stack            
-%      1                3               
-                       1
-                       
-%Execute iadd     Execute ireturn
-
-%  Stack           Stack(empty)
-%    4
-
-
-          
-%\end{verbatim}
-%}
-%\caption{Index zero of the frame is a reference to the methods current class. Istore\_n pushes an element from index n from frame onto stack. Iadd pops two elements from operand stack add them together and then pushes to the result to the stack. Ireturn pops an element from the stack and returns it}
-%\label{stack}
-%\end{figure}
-
-
 \section{Instruction-level Code Benefits}
 
 There are many problems we run into when trying to evolve source code. One problem is that it is extremely difficult to evolve an entire program due to source code syntactical constraints. Another problem is that we cannot just take a program and evolve it, we have to know and understand the structure of the program in order to design an EA for that specific problem. At times we even have to modify the program so that it can be evolved or use templating. Evolving instruction-level code can bypasses both of these problems.
@@ -299,29 +266,26 @@ For example in Figure~\ref{crossover} let the Java bytecode snippets 4(A) and 4(
 Another issue that arises from evolving unrestricted bytcode is that the resulting program might enter a non-halting state. These problems do not arise when the check to see if an offspring is good bytecode. Instead, this is a runtime issue. This, is especially true when evolving programs that contain loops and recursion.
 The way that Orlov et al.,~\cite{FINCH:2011} deal with this, before running the program, is count how many calls are made to each function. If too many calls are made to a function then an exception is thrown. The lowest possible fitness is assigned to an individual who fails this test.
 
-Orlov et al., chose to count the calls to each function before running the code to prevent from having to either run it on a separate thread or setting a run time limit. They decided against running each program on a separate thread because killing a thread can be unreliable and be unsafe for the GP as a whole. They also decided against setting a time limit due to the difficult of defining how long a program should run. How long a program runs could vary greatly depending on the program being run and the CPU load. Also, this would limit the search space since an individual that is a desired solution could run longer than the time limit.
+Orlov et al., chose to count the calls to each function before running the code to prevent from having to either run it on a separate thread or set a run time limit. They decided against running each program on a separate thread because killing a thread can be unreliable and be unsafe for the GP as a whole. They also decided against setting a time limit due to the difficulty of defining how long a program should run. How long a program runs could vary greatly depending on the program being run and the CPU load. Also, this would limit the search space since an individual that is a desired solution could run longer than the time limit.
 
 
 \section{Evolving Assembly Code}
-Eric, et al.,~\cite{Assembly:2010} focus evolving x86 assembly and Java bytecode for the purpose of program repair and debugging. In their tests they took medium to large sized programs in Java, C, and Haskell that contained a bug. The types of bugs they used were common human errors such as having a for loop index off by one. Most of their experiments focused on evolving a small section of the program.
+Eric, et al.,~\cite{Assembly:2010} focused evolving x86 assembly and Java bytecode for the purpose of program repair and debugging. In their tests they took medium to large sized programs in Java, C, and Haskell that contained a bug. The types of bugs they used were common human errors such as having a for loop index off by one. Most of their experiments focused on evolving a small section of the program. 
 \subsection{Selecting Offspring } 
-In selecting offspring a Eric et al.,~\cite{Assembly:2010} chose a different path than Olov, et al.,~\cite{FINCH:2011}. They decided to not make sure produced offspring were compilable. Instead they decided to let all produced offspring into the next generation. This produced a considerable amount of individuals with fitness zero due to being noncompilable.
+They also chose a different approach in offspring selection than Orlov et al.~\cite{FINCH:2011}. They chose to not make sure their offspring were valid instruction-level code. Instead they decided to let all produced offspring into the next generation. This produced a considerable amount of individuals with a fitness of zero due to being noncompilable.
 
-Each program to be evolved was provided with a set of tests that passed and one test that failed. The failed test was used to check if an offspring fixed the bug. The tests that passed were used to make sure the program retained functionality. For each offspring they compiled them into either an executable binary(x86) or class file (Java). If the program failed to compile then it would obtain a fitness of zero. If the program did compile then it was ran against the tests. The fitness score was calculated as the weighted sum of tests passed, the test that initially failed being worth more. A greater weight was placed on the non passing testing since that was the main goal.
-
-
+Test cases were used to calculate the fitness of each individual. The test cases consisted of a set of passing tests and one failing test. The failing test was used to check if an offspring fixed the bug. The passing tests were used to make sure the program retained functionality. Each offspring was compiled into either an executable binary(x86) or class file (Java). If the program failed to compile it obtained a fitness of zero. If the program did compile it was run against the tests. The fitness score was calculated as the weighted sum of tests passed, the test that initially failed being worth more. A greater weight was placed on the non passing testing since that was the main goal.
 
 \subsection{Genetic Operators}
-Eric et al.,~\cite{Assembly:2010} used mutation on 90\% of each population and crossover on the rest to produce the offspring population. Multiple tournaments consisting of three individuals was performed to select fit individuals for reproduction. They used mutation over crossover 90\% of the time because it produced better results for the type of problems they were solving. Since, each bug was a minor change, such as change a zero to a one, using a large amount of crossover or more complex operators generally lengthened their search time.
+Eric et al.,~\cite{Assembly:2010} used mutation on 90\% of each population and crossover on the rest to produce the offspring population. Multiple tournaments consisting of three individuals each were performed to select fit individuals for reproduction. Mutation was used over crossover 90\% of the time because it produced better results for the type of problems being solved. Since each bug was a minor change, such as changing a zero to a one, using a large amount of crossover or more complex operators generally lengthened their search time.
 
-Many of the programs being evolved where very large; consisting of thousands of lines of instruction-level code. Because of this Eric et al., used a "weighted path" to select what lines of instruction to apply mutation and crossover too. Each line of instruction-level code was given a weight based off of if the tests executed that instruction. This weight is supposed to indicate how relevant the statement is too the bug. A path weight of 1.0 is assigned if the instruction is only executed by the negative test case. A weight of .1 is given if the instruction is executed by both the negative test case and atleast one positive test case. For all other cases a path weight of 0 is given. The path weight is the sum of the weight of all the instructions in that path. 
+Many of the programs being evolved where very large; consisting of thousands of lines of instruction-level code. Because of this Eric et al., used a "weighted path" to select what lines of instruction to apply mutation and crossover too. Each line of instruction-level code was given a weight based off of if the tests executed that instruction. This weight was used to indicate how relevant the that line of code was too the bug. A path weight of 1.0 was assigned if the instruction was only executed by the negative test case. A weight of .1 is given if the instruction is executed by both the negative test case and atleast one positive test case. For all other cases a path weight of 0 is given. The path weight is the sum of the weight of all the instructions in that path. Paths that the negative test did not go through were ignored.
 
-They used three mutation operators. Mutate-insert selects an instruction based of off its positive weight. Mutate-delete selects and instruction by proportionally by negative weight and deletes it. Mutate-swap operator select to instruction proportionally by negative weight and swaps them. They also implement a simple version of crossover that swaps sections from two programs creating two new offspring.
+They used three mutation operators. Mutate-insert selects an instruction based of off its positive weight. Mutate-delete selects and instruction by proportionally by negative weight and deletes it. Mutate-swap operator select to instruction proportionally by negative weight and swaps them. They also implement a simple version of crossover that swaps sections from two programs creating two new offspring. The probability of mutation for each path was calculated by multiplying the mutation rate and the weighted path. The higher the result the more likely that path was chosen for mutation.
 
 \subsection{Non-Halting Offspring}
 
-Eric, et al., also chose a different approach than that of Olav, et al., when dealing with non-halting offspring. They decided to not check for non-halting cases and instead run each individual on a virtual machine(VM) with an eight second timeout on the process. They did run into one of the problems that Orlov et al., were worried about. They had trouble having programs not respond to termination requests.
-They also ran into stack buffer overflow which occurs when there is an attempt to write to a memory address outside of data structures size. This can cause the program and system as a whole to crash. However, this was expected since one of the bugs they were trying to fix was buffer overflow. Also, since they ran each individual on a VM buffer overflow was not a significant problem.
+Eric, et al., also chose a different approach than that of Olav, et al., when dealing with non-halting offspring. They decided to not check for non-halting cases and instead run each individual on a virtual machine(VM) with an eight second timeout on the process. A problem with programs not responding to termination requests was noted. There were also issues with stack buffer overflow which occurs when there is an attempt to write to a memory address outside of data structures size. This can cause the program and system as a whole to crash. However, this was expected since one of the bugs that Eric et al.~\cite{Assembly:2010} were trying to fix was buffer overflow. Since each individual was run on a VM, buffer overflow was not a significant problem.
 
 
 
@@ -378,7 +342,6 @@ When evolving array sum with recursion the initial population consisted of an in
 
 
 \subsection{x86}
-\mycomment{looking into other research/papers by this group to get more to write about.}
 
 Eric,et al., were able to show that it is possible to fix human programming errors though bytecode and assembly. They were able to successfully debug various programs containing bugs such as infinite loops and remote buffer overflows. The interesting thing about these experiments was that it was done on real programs with real bugs and at times the programs consisted of thousands of lines of code. Another interesting thing that they discovered was that there were some bug repairs the they were able to solve through x86 assembly that were not possible in the source code. 
 
