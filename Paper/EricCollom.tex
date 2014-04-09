@@ -167,7 +167,7 @@ Java bytecode ``is [an] intermediate, platform-independent representation''~\cit
 
 The JVM executes bytecode through a stack-based architecture. Each JVM thread has a private stack which can only be popped and pushed to. The private stack stores frames. Each frame contains an array of local variables, its own operand stack, and a reference to the class of the current method\footnote{It is a reference to the run time constant pool of the class of the current method. More details can be found in chapter 2.5.5 of ~\cite{JVMspec:2013}}. A new frame is created when a method is invoked. When a method is done executing the frame is destroyed~\cite{Oracle:2013}. Only the frame of the current executing method can be active at a time.
 
-Figure~\ref{stack} is a simple example of what Java bytecode looks like and how the stack works. In this example we are assuming that the frame already contains the local variables 1 and 3 to retain simplicity. After iload\_1 is executed, it takes the element from the frame at index 1 and pushes it onto the stack. Iload\_2 does the same thing but with index 2. Iadd pops two elements from the stack, which both must be of type int, and then adds them and pushes the result on the stack. Ireturn simply pops the stack and returns that element. 
+Figure~\ref{stack} is a simple example of what Java bytecode looks like and how the stack works. In this example we are assuming that the frame already contains the local variables 1 and 3 to retain simplicity. After iload\_1 is executed, it takes the element from the frame at index 1 and pushes it onto the stack. Iload\_2 does the same thing but with index 2. Iadd pops two elements from the stack, which both must be of type int, and then adds them and pushes the result on the stack. Ireturn simply pops the stack and returns that element. warnings
 
 \begin{figure}
 \centering
@@ -214,7 +214,7 @@ When evolving instruction-level code the program does not have to be ``intention
 A huge benefit that comes from evolving instruction-level code is that the initial program being evolved does not have to contain a whole lot of code. This is partially due to the fact that a small program can contain a large amount of instructions-level code~\cite{Assembly:2010}. The EA can evolve a minimal amount of code into a full-scale working program. However, when evolving instruction-level code it is also possible to evolve a very focused area within the program; like traditional GP does in source code. For example, Eric et al.,~\cite{Assembly:2010} designed their EA to only evolve smaller areas of code and only made minor changes to the code as a whole. The resulting code would usually only have one line of code changed. However, since they were evolving instruction-level code, they were able to fix bugs such as incorrect type declarations, which was not possible in their earlier work~\cite{Forrest:2009} done in source code. 
 
 \section{FINCH}
-FINCH is a program developed by Orlov et al.,~\cite{FINCH2:2009,FINCH:2011} that evolves programs that have already been compiled into Java bytecode. FINCH also makes sure that all offspring produced are executable Java bytecode through a set of strict rules. 
+FINCH is a program developed by Orlov et al.,~\cite{FINCH2:2009,FINCH:2011} that bytecodeevolves programs that have already been compiled into Java bytecode. FINCH also makes sure that all offspring produced are executable Java bytecode through a set of strict rules. 
 
 \subsection{Selecting Offspring}
 Evolving Java Byte code only reduces the chance of evolving non-compilable bytecode to a certain extent. Even though Java byte code has a simpler syntax than source code, it still has syntactical constraints. Orlov et al.,\cite{FINCH2:2009} address this issue by checking if a good offspring has been created before letting it join the evolved population, thus ensuring offspring produced through crossover contain valid bytecode. If an illegal offspring is produced then another offspring with the same parents is made. This process is repeated until a good offspring is produced or a predetermined number of attempts have been made. These checks makes sure that stack depth, variable type, and control flow is respected.\par
@@ -294,9 +294,9 @@ Eric, et al., also chose a different approach than that of Olav, et al., when de
 Both Orlov et al., and Eric et al., both where able to evolve programs successfully by evolving instruction-level code. Many of the different designs of their EAs was due to the type of problems they were trying to solve. Orlov et. al., focused on evolving simple programs that performed a specific task while Eric et. al., focused on evolving programs to fix bugs within them.
 
 \subsection{FINCH}
-Orlov et al.~\cite{FINCH:2011} focused on evolving small programs to solve problems. The five problems they focused on were symbolic regression, artificial ant, intertwined spirals, array sum, and tic-tac-toe. We will discuss their results from the symbolic regression and array sum problems. Their program, FINCH, was able to evolve programs and solve each of these problems.
+Orlov et al.~\cite{FINCH:2011} focused on evolving small programs to solve problems. The five problems focused on were symbolic regression, artificial ant, intertwined spirals, array sum, and tic-tac-toe. We will discuss their results from the symbolic regression and array sum problems. The researchers program, FINCH, was able to evolve programs and solve each of these problems.
 
-In each of tests FINCH was given each time a program that had a zero fitness. The elements included in the programs were the minimal components to successfully evolve and solve the problem.
+In each test FINCH was given a program that had a zero fitness. The elements included in the programs were the minimal components to successfully evolve and solve the problem. For example if the problem consisted of adding all the elements in an array than a loop or a recursive call was provided along with one variable of each type needed.
 
 \begin{figure}
 \centering
@@ -314,12 +314,11 @@ class SymbolicRegression{
 \label{regression}
 \end{figure}
 \subsubsection{Symbolic Regression}
-Symbolic regression is a method of finding a mathematical function that best fits a a set of points between two intervals. Olov, et al.,~\cite{FINCH:2011} chose to use 20 random points, between -1 and 1, from various polynomials. Fitness was calculated as the number of points hit by the function. The function set \{+, -, *, \%, sin, cos, $e$, $ln$\}\footnote{$e$ is not being referred as the constant but as the function in the java.lang.Math library.}\footnote{\% and $ln$ are protected division and logarithm. This means that if there is something like division by zero the EA avoids the computation and outputs some pre-selected value. Orlov et al.~\cite{FINCH:2011} do not specify how they deal them.} was used for most of their experiments. This was done in order to mimic previous experimentation done~\cite{koza:1992} in order to compare the results to traditional GP. They were able to evolve up to a 9-degree polynomial with just the function set \{+, *\}. This is a good example of how little needs to be written of the original program to be able to evolve it and find a solution.
+Symbolic regression is a method of finding a mathematical function that best fits a a set of points between two intervals. Olov, et al.,~\cite{FINCH:2011} chose to use 20 random points, between -1 and 1, from various polynomials. Fitness was calculated as the number of points hit by the function. The function set \{+, -, *, \%, sin, cos, $e$, $ln$\}\footnote{$e$ is not being referred as the constant but as the function in the java.lang.Math library.}\footnote{\% and $ln$ are protected division and logarithm. This means that if there is something like division by zero the EA avoids the computation and outputs some pre-selected value. Orlov et al.~\cite{FINCH:2011} do not specify how they deal them.} was used for most of the experiments. This was done in order to mimic previous experimentation done~\cite{koza:1992} in order to compare the results to traditional GP. It was found possible to evolve up to a 9-degree polynomial with just the function set \{+, *\}. This is a good example of how little needs to be written of the original program to be able to evolve it and find a solution.
 
-A more complex fitness was also tested. This symbolic regression consisted of a fitness that checked if all twenty points were within $10^{-8}$ degree of they polynomials output. 
+Each experiment started off with an offspring of fitness zero and usually with a minimal amount of code, such as in Figure~\ref{regression}. Figure~\ref{regression} only contains a simple function set of {+, \*} and a number object. However, it was found possible  to evolve such programs to full-fledged programs that solved symbolic regression of up to 9-degree polynomials. 
+The authors evolved programs with a 90\% crossover by using the simple fitness algorithm 99\% of the time a maximum fitness individual was found. With a more complex fitness algorithm a maximum fitness individual was found 100\% of the time.
 
-For each experiment they started off with an offspring of fitness zero and usually with a minimal amount of code, such as in Figure~\ref{regression}. Figure~\ref{regression} only contains a simple function set of {+, \*} and a number object. However they were able to evolve programs like this to full-fledged programs that solved symbolic regression of up to 9-degree polynomials. 
-They evolved programs with a 90\% crossover. Using the simple fitness algorithm 99\% of the time a maximum fitness individual was found. With the more complex fitness algorithm a maximum fitness individual was found 100\% of the time.
 
 \begin{figure}
 \centering
@@ -338,25 +337,26 @@ They evolved programs with a 90\% crossover. Using the simple fitness algorithm 
 The array sum problem consists of adding up all the values in an array. This problem is important because it would require evolving a loop or recursion to solve it. This would show that FINCH is capable of evolving more complex programs\par
 FINCH was able to solve this problem quite easily though recursion and a for loop. This experiment also showed that FINCH is able to evolve different list abstractions such as List and ArrayList.
 
-When evolving array sum with recursion the initial population consisted of an individual which entered infinite recursion as shown in figure 5. Due to the way FINCH deals with non-halting programs this wasn't a problem and evolution was able to ensure. The resulting code from evolving Figure 5 is shown in Figure 6.
+When evolving array sum with recursion the initial population consisted of an individual which entered infinite recursion as shown in figure 5. Due to the way FINCH deals with non-halting programs this wasn't a problem and evolution was able to ensue. The resulting code from evolving Figure 5 is shown in Figure 6.
 
 
-\subsection{x86}
+\subsection{Automated Bug Repair}
 
-Eric,et al., were able to show that it is possible to fix human programming errors though bytecode and assembly. They were able to successfully debug various programs containing bugs such as infinite loops and remote buffer overflows. The interesting thing about these experiments was that it was done on real programs with real bugs and at times the programs consisted of thousands of lines of code. Another interesting thing that they discovered was that there were some bug repairs the they were able to solve through x86 assembly that were not possible in the source code. 
+Eric,et al., were able to show that it is possible to fix human programming errors though bytecode and assembly. The authors were able to successfully debug various programs containing bugs such as infinite loops and remote buffer overflows. The interesting thing about these experiments was that it was done on real programs with real bugs and at times the programs consisted of thousands of lines of code. Some of the bugs that they were able to fix through instruction-level code were not possible in their previous work~\cite{Forrest:2009} with source code. This shows that a wider array of bugs can be fixed by using instruction-level code.
 
-Even though they produced a considerable amount of offspring with fitness zero this did not seem to hurt their result very much. The average number of fitness evaluations required to produce an offspring that passed all the tests was 63.6 for C and 74.4 for assembly. This indicates that not much more computational work is needed to to evolve repairs in assembly. Even programs that contained thousands of lines of code only required a few runs. This shows that evolving programs in assembly is feasible.
-
-It was also discovered that most repairs only required a small number of operations. This was also due to optimization of mutation. 
+Although a considerable amount of offspring with a fitness of zero were produced this did not seem to damage the result. The average number of fitness evaluations required to produce an offspring that passed all the tests was 63.6 for C and 74.4 for assembly. This indicates that not much more computational work is needed to to evolve repairs in assembly. Even programs that contained thousands of lines of code only required a few runs. Thus, evolving programs in assembly is feasible.
+ 
 
 \subsection{Future Work}
-Future work that could be done, through evolving instruction-level code is to evolve programs whose solutions are much longer and complicated. Even though Orlov et al.,~\cite{FINCH:2011} proved that using bytecode evolution it is possible to solve many simple problems. Most of the problems only consisted of a few lines of code.
 
-For the work done by Eric et al.,~\cite{Assembly:2010} it would be nice to see debugging done on less focused areas. Possibly a program as a whole. This would be a good development since it would greatly reduce how much scaffolding is required to set up the evolution. However, this might not be extremely feasible in a real world situation where test coverage is usually minimal.
+
+Future work that could be done, through evolving instruction-level code is to evolve programs whose solutions are much longer and complicated. Orlov et al.,~\cite{FINCH:2011} proved that using GP on bytecode it is possible to solve many simple problems. However, most of the problems only consisted of a small number of lines of code.
+
+An extension of future work, using the research by Eric et al., could include debugging on less focused areas. For example, attempting to fix bugs that require more fixes throughout the code. Also, there is the question of how applicable automated bug repair is in a real world situation. In most real world scenarios test coverage is very minimal and would rarely cover the entire code base.
 
 
 \section{Conclusion}
-There are things that evolving at the instruction-level can be done that can not be done at the source code level. Benefits such as evolving the program as a whole and reduced scaffolding to the GP, and no scaffolding for the program being evolved. Eric et al., and Orlov et al., showed that evolving instruction-level code is just as good as source code and at times even better due to the fact there some things that you can only do at the the instruction-level. In conclusion, evolving instruction-level is feasible and exiting for the field of EC since it opens up many possibilities that were once unavailable.
+There are things that can be at the instruction-level that are a lot simpler than at the source code level. Things including evolving programs as a whole and reduced assumptions, of the program being evolved, by the EA, and no scaffolding for the program being evolved. Eric et al., and Orlov et al., showed that evolving instruction-level code is just as good as source code and at times even better due to the fact there some things that you can only do at the the instruction-level. In conclusion, evolving instruction-level is feasible and exciting for the field of EC since it opens up many possibilities that were once unavailable.
 %\end{document}  % This is where a 'short' article might terminate
 
 %ACKNOWLEDGMENTS are optional

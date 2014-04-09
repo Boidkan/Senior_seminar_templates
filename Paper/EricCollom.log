@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.13 (TeX Live 2013/dev) (format=pdflatex 2013.9.23)  7 APR 2014 19:25
+This is pdfTeX, Version 3.1415926-2.5-1.40.13 (TeX Live 2013/dev) (format=pdflatex 2013.9.23)  9 APR 2014 14:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -386,20 +386,20 @@ Overfull \hbox (3.84094pt too wide) in paragraph at lines 220--220
 File: infrec.pdf Graphic file (type pdf)
 
 <use infrec.pdf>
-Package pdftex.def Info: infrec.pdf used on input line 326.
+Package pdftex.def Info: infrec.pdf used on input line 325.
 (pdftex.def)             Requested size: 252.79803pt x 95.3829pt.
 
-Overfull \hbox (12.79803pt too wide) in paragraph at lines 326--327
+Overfull \hbox (12.79803pt too wide) in paragraph at lines 325--326
  [][] 
  []
 
 <recsolution.pdf, id=158, 258.1348pt x 104.72134pt>
 File: recsolution.pdf Graphic file (type pdf)
  <use recsolution.pdf>
-Package pdftex.def Info: recsolution.pdf used on input line 333.
+Package pdftex.def Info: recsolution.pdf used on input line 332.
 (pdftex.def)             Requested size: 258.13416pt x 104.72108pt.
 
-Overfull \hbox (18.13416pt too wide) in paragraph at lines 333--334
+Overfull \hbox (18.13416pt too wide) in paragraph at lines 332--333
  [][] 
  []
 
@@ -423,17 +423,17 @@ ive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts
 public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
-6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
-tmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on EricCollom.pdf (6 pages, 968629 bytes).
+9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
+times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.p
+fb>
+Output written on EricCollom.pdf (6 pages, 961342 bytes).
 PDF statistics:
- 338 PDF objects out of 1000 (max. 8388607)
- 219 compressed objects within 3 object streams
+ 334 PDF objects out of 1000 (max. 8388607)
+ 216 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
