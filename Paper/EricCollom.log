@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.13 (TeX Live 2013/dev) (format=pdflatex 2013.9.26)  10 APR 2014 14:03
+This is pdfTeX, Version 3.1415926-2.5-1.40.13 (TeX Live 2013/dev) (format=pdflatex 2013.9.23)  10 APR 2014 17:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -354,85 +354,88 @@ Package pdftex.def Info: ECdiagram.pdf used on input line 146.
 
 
 ]
-<stackBytecode.pdf, id=13, 346.29375pt x 476.78125pt>
-File: stackBytecode.pdf Graphic file (type pdf)
- <use stackBytecode.pdf>
-Package pdftex.def Info: stackBytecode.pdf used on input line 175.
-(pdftex.def)             Requested size: 131.22838pt x 180.67499pt.
-LaTeX Font Info:    Try loading font information for T1+aett on input line 183.
+LaTeX Font Info:    Try loading font information for T1+aett on input line 172.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/ae/t1aett.fd
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 )
-Overfull \hbox (0.51228pt too wide) in paragraph at lines 195--195
+<stackBytecode.pdf, id=13, 346.29375pt x 476.78125pt>
+File: stackBytecode.pdf Graphic file (type pdf)
+ <use stackBytecode.pdf>
+Package pdftex.def Info: stackBytecode.pdf used on input line 177.
+(pdftex.def)             Requested size: 131.22838pt x 180.67499pt.
+
+Overfull \hbox (0.51228pt too wide) in paragraph at lines 197--197
 []\T1/aett/m/n/9 }System.out.println(x);      System.out.println(z);[] 
  []
 
 
-Overfull \hbox (8.56444pt too wide) in paragraph at lines 203--203
+Overfull \hbox (8.56444pt too wide) in paragraph at lines 205--205
 []\secfnt INSTRUCTION-LEVEL CODE BEN-E-FITS 
  []
 
-
-Underfull \vbox (badness 1755) has occurred while \output is active []
-
- [2 <./ECdiagram.pdf> <./stackBytecode.pdf>]
-Overfull \hbox (3.84094pt too wide) in paragraph at lines 222--222
+[2 <./ECdiagram.pdf>]
+Overfull \hbox (3.84094pt too wide) in paragraph at lines 224--224
 \T1/aer/m/n/9 ing non-compilable byte-code to a cer-tain ex-tent. Even though
  []
 
-[3] [4] <infrec.pdf, id=157, 252.79866pt x 95.38315pt>
+[3 <./stackBytecode.pdf>]
+Underfull \vbox (badness 1558) has occurred while \output is active []
+
+ [4]
+<infrec.pdf, id=158, 252.79866pt x 95.38315pt>
 File: infrec.pdf Graphic file (type pdf)
  <use infrec.pdf>
-Package pdftex.def Info: infrec.pdf used on input line 330.
+Package pdftex.def Info: infrec.pdf used on input line 332.
 (pdftex.def)             Requested size: 252.79803pt x 95.3829pt.
 
-Overfull \hbox (12.79803pt too wide) in paragraph at lines 330--331
+Overfull \hbox (12.79803pt too wide) in paragraph at lines 332--333
  [][] 
  []
 
-<recsolution.pdf, id=158, 258.1348pt x 104.72134pt>
+<recsolution.pdf, id=159, 258.1348pt x 104.72134pt>
 File: recsolution.pdf Graphic file (type pdf)
  <use recsolution.pdf>
-Package pdftex.def Info: recsolution.pdf used on input line 337.
+Package pdftex.def Info: recsolution.pdf used on input line 339.
 (pdftex.def)             Requested size: 258.13416pt x 104.72108pt.
 
-Overfull \hbox (18.13416pt too wide) in paragraph at lines 337--338
+Overfull \hbox (18.13416pt too wide) in paragraph at lines 339--340
  [][] 
  []
 
-[5 <./infrec.pdf>]
-Overfull \hbox (13.23515pt too wide) in paragraph at lines 359--360
+[5]
+Overfull \hbox (13.23515pt too wide) in paragraph at lines 361--362
 []\T1/aer/m/n/9 Future work that could be done, through evolv-ing instruction-
  []
 
-(./EricCollom.bbl) [6 <./recsolution.pdf>] (./EricCollom.aux) ) 
+(./EricCollom.bbl [6 <./infrec.pdf> <./recsolution.pdf>]) [7
+
+] (./EricCollom.aux) ) 
 Here is how much of TeX's memory you used:
  3364 strings out of 495063
  43580 string characters out of 3182194
- 114942 words of memory out of 3000000
+ 115942 words of memory out of 3000000
  6452 multiletter control sequences out of 15000+200000
  53306 words of font info for 72 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 41i,11n,28p,1363b,258s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texl
-ive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
-9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
-times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.p
-fb>
-Output written on EricCollom.pdf (6 pages, 960938 bytes).
+ 41i,11n,28p,1341b,258s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.en
+c}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/he
+lvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8
+a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on EricCollom.pdf (7 pages, 962139 bytes).
 PDF statistics:
- 334 PDF objects out of 1000 (max. 8388607)
- 216 compressed objects within 3 object streams
+ 339 PDF objects out of 1000 (max. 8388607)
+ 220 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
