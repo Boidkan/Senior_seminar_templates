@@ -57,7 +57,7 @@
 %%%%% NOTE: comments still occupy a line even if invisible;
 %%%%% Don't write them as a separate paragraph
 %\newcommand{\mycomment}[3]{}
-
+%\linespread{2}
 \begin{document}
 
 %
@@ -165,18 +165,20 @@ Throughout the rest of the paper the term \textit{instruction-level code} will b
 x86 is a family of backward compatible low-level programming languages~\cite{x86assembly:2014} created by Intel and designed for specific computer architectures. This means that it is designed to only run on certain physical machines. 
 
 \subsubsection{ Bytecode and the JVM}
-Java bytecode ``is [an] intermediate, platform-independent representation''~\cite{FINCH2:2009} of Java source code. Even though it was originally designed for Java source code other high-level languages now also have compilers for the JVM. Some of those languages are Scala, Groovy, Jython, Kawa, JavaFx Script, Clojure, Erjang, and JRuby.
+Java bytecode ``is [an] intermediate, platform-independent representation''~\cite{FINCH2:2009} of Java source code. However, "implementors of other languages can turn the Java Virtual Machine as a delivery vehicle for their languages"~\cite{JVMspec:2013}. A few examples of languages with which this has been done are Scala, Groovy, Jython, Kawa, JavaFx Script, Clojure, Erjang, and JRuby.
 
 The JVM executes bytecode through a stack-based architecture. Each JVM thread has a private stack, which can only be popped and pushed to, stores frames. Each frame contains an array of local variables, its own operand stack, and a reference to the class of the current method\footnote{It is a reference to the run time constant pool of the class of the current method. More details can be found in chapter 2.5.5 of ~\cite{JVMspec:2013}}. A new frame is created when a method is invoked. When a method is done executing the frame is destroyed~\cite{Oracle:2013}. Only the frame of the current executing method can be active at a time.
 
-Figure~\ref{stack} is a simple example of what Java bytecode looks like and how the stack works. In this example we are assuming that the frame already contains the local variables 1 and 3 to retain simplicity. After \texttt{iload\_1} is executed, it takes the element from the frame at index 1 and pushes it onto the stack. \texttt{iload\_2} does the same thing but with index 2. \texttt{Iadd} pops two elements from the operand stack, which both must be of type int, and then adds them and pushes the result on the stack. \texttt{ireturn} simply pops the stack and returns that element.
+Figure~\ref{stack} is a simple example of what Java bytecode looks like and how the stack works. Each of the opcodes in Figure \ref{stack} contain the prefix \texttt{i} which stands for the primitive integer type. This means that these opcodes can only manipulate integers. The prefix is followed by the operation to be executed. The opcodes that I will be referenced in this paper are: \texttt{iconst\_n}, \texttt{istore\_n}, \texttt{iload\_n}, \texttt{iadd}, \texttt{isub}, and \texttt{ireturn}. \texttt{iconst} produces an integer type \texttt{n} and pushes it on the stack. \texttt{istore\_n} pops the stack and save that element value at index n on the frame. \texttt{iload\_n} takes the value of the element at index \texttt{n} on the frame and pushes it to the stack. \texttt{iadd} pops two elements from the stack and adds them and pushes the result to the stack. Similarly, \texttt{isub} pops two elements, subtracts the second element from the first element and then pushes the result to the stack. \texttt{ireturn} simply pops the stack and returns that value.
+
+In Figure \ref{stack} when \texttt{iload\_1} is executed, it takes the element from the frame at index 1, and pushes it onto the stack. \texttt{iload\_2} does the same thing but with index 2. \texttt{iadd} pops two elements from the operand stack, which both must be of type integer, and then adds them and pushes the result on the stack. \texttt{ireturn} simply pops the stack and returns that element. \mycomment{I feel I don't need this anymore. It is a bit repetitive. Should I just explain in more general terms what figure 2 is doing without going into detail how each opcode works? Or should I just forget about that and just have the explanation in the caption?}
 
 
 \begin{figure}
 \centering
 \psfig{file=stackBytecode.pdf,height=2.5in}
 
-\caption{Index zero of the frame is a reference to the methods current class. Istore\_n pushes an element from index n from frame onto stack. Iadd pops two elements from operand stack add them together and then pushes to the result to the stack. Ireturn pops an element from the stack and returns it}
+\caption{In this example we are assuming that the frame already contains the local variables 1 and 3 to retain simplicity. This Java bytecode sequence pushes two numbers to the stack and adds them and returns the value.}
 \label{stack}
 \end{figure}
 
@@ -256,7 +258,7 @@ Line \#&Parent 1&Parent 2&Good Offspring&Bad Offspring\\  \hline
 8&ireturn&ireturn&ireturn&ireturn\\
 \hline
 \end{tabular}
-\caption{This is an example of good and bad crossover. iconst\_n pushes onto the stack an int of value n. istore\_n pops the stack and saves the value on the frame at index n. Look at figure~\ref{stack} for a description of iload,iadd,isub,and ireturn.}
+\caption{This is an example of two possible outcomes of performing unrestricted crossover on parent 1 and 2.}
 \label{crossover}
   
 \end{figure}
