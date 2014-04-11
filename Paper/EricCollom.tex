@@ -159,6 +159,16 @@ Figure~\ref{ECdiagram} shows the process of evolution in EC. An initial populati
 
 
 \subsection{x86 Assembly \& Java Bytecode}
+
+\begin{figure}
+\centering
+\psfig{file=stackBytecode.pdf,height=2.5in}
+
+\caption{In this example we are assuming that the frame already contains the local variables 1 and 3 to retain simplicity. This Java bytecode sequence pushes two numbers to the stack and adds them and returns the value.}
+\label{stack}
+\end{figure}
+
+
 Throughout the rest of the paper the term \textit{instruction-level code} will be used when referring to both Java bytecode and x86 assembly together. Instruction-level code consist of operation codes (opcodes) which are each one byte in length. However, some opcodes that take parameters are multiple bytes long~\cite{JavaBytecode:2014,x86tomachine:2013}.
 
 \subsubsection{X86}
@@ -174,13 +184,6 @@ Figure~\ref{stack} is a simple example of what Java bytecode looks like and how 
 In Figure \ref{stack} when \texttt{iload\_1} is executed, it takes the element from the frame at index 1, and pushes it onto the stack. \texttt{iload\_2} does the same thing but with index 2. \texttt{iadd} pops two elements from the operand stack, which both must be of type integer, and then adds them and pushes the result on the stack. \texttt{ireturn} simply pops the stack and returns that element. \mycomment{I feel I don't need this anymore. It is a bit repetitive. Should I just explain in more general terms what figure 2 is doing without going into detail how each opcode works? Or should I just forget about that and just have the explanation in the caption?}
 
 
-\begin{figure}
-\centering
-\psfig{file=stackBytecode.pdf,height=2.5in}
-
-\caption{In this example we are assuming that the frame already contains the local variables 1 and 3 to retain simplicity. This Java bytecode sequence pushes two numbers to the stack and adds them and returns the value.}
-\label{stack}
-\end{figure}
 
 \begin{figure}
 \centering
