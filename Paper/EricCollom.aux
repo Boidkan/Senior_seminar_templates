@@ -7,26 +7,20 @@
 \citation{Assembly:2010}
 \citation{FINCH:2011}
 \citation{Assembly:2010}
-\citation{FINCH:2011}
-\citation{Assembly:2010}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Background}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Evolutionary Computation}{\thepage }}
-\citation{JavaBytecode:2014}
-\citation{x86tomachine:2013}
-\citation{x86assembly:2014}
+\citation{Assembly:2010}
 \citation{FINCH2:2009}
 \citation{JVMspec:2013}
-\citation{JVMspec:2013}
 \citation{Oracle:2013}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The process of of Evolutionary Computation}}{\thepage }}
-\newlabel{ECdiagram}{{1}{\thepage }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}x86 Assembly \& Java Bytecode}{\thepage }}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}X86}{\thepage }}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2} Bytecode and the JVM}{\thepage }}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces In this example we are assuming that the frame already contains the local variables 1 and 3 to retain simplicity. This Java bytecode sequence pushes two numbers to the stack and adds them and returns the value.}}{\thepage }}
-\newlabel{stack}{{2}{\thepage }}
 \citation{FINCH:2011}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The process of Evolutionary Computation}}{\thepage }}
+\newlabel{ECdiagram}{{1}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Java Bytecode and the JVM}{\thepage }}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces In this example we are assuming that the frame already contains the local variables 1 and 3 to retain simplicity. When \texttt  {iload\_1} is executed, it takes the element from the frame at index 1 and pushes it onto the stack. \texttt  {iload\_2} does the same thing but with index 2. \texttt  {iadd} pops two elements from the stack, which both must be of integer type, adds them and then pushes the result to the stack. \texttt  {ireturn} simply pops the stack and returns that element.}}{\thepage }}
+\newlabel{stack}{{2}{\thepage }}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Instruction-level Code Benefits}{\thepage }}
 \citation{Oracle:2013}
 \citation{Assembly:2010}
 \citation{FINCH:2011}
@@ -43,7 +37,6 @@
 \citation{FINCH2:2009}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Both (a) and (b) are valid code syntactically however only (a) is valid semantically.}}{\thepage }}
 \newlabel{semantics}{{3}{\thepage }}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Instruction-level Code Benefits}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Source Code Constraints}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Flexibility for Individuals}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {4}FINCH}{\thepage }}
@@ -55,6 +48,7 @@
 \citation{Assembly:2010}
 \citation{Assembly:2010}
 \citation{Assembly:2010}
+\citation{Assembly:2010}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces This is an example of two possible outcomes of performing unrestricted crossover on parent 1 and 2.}}{\thepage }}
 \newlabel{crossover}{{4}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Crossover}{\thepage }}
@@ -62,7 +56,6 @@
 \@writefile{toc}{\contentsline {section}{\numberline {5}Automated Bug Repair}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Selecting Offspring }{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Genetic Operators}{\thepage }}
-\citation{Assembly:2010}
 \citation{Assembly:2010}
 \citation{FINCH:2011}
 \citation{Assembly:2010}
@@ -78,10 +71,13 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Non-Halting Offspring}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Results}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.1}FINCH}{\thepage }}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.1}Symbolic Regression}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Example of a possible starting program to evolve and solve symbolic regression.}}{\thepage }}
 \newlabel{regression}{{5}{\thepage }}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.1}Symbolic Regression}{\thepage }}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2}Array Sum}{\thepage }}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Initial population function, for array sum, that enters into infinite recursion in the if statement}}{\thepage }}
+\newlabel{initial rec}{{6}{\thepage }}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces FINCH's solution to the intial program presented in Figure\nobreakspace  {}6\hbox {}}}{\thepage }}
+\newlabel{final rec}{{7}{\thepage }}
 \citation{Assembly:2010}
 \citation{Assembly:2010}
 \citation{Forrest:2009}
@@ -102,10 +98,7 @@
 \bibcite{x86tomachine:2013}{8}
 \bibcite{JavaBytecode:2014}{9}
 \bibcite{x86assembly:2014}{10}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Initial population function, for array sum, that enters into infinite recursion in the if statement}}{\thepage }}
-\newlabel{initial rec}{{6}{\thepage }}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces FINCH's solution to the intial program presented in Figure\nobreakspace  {}6\hbox {}}}{\thepage }}
-\newlabel{final rec}{{7}{\thepage }}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2}Array Sum}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Automated Bug Repair}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Future Work}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{\thepage }}

@@ -117,7 +117,7 @@ Eric C. Collom \\
 
 \maketitle
 \begin{abstract}
-Traditional genetic programming (GP) has not yet been able to evolve entire programs at the source code level. Instead only small sections within the programs are usually evolved. Evolving programs in either bytecode or assembly language is a method that solves this problem. This paper provides an overview of applying genetic programming to Java bytecode and x86 assembly to solve problems. Two examples of how this method can be implemented will be explored. We will explore how they evolve bytecode and assembly and discuss their experimental results.
+Traditional genetic programming (GP) has not yet been able to perform unrestricted evolution on entire programs at the source code level. Instead only small sections within the programs are usually evolved. Not being able to evolve whole programs is an issue since it limits the flexibility on what can be evolved. Evolving programs in either bytecode or assembly language is a more current method that has been used to perform unrestricted evolution. This paper provides an overview of applying genetic programming to Java bytecode and x86 assembly. Two examples of how this method can be implemented will be explored. We will also discuss experimental results.
 \end{abstract}
 
 
@@ -126,67 +126,61 @@ Traditional genetic programming (GP) has not yet been able to evolve entire prog
 \section{Introduction}
 GP is a set of techniques used to automate computer problem solving. This is done by evolving programs with an evolutionary algorithm (EA) that imitates natural selection in order to find a solution. Traditional GP has been used mostly to evolve only specific parts of programs and not full-fledged programs themselves. This is because traditionally we have to understand the structure of the program being evolved. An EA is usually designed for a specific program with knowledge about how the program works. Being able to evolve an entire program without knowing its structure would allow for more flexibility in GP. Evolving bytecode and assembly, instead of source code, is a method that allows for this flexibility. This is possible because bytecode and assembly languages are less restrictive syntactically than source code. We discuss this issue further in Section 3.\par 
 
-Orlov et al.,~\cite{FINCH2:2009} propose a method of applying GP to full-fledged programs that only requires a program to be compiled to Java bytecode. Once in Java bytecode an EA is applied to the program to solve the desired problem. Schulte et al.,~\cite{Assembly:2010} also apply a similar method with both Java bytecode and the x86 assembly family.
+Orlov et al.,~\cite{FINCH2:2009} propose a method of applying GP to full-fledged programs that only requires a program to be in Java bytecode. Schulte et al.,~\cite{Assembly:2010} also apply a similar method with both Java bytecode and x86 assembly. Orlov et al.,~\cite{FINCH:2011} focused on evolving simple programs as a whole while Schulte et al.,~\cite{Assembly:2010} focused on automated bug repair in programs.\par
 
-These methods are important because they show that evolving entire programs is possible. This is useful since once the EA has been created there is little modification that has to be done to it to evolve different programs. Also, the structure of the program being evolved does not have to be known or modified.\par
-
-	This paper will examine how both Orlov et al.,~\cite{FINCH:2011} and Schulte et al.,~\cite{Assembly:2010} apply GP to solve programs in Java bytecode and x86 assembly. We will show that this methodology is feasible in Section 6. Orlov et al.,~\cite{FINCH:2011} focused on evolving simple programs as a whole while Schulte et al.,~\cite{Assembly:2010} focused on automated bug repair in programs.\par
+These methods are important because they show that evolving entire programs is possible. This is useful since once the EA has been created there is little modification that has to be done to it to evolve different programs. Also, the structure of the program being evolved does not have to be known. \mycomment{if I have space add what I mean by knowing the structure of a program}\par
 	
-This paper is organized as follows: Section 2 covers the background needed for understanding that application of GP to bytecode and assembly. It contains information on Evolutionary Computation (EC), x86 assembly, and Java bytecode. Section 3 describes the benefits of evolving assembly and bytecode. Section 4 discusses how Orlov, et al.,~\cite{FINCH:2011} evolved Java bytecode. Similarly, in Section 5 we discuss how Schulte, et al.,~\cite{Assembly:2010} evolved both x86 assembly and Java bytecode. In section 6, we report some of the problems solved by \cite{FINCH:2011} and \cite{Assembly:2010} in applying GP to bytecode and assembly. Section 7 will address possible future work and ideas.  
+This paper is organized as follows: Section 2 covers the background needed for understanding the application of GP to bytecode and assembly. It contains information on Evolutionary Computation (EC), x86 assembly, and Java bytecode. Section 3 describes the benefits of evolving assembly and bytecode. Section 4 discusses how Orlov, et al.,~\cite{FINCH:2011} evolved Java bytecode. Similarly, in Section 5 we discuss how Schulte et al.,~\cite{Assembly:2010} evolved both x86 assembly and Java bytecode. In Section 6 we summarize some of the experimental results from \cite{FINCH:2011} and \cite{Assembly:2010}. Section 7 will address possible future work and ideas.  
 	
 	
 
 \section{Background}
 
 
-This section explores the components of evolutionary computation (EC) and GP. x86 and Java bytecode are will also be discussed. Additionally, we will analyze basic details of the Java Virtual Machine (JVM).
+This section explores the components of EC and GP. x86 and Java bytecode will also be discussed. Additionally, we will present necessary details of the Java Virtual Machine (JVM).
 \subsection{Evolutionary Computation}
 \begin{figure}
 \centering
 \psfig{file=ECdiagram.pdf,height=3in}
 
-\caption{The process of of Evolutionary Computation}
+\caption{The process of Evolutionary Computation}
 \label{ECdiagram}
 \end{figure}
 
 
-EC is a field of computer science and artificial intelligence that is loosely based on evolutionary biology. EC imitates evolution through continuous optimization in order to solve problems. Optimization in EC is the selection of the best individual within a population. What an individual is depends on the problem being solved. For example, It can be a string of bits, a lisp tree, or an object. For clarity, in this paper the individuals will be programs.\par 
+EC is a field of computer science and artificial intelligence that is loosely based on evolutionary biology. EC imitates evolution through continuous optimization in order to solve problems. Optimization in EC, in the best case scenario, is the selection of the best individual within a population. The representation of what an individual is depends on the problem being solved. For example, it can be a string of bits, a parse tree, or an object. For clarity, in this paper the individuals will be programs in Java bytecode and x86 assembly.\par 
 
-Figure~\ref{ECdiagram} shows the process of evolution in EC. An initial population of individuals is taken and a selection process is done to choose the most fit individuals who are then taken and modified with genetic operators that imitate procreation between two individuals. A check is then done to see if any individuals from the population solve the desired problem. If not, the process of evolution is repeated. If the problem is solved the individual with the best solution is returned.\par
+Figure~\ref{ECdiagram} shows the process of evolution in EC. An initial population of individuals is generated and a selection process is used to choose the most fit individuals. The selection process usually gives a fitness value, usually numerical, to each individual which indicates how well it solves the specific problem. For the research discussed in this paper a higher fitness indicates a more fit individual. The individuals with the highest fitness are then taken and modified using genetic operators that imitate mutation and sexual reproduction. A check is then done to see if any individuals from the new population solve the desired problem or a predetermined number of generations is reached. If not, the process of evolution is repeated.  If the problem is solved the individual with the best solution is returned.\par
 
-	GP is a tool that uses the EC process to evolve programs. GP evolves an initial population of programs either until the desired solution to the problem is found or a specified number of generations is reached. The fitness of each individual is the deciding factor on how likely it is to be chosen for evolution. The fitness is a value, usually numerical, that indicates how well an individual solves the specific problem. For the research discussed in this paper a higher fitness indicates a more fit individual. The selection of individuals for procreation is done through tournament selection. A certain number of individuals are chosen for a simulated competition and the individual with the highest fitness wins. That individual is then used for procreation.\par 
+	GP is a tool that uses the EC process to evolve programs. In the research discussed in this paper, the selection of individuals for sexual reproduction is done through tournament selection. A certain number of individuals are chosen for a simulated competition and the individual with the highest fitness wins. That individual is then selected to be a parent.\par 
 		
-	One way procreation is simulated in GP is through the genetic operator called crossover. Crossover is the process of taking two individuals and extracting a section of code from one and then replacing it with a section from the other program to form an offspring which is a new program.\par 
-	
-	Mutation is another genetic operator that is used to produce offspring. Mutation takes a program and randomly changes a section. Mutation can be used along with crossover to produce offspring.
+	One way sexual reproduction is simulated in GP is through the genetic operator called crossover. Crossover is the process of taking two parent individuals and extracting a section of code from one and then replacing it with a section from the other program, to form an offspring. Mutation is another genetic operator that is used to produce offspring. Mutation takes a program and performs random changes on a randomly chosen section.
 
 
-\subsection{x86 Assembly \& Java Bytecode}
+\subsection{Java Bytecode and the JVM}
 
 \begin{figure}
 \centering
 \psfig{file=stackBytecode.pdf,height=2.5in}
 
-\caption{In this example we are assuming that the frame already contains the local variables 1 and 3 to retain simplicity. This Java bytecode sequence pushes two numbers to the stack and adds them and returns the value.}
+\caption{In this example we are assuming that the frame already contains the local variables 1 and 3 to retain simplicity. When \texttt{iload\_1} is executed, it takes the element from the frame at index 1 and pushes it onto the stack. \texttt{iload\_2} does the same thing but with index 2. \texttt{iadd} pops two elements from the stack, which both must be of integer type, adds them and then pushes the result to the stack. \texttt{ireturn} simply pops the stack and returns that element.}
 \label{stack}
 \end{figure}
 
 
-Throughout the rest of this paper the term \textit{instruction-level code} will be used when referring to Java bytecode and x86 assembly as one unit. Instruction-level code consist of operation codes (opcodes) which are one byte in length. However, some opcodes that take parameters are multiple bytes in length~\cite{JavaBytecode:2014,x86tomachine:2013}.
+Throughout the rest of this paper the term \textit{instruction-level code} will be used when referring to either Java bytecode or x86 assembly. In this section only bytecode will be discussed since knowledge of x86 assembly is not needed to understand the research done by Schulte et al.,~\cite{Assembly:2010}.
 
-\subsubsection{X86}
-x86 is a family of backward compatible low-level programming languages~\cite{x86assembly:2014} created by Intel and designed for specific computer architectures. They are designed to only run on certain physical machines. 
 
-\subsubsection{ Bytecode and the JVM}
-Java bytecode ``is [an] intermediate, platform-independent representation''~\cite{FINCH2:2009} of Java source code. However, ``implementors of other languages can turn to the Java Virtual Machine as a delivery vehicle for their languages''~\cite{JVMspec:2013}. A few examples of languages with which this has been done are Scala, Groovy, Jython, Kawa, JavaFx Script, Clojure, Erjang, and JRuby.
 
-The JVM executes bytecode through a stack-based architecture. Each JVM thread has a private stack which can only be popped and pushed to. Each private stack stores frames. Each frame contains an array of local variables, its own operand stack, and a reference to the class of the current method\footnote{It is a reference to the run time constant pool of the class of the current method. More details can be found in chapter 2.5.5 of ~\cite{JVMspec:2013}}. A new frame is created when a method is invoked. When a method is done executing, the frame is destroyed~\cite{Oracle:2013}. Only the frame of the current executing method within a thread can be active at any time. Popping from a stack is simply removing the top element while pushing is putting an element on top of the stack.
+Java bytecode ``is [an] intermediate, platform-independent representation''~\cite{FINCH2:2009} of Java source code. However, ``implementors of other languages can turn to the Java Virtual Machine as a delivery vehicle for their languages''~\cite{JVMspec:2013}. A few examples of languages with which this has been done are Scala, Groovy, Jython, Kawa, JavaFx Script, Clojure, Erjang, and JRuby.\par
 
-Figure~\ref{stack} is a simple example of what Java bytecode looks like and how the stack works. Each of the opcodes in Figure \ref{stack} contain the prefix \texttt{i} which stands for the primitive integer type. These opcodes can only manipulate integers. The prefix is followed by the operation to be executed.\par 
+The JVM executes bytecode through a stack-based architecture. Each JVM thread has a private stack which can only be popped from and pushed to. Each private stack stores frames. Each frame contains an array of local variables and its own operand stack. A new frame is created when a method is invoked. When a method is done executing, the frame is destroyed~\cite{Oracle:2013}. Only the frame of the current executing method within a thread can be active at any time.
 
-The opcodes that we will be examining in this paper are: \texttt{iconst\_n}, \texttt{istore\_n}, \texttt{iload\_n}, \texttt{iadd}, \texttt{isub}, and \texttt{ireturn}. \texttt{iconst\_n} produces an integer type of value \texttt{n} and pushes it on the stack. \texttt{istore\_n} pops the stack and saves that element value at index n on the frame. \texttt{iload\_n} takes the value of the element at index \texttt{n} on the frame and pushes it to the stack. \texttt{iadd} pops two elements from the stack, adds them and pushes the result to the stack. Similarly, \texttt{isub} pops two elements, subtracts the second element from the first element and pushes the result to the stack. \texttt{ireturn} simply pops the stack and returns that value.
+Figure~\ref{stack} is a simple example of what Java bytecode looks like and how the stack works. Bytecode consists of operation codes (opcodes) that perform operations and can manipulate both the operand stack and the frame. Each of the opcodes in Figure \ref{stack} contain the prefix \texttt{i} which stands for the primitive integer type. These opcodes can only manipulate integers. The prefix is followed by the operation to be executed.\par 
 
-In Figure, \ref{stack} when \texttt{iload\_1} is executed, it takes the element from the frame at index 1 and pushes it onto the stack. \texttt{iload\_2} does the same thing but with index 2. \texttt{iadd} pops two elements from the operand stack, which both must be of integer type, adds them and then pushes the result to the stack. \texttt{ireturn} simply pops the stack and returns that element. \mycomment{I feel I don't need this anymore. It is a bit repetitive. Should I just explain in more general terms what figure 2 is doing without going into detail how each opcode works? Or should I just forget about that and just have the explanation in the caption?}
+The opcodes that we will be using in this paper are: \texttt{iconst\_n}, \texttt{istore\_n}, \texttt{iload\_n}, \texttt{iadd}, \texttt{isub}, and \texttt{ireturn}. \texttt{iconst\_n} pushes an integer value of \texttt{n} on the stack. \texttt{istore\_n} pops the stack and stores that value at index n on the local variable array on the frame. \texttt{iload\_n} takes the value of the element at index \texttt{n} on the array of local variables and pushes it to the stack. \texttt{iadd} pops two elements from the stack, adds them and pushes the result to the stack. Similarly, \texttt{isub} pops two elements, subtracts the second element from the first element and pushes the result to the stack. \texttt{ireturn} simply pops the stack and returns that value.
+
+In Figure, \ref{stack} when \texttt{iload\_1} is executed, it takes the element from the frame at index 1 and pushes it onto the stack. \texttt{iload\_2} does the same thing but with index 2. \texttt{iadd} pops two elements from the operand stack, which both must be of integer type, adds them and then pushes the result to the stack. \texttt{ireturn} simply pops the stack and returns that element.
 
 
 

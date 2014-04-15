@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.13 (TeX Live 2013/dev) (format=pdflatex 2013.9.23)  13 APR 2014 05:55
+This is pdfTeX, Version 3.1415926-2.5-1.40.13 (TeX Live 2013/dev) (format=pdflatex 2013.9.23)  14 APR 2014 22:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -348,84 +348,93 @@ Underfull \hbox (badness 5316) in paragraph at lines 118--118
 <ECdiagram.pdf, id=1, 289.08pt x 542.025pt>
 File: ECdiagram.pdf Graphic file (type pdf)
  <use ECdiagram.pdf>
-Package pdftex.def Info: ECdiagram.pdf used on input line 146.
+Package pdftex.def Info: ECdiagram.pdf used on input line 144.
 (pdftex.def)             Requested size: 115.62994pt x 216.81pt.
  [1{/usr/share/texlive/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-Overfull \hbox (1.15909pt too wide) in paragraph at lines 161--162
-\T1/aer/m/n/9 changes a sec-tion. Mu-ta-tion can be used along with crossover
- []
-
 <stackBytecode.pdf, id=13, 347.2975pt x 476.78125pt>
 File: stackBytecode.pdf Graphic file (type pdf)
  <use stackBytecode.pdf>
-Package pdftex.def Info: stackBytecode.pdf used on input line 168.
+Package pdftex.def Info: stackBytecode.pdf used on input line 164.
 (pdftex.def)             Requested size: 131.60876pt x 180.67499pt.
-LaTeX Font Info:    Try loading font information for T1+aett on input line 185.
+LaTeX Font Info:    Try loading font information for T1+aett on input line 166.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/ae/t1aett.fd
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-) [2 <./ECdiagram.pdf> <./stackBytecode.pdf>]
-Overfull \hbox (8.56444pt too wide) in paragraph at lines 216--216
+)
+
+LaTeX Font Warning: Font shape `T1/aett/bx/n' undefined
+(Font)              using `T1/aett/m/n' instead on input line 166.
+
+
+Overfull \hbox (14.002pt too wide) in paragraph at lines 181--182
+[]\T1/aer/m/n/9 The op-codes that we will be us-ing in this pa-per are: \T1/aet
+t/bx/n/9 iconst_n\T1/aer/m/n/9 ,
+ []
+
+
+Overfull \hbox (8.56444pt too wide) in paragraph at lines 210--210
 []\secfnt INSTRUCTION-LEVEL CODE BEN-E-FITS 
  []
 
-
-Overfull \hbox (1.42033pt too wide) in paragraph at lines 221--221
+[2 <./ECdiagram.pdf> <./stackBytecode.pdf>]
+Overfull \hbox (1.42033pt too wide) in paragraph at lines 215--215
 \T1/aer/m/n/9 high-level pro-gram-ming lan-guages are de-fined by us-ing gram-
  []
 
-[3] [4] <infrec.pdf, id=154, 252.79866pt x 95.38315pt>
+[3] [4] <infrec.pdf, id=153, 252.79866pt x 95.38315pt>
 File: infrec.pdf Graphic file (type pdf)
  <use infrec.pdf>
-Package pdftex.def Info: infrec.pdf used on input line 353.
+Package pdftex.def Info: infrec.pdf used on input line 347.
 (pdftex.def)             Requested size: 252.79803pt x 95.3829pt.
 
-Overfull \hbox (12.79803pt too wide) in paragraph at lines 353--354
+Overfull \hbox (12.79803pt too wide) in paragraph at lines 347--348
  [][] 
  []
 
-<recsolution.pdf, id=155, 258.1348pt x 104.72134pt>
+<recsolution.pdf, id=154, 258.1348pt x 104.72134pt>
 File: recsolution.pdf Graphic file (type pdf)
  <use recsolution.pdf>
-Package pdftex.def Info: recsolution.pdf used on input line 360.
+Package pdftex.def Info: recsolution.pdf used on input line 354.
 (pdftex.def)             Requested size: 258.13416pt x 104.72108pt.
 
-Overfull \hbox (18.13416pt too wide) in paragraph at lines 360--361
+Overfull \hbox (18.13416pt too wide) in paragraph at lines 354--355
  [][] 
  []
 
-[5] (./EricCollom.bbl [6 <./infrec.pdf> <./recsolution.pdf>]) [7
+[5 <./infrec.pdf> <./recsolution.pdf>] (./EricCollom.bbl) [6] (./EricCollom.aux
+)
 
-]
-(./EricCollom.aux) ) 
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3364 strings out of 495063
- 43580 string characters out of 3182194
- 115942 words of memory out of 3000000
- 6452 multiletter control sequences out of 15000+200000
+ 3366 strings out of 495063
+ 43606 string characters out of 3182194
+ 114942 words of memory out of 3000000
+ 6454 multiletter control sequences out of 15000+200000
  53306 words of font info for 72 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 41i,11n,28p,1288b,258s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helv
-etic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on EricCollom.pdf (7 pages, 952667 bytes).
+ 41i,11n,28p,1288b,293s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
+rw/times/utmri8a.pfb>
+Output written on EricCollom.pdf (6 pages, 948635 bytes).
 PDF statistics:
- 335 PDF objects out of 1000 (max. 8388607)
- 217 compressed objects within 3 object streams
+ 330 PDF objects out of 1000 (max. 8388607)
+ 213 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
