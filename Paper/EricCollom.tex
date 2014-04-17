@@ -228,7 +228,7 @@ Typically, when an EA is developed for source code it only works for that high-l
 \section{FINCH}
 FINCH is a program developed by Orlov et al.,~\cite{FINCH2:2009,FINCH:2011} that evolves programs that have already been compiled into Java bytecode. FINCH uses crossover to evolve Java bytecode. It takes two programs \texttt{A} and \texttt{B} and identifies randomly chosen sections $\alpha$ and $\beta$ respectively. It then takes section $\alpha$ and inserts it where section $\beta$ used to be. It only selects an $\alpha$ that will allow the program to execute after being inserted into \texttt{B}. This is done by selecting code snippets that follow a set of strict rules.
 
-\subsection{Selecting Offspring}
+\subsection{Crossover and Selecting Offspring}
 Evolving Java bytecode reduces but does not remove the possibility of producing non-executable bytecode. Even though Java bytecode has a simpler syntax than source code, it still continues to have syntactical constraints. Orlov et al.,~\cite{FINCH2:2009} address this issue by checking if an offspring is executable before letting it join the evolved population, thus ensuring offspring produced through crossover contain valid bytecode. If an illegal offspring is produced, the reproduction process is repeated, with the same parents, until a good offspring is produced or a predetermined number of attempts have been made. The specific semantic constraints that were checked were stack depth, variable type, and control flow.\par
 
 In order to clarify, let $\alpha$ and $\beta$ be sections of code of \texttt{A} and \texttt{B}, respectively, on which crossover is being applied.
@@ -240,10 +240,8 @@ When inserting $\alpha$ into $\beta$, variables written before and after must be
 
 All jumps within the bytecode should not cause the program to break. There must be no jumps into $\beta$ and no jumps out of $\alpha$ since there is a high probability that such a jump would break the code. For example, even though a jump out of $\alpha$ is assured to go to an existing line of code in \texttt{A}, it is not assured do go to an existing line of code in \texttt{B} when replacing $\beta$.
 
-These checks, simply put, make sure that all the variables will be written before read, will be type-compatible, and will not cause stack underflow\cite{FINCH2:2009}. In Figure~\ref{crossover}, for example, FINCH would not accept the bytecode sequence ``Bad Offspring'' since it would fail the checks for stack and frame depth\mycomment{say why in caption? explained in next section}.
+These checks, simply put, make sure that all the variables will be written before read, will be type-compatible, and will not cause stack underflow\cite{FINCH2:2009}. In Figure~\ref{crossover}, for example, FINCH would not accept the bytecode sequence ``Bad Offspring'' since it would fail the checks for stack and frame depth\mycomment{say why in caption? explained in next section. Since I merged these two sections I need to change this paragraph and remove the figure 4 reference.}.
 
-
-\subsection{Crossover}
 
 \begin{figure}
 \begin{tabular}{|c|l|l|l|l|}
@@ -251,42 +249,43 @@ These checks, simply put, make sure that all the variables will be written befor
 \hline
 Line&Parent 1&Parent 2&Good&Bad\\  
  &         &         &Offspring&Offspring\\ \hline
-1&iconst\_1&iconst\_4&iconst\_4&iconst\_4\\
-2&iconst\_3&iconst\_2&iconst\_2&istore\_1\\
-3&istore\_1&istore\_1&istore\_1&istore\_2\\
-4&istore\_2&istore\_2&istore\_2&istore\_2\\
-5&iload\_1&iload\_1&iload\_2&iload\_2\\
-6&iload\_2&iload\_2&iload\_2&iload\_1\\
-7&iadd&isub&isub&isub\\
-8&ireturn&ireturn&ireturn&ireturn\\
+1&\textbf{iconst\_1}&iconst\_4&iconst\_4&iconst\_4\\
+2&\textbf{iconst\_3}&iconst\_2&iconst\_2&\textbf{istore\_1}\\
+3&\textbf{istore\_1}&istore\_1&istore\_1&\textbf{istore\_2}\\
+4&\textbf{istore\_2}&istore\_2&istore\_2&istore\_2\\
+5&\textbf{iload\_1}&iload\_1&\textbf{iload\_2}&iload\_2\\
+6&\textbf{iload\_2}&iload\_2&iload\_2&iload\_1\\
+7&\textbf{iadd}&isub&isub&isub\\
+8&\textbf{ireturn}&ireturn&ireturn&ireturn\\
 \hline
 \end{tabular}
-\caption{This is an example of two possible outcomes of performing unrestricted crossover on parent 1 and 2.\mycomment{find a way to make it obvious what is being replaced from what parent. Use bold? Also explain in caption}}
+\caption{This is an example of two possible outcomes of performing unrestricted crossover on parent 1 and 2. The bold in the good parent and bad parent represent the code from parent 1 replacing code in parent 2.}
 \label{crossover}
   
 \end{figure}
 As previously stated, crossover is a genetic operator that takes a section of code from one parent and replaces it with a section of code from another parent. Orlov, et al.,~\cite{FINCH:2011} would perform cross over and then check if the resulting offspring passed all the constraints previously mentioned.\par 
 
-Figure~\ref{crossover} is an example of unrestricted crossover resulting in both a good and a bad offspring. Let $\alpha$ be the opcode \texttt{iload\_2} from parent 1 and $\beta$ be \texttt{iload\_1} from parent 2. Replacing $\beta$ with $\alpha$ in parent 2 results in good a crossover. This is because the value at index 2 on the frame is an integer which respects the type constraints. Now, let $\alpha$ be lines
+Figure~\ref{crossover} is an example of unrestricted crossover resulting in both a good and a bad offspring. Let $\alpha$ be the opcode \texttt{iload\_2} from parent 1 and $\beta$ be \texttt{iload\_1} from parent 2. Replacing $\beta$ with $\alpha$ in parent 2 results in a good a crossover. This is because the value at index 2 on the frame is an integer which respects the type constraints. Now, let $\alpha$ be lines
 {\tt
 \begin{verbatim}
-istore_1
-istore_2
+                    istore_1
+                    istore_2
 \end{verbatim}}
 
-in parent 1 and $\beta$ be lines 
+\noindent parent 1 and $\beta$ be lines
 {\tt
 \begin{verbatim}
-iconst_2
-istore_1
+                    iconst_2
+                    istore_1
 \end{verbatim}}
+\noindent 
 in parent 2. In this case, replacing $\beta$ with $\alpha$ in parent 2 results in a bad offspring. Only one integer is saved on the frame and at line 3 \texttt{istore\_2} tries to pop from an empty stack causing stack underflow\mycomment{clarify}.
 
 \subsection{Non-Halting Offspring}
-An issue that arises from evolving unrestricted bytecode is that the resulting program might enter a non-halting state. The previously mentioned checks for good offspring, in Section 4.1, do not check for this issue. This is partially because it is a runtime issue. This, especially becomes an issue when evolving programs that contain loops and recursion.
-\cite{FINCH:2011} deal with this by counting how many calls are made to each function before running the program. An exception is thrown if too many calls are made to a function. The lowest possible fitness is assigned to an individual who fails this test.\par
+An problem that arises from evolving unrestricted bytecode is that the resulting program might enter a non-halting state. The previously mentioned checks for good offspring, in Section 4.1, do not check for this issue. This is because it is a runtime error. This, especially becomes a concern when evolving programs that contain loops and recursion.
+\cite{FINCH:2011} deal with this by counting how many calls are made to each function while running the program. An exception is thrown if too many calls are made to a function. The lowest possible fitness is assigned to an individual who fails this test.\par
 
-\cite{FINCH:2011} chose to count the calls to each function before running the code to avoid having to either run it on a separate thread or set a run time limit. They decided against running each program on a separate thread because killing a thread can be unreliable and unsafe for the GP as a whole. They also decided against setting a time limit due to the difficulty of defining how long a program should run, since this could vary greatly depending on the program being run and the CPU load. Also, this would limit the search space since an individual that is a desired solution could run longer than the time limit.
+\cite{FINCH:2011} chose to count the calls to each function to avoid having to either run each program on a separate thread or set a run time limit. They decided against running each program on a separate thread because killing a thread can be unreliable and unsafe for the GP as a whole. They also decided against setting a time limit due to the difficulty of defining how long a program should run, since this could vary greatly depending on the program being run and the CPU load.
 
 
 \section{Automated Bug Repair}
