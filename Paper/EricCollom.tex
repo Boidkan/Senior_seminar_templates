@@ -127,8 +127,6 @@ Traditional genetic programming (GP) has not yet been able to perform unrestrict
 GP is a set of techniques used to automate computer problem solving. This is done by evolving programs with an evolutionary algorithm (EA) that imitates natural selection in order to find a solution. Traditional GP has commonly been used to evolve specific parts of programs instead of full-fledged programs. This is because traditionally we have to understand the structure of the program being evolved. An EA is usually designed for a specific program with knowledge about how the program works. Being able to evolve an entire program without knowing its structure would allow for more flexibility in GP. Evolving bytecode and assembly, instead of source code, is a method that allows for this flexibility. This is possible because bytecode and assembly languages are less restrictive syntactically than source code. We discuss this issue further in Section 3.\par 
 
 Orlov et al.,~\cite{FINCH2:2009} propose a method for applying GP to full-fledged programs that requires a program to be in Java bytecode. Schulte et al.,~\cite{Assembly:2010} apply a similar method with both Java bytecode and x86 assembly. Orlov et al.,~\cite{FINCH:2011} focused on evolving simple programs as a whole while Schulte et al.,~\cite{Assembly:2010} focused on automated bug repair in programs.\par
-
-These methods are important because they show that evolving an entire program is possible. This is useful since once the EA has been created, there is little modification that has to be done to it to evolve different programs\mycomment{either explain or remove?}. Also, the structure of the program being evolved does not have to be known. \mycomment{if I have space add what I mean by knowing the structure of a program}\par
 	
 This paper is organized as follows: Section 2 covers the background needed for understanding the application of GP to bytecode and assembly. It contains information on Evolutionary Computation (EC), Java bytecode, and the Java Virtual Machine. Section 3 describes the benefits of evolving assembly and bytecode. Section 4 discusses how Orlov, et al.,~\cite{FINCH:2011} evolved Java bytecode. Section 5 explores how Schulte et al.,~\cite{Assembly:2010} evolved both x86 assembly and Java bytecode. Section 6 summarizes some of the experimental results from \cite{FINCH:2011} and \cite{Assembly:2010}.  Possible future work and ideas is also discussed.  
 	
@@ -137,7 +135,7 @@ This paper is organized as follows: Section 2 covers the background needed for u
 \section{Background}
 
 
-This section explores the components of EC and GP. Java bytecode will also be discussed in addition to various details of the Java Virtual Machine (JVM). This section will only address Java bytecode since knowledge of x86 assembly is not needed to understand the research done by Schulte et al.,~\cite{Assembly:2010}. Also, throughout the rest of this paper, the term \textit{instruction-level code} will be used when referring to both Java bytecode or x86 assembly.
+This section explores the components of EC and GP. Java bytecode will also be discussed in addition to various details of the Java Virtual Machine (JVM). This section will only address Java bytecode since knowledge of x86 assembly is not needed to understand the research done by Schulte et al.,~\cite{Assembly:2010}. Also, throughout the rest of this paper, the term \textit{instruction-level code} will be used when referring to either Java bytecode or x86 assembly.
 \subsection{Evolutionary Computation}
 \begin{figure}
 \centering
@@ -148,9 +146,9 @@ This section explores the components of EC and GP. Java bytecode will also be di
 \end{figure}
 
 
-EC is a field of computer science and artificial intelligence that is loosely based on evolutionary biology. EC imitates evolution through continuous optimization in order to solve problems. Optimization in EC, in the best case scenario, is the selection of the best individual within a population. The representation of what an individual is depends on the problem being solved. For example, it can be a string of bits, a parse tree, or an object. In this paper, the individuals will be programs in Java bytecode and x86 assembly.\par 
+EC is a field of computer science and artificial intelligence that is loosely based on evolutionary biology. EC imitates evolution through continuous optimization in order to solve problems. Optimization in EC, in the best case scenario, is the selection of a few the best individuals within a population. The representation of what an individual is depends on the problem being solved. For example, it can be a string of bits, a parse tree, or an object. In this paper, the individuals will be programs in Java bytecode and x86 assembly.\par 
 
-The EC process is summarized in Figure~\ref{ECdiagram}. An initial population of individuals is generated and a selection process is used to choose the most fit individuals. The selection process usually gives a fitness value, usually numerical, to each individual which indicates how well it solves the specific problem. For the research discussed in this paper a higher fitness indicates a more fit individual. The individuals with the highest fitness are then taken and modified using genetic operators that imitate mutation and sexual reproduction. A check is then done to see if any individuals from the new population solve the desired problem or a predetermined number of generations is reached. If not, the process of evolution is repeated.  If the problem is solved the individual with the best solution is returned.\par
+The EC process is summarized in Figure~\ref{ECdiagram}. An initial population of individuals is generated and a selection process is used to choose the most fit individuals. The selection process gives a fitness value, usually numerical, to each individual which indicates how well it solves the specific problem. For the research discussed in this paper a higher fitness indicates a more fit individual. The individuals with the highest fitness are then taken and modified using genetic operators that imitate mutation and sexual reproduction. A check is then done to see if any individuals from the new population solve the desired problem or a predetermined number of generations is reached. If not, the process of evolution is repeated.  If the problem is solved the individual with the best solution is returned.\par
 
 	GP is a tool that uses the EC process to evolve programs. In the research discussed in this paper, the selection of individuals for sexual reproduction is done through tournament selection. A certain number of individuals are chosen for a simulated competition and the individual with the highest fitness wins. That individual is then selected to be a parent.\par 
 		
@@ -168,9 +166,9 @@ The EC process is summarized in Figure~\ref{ECdiagram}. An initial population of
 \end{figure}
 
 
-Java bytecode ``is [an] intermediate, platform-independent representation''~\cite{FINCH2:2009} of Java source code. However, ``implementors of other languages can turn to the Java Virtual Machine as a delivery vehicle for their languages''~\cite{JVMspec:2013}. A few examples of languages with which this has been done are Scala, Groovy, Jython, Kawa, JavaFx Script, Clojure, Erjang, and JRuby. \mycomment{dont need jvm sentence? describe why its important that multiple languages compile to bytecode}\par
+Java bytecode ``is [an] intermediate, platform-independent representation''~\cite{FINCH2:2009} of Java source code. However, ``implementors of other languages can turn to the Java Virtual Machine as a delivery vehicle for their languages''~\cite{JVMspec:2013}. A few examples of languages with which this has been done are Scala, Groovy, Jython, Kawa, JavaFx Script, Clojure, Erjang, and JRuby. All these languages can be compiled to Java bytcode and be evolved. \par
 
-The JVM executes bytecode through a stack-based architecture. Each JVM thread has a private stack which can only be popped from and pushed to. Each private stack stores frames. Each frame contains an array of local variables and its own operand stack. A new frame is created when a method is invoked. When a method is done executing, the frame is destroyed~\cite{Oracle:2013}. Only the frame of the current executing method within a thread can be active at any time.
+The JVM executes bytecode through a stack-based architecture. Each method has a frame that contains an array of local variables and its own operand stack. A new frame is created when a method is invoked. When a method is done executing, the frame is destroyed~\cite{Oracle:2013}. Only the frame of the current executing method within a thread can be active at any time.
 
 Figure~\ref{stack} is a simple example of what Java bytecode looks like and how the stack works. Bytecode consists of operation codes (opcodes) that perform operations and can manipulate both the operand stack and the frame. Each of the opcodes in Figure \ref{stack} contain the prefix \texttt{i} which stands for the primitive integer type. These opcodes can only manipulate integers. The prefix is followed by the operation to be executed.\par 
 
@@ -205,7 +203,7 @@ System.out.println(x);
 
 \section{Constraints and Benefits}
 
-While it would be useful, it is difficult to evolve an entire program in source code due to semantic constraints. This section will discuss these difficulties and how instruction-level code can deal more easily with semantic constraints.  
+While it would be useful, it is difficult to evolve an entire program in source code due to semantic constraints. However, Instruction-level code can deal with these constraints in a more graceful manner. This section will explore why it is difficult for source code to deal with semantic constraints and why it is easier at the instruction-level. We will discuss some of the benefits that arise from being able to deal with these constraints and evolving at the instruction-level.
 
 \subsection{Source Code Constraints}
 There is a high risk of producing a non-compilable program when evolving programs at the source code level. This is due to the fact that high-level programming languages are designed to simplify reading and writing programs. Most high-level programming languages are defined by using grammars which are used to represent the syntax of the programming language~\cite{Oracle:2013,Assembly:2010}. The grammar does not represent the semantic constraints of a program. It does not capture the languages type system, variable visibility and accessibility, or other constraints ~\cite{FINCH:2011}. For example, in Figure~\ref{semantics} both \ref{semantics}(a) and \ref{semantics}(b) comply with the syntactical rules of Java but 3(b) breaks the semantic rules and thus is illegal code. In \ref{semantics}(b), variable \texttt{y} is uninitialized before the test in the if statement, assigning \texttt{y} to \texttt{x} violates a type constraint, and variable \texttt{z} is not defined. In order to write a program to evolve source code we would have to deal with all these constraints. While this task is possible, it would require creating a full-scale compiler to check for these semantic constraints~\cite{FINCH:2011}.\par
@@ -222,26 +220,13 @@ One of the benefits from being able to perform unrestricted evolution on a progr
 
 Conventionally in GP most of program, being evolved, is written beforehand and most of it remains the same after evolution. In contrast, when evolving instruction-level code the initial population of programs do not have to contain a great deal of code in order to find a solution. An EA can evolve a minimal amount of code into a full-scale working program.
 
-Typically, when an EA is developed for source code it only works for that high-level language. Instruction-level code,on the other hand, can evolve any language that can be compiled to the instruction-level. There are many high-level languages that compile into instruction level code such as the ones listed in Section 2.2.  
+Typically, when an EA is developed for source code it only works for a single high-level language. Instruction-level code,on the other hand, can evolve any language that can be compiled to the instruction-level. There are many high-level languages that compile into instruction-level code such as the ones listed in Section 2.2 that compile to Java bytecode.  
 
 
 \section{FINCH}
-FINCH is a program developed by Orlov et al.,~\cite{FINCH2:2009,FINCH:2011} that evolves programs that have already been compiled into Java bytecode. FINCH uses crossover to evolve Java bytecode. It takes two programs \texttt{A} and \texttt{B} and identifies randomly chosen sections $\alpha$ and $\beta$ respectively. It then takes section $\alpha$ and inserts it where section $\beta$ used to be. It only selects an $\alpha$ that will allow the program to execute after being inserted into \texttt{B}. This is done by selecting code snippets that follow a set of strict rules.
+FINCH is a program developed by Orlov et al.,~\cite{FINCH2:2009,FINCH:2011} that evolves programs that have already been compiled into Java bytecode. FINCH uses crossover to evolve Java bytecode. It takes two programs \texttt{A} and \texttt{B} and identifies randomly chosen sections $\alpha$ and $\beta$ respectively. It then takes section $\alpha$ and inserts it into the previous location of $\beta$. Then, the resulting program is analyzed to see if it is executable.
 
 \subsection{Crossover and Selecting Offspring}
-Evolving Java bytecode reduces but does not remove the possibility of producing non-executable bytecode. Even though Java bytecode has a simpler syntax than source code, it still continues to have syntactical constraints. Orlov et al.,~\cite{FINCH2:2009} address this issue by checking if an offspring is executable before letting it join the evolved population, thus ensuring offspring produced through crossover contain valid bytecode. If an illegal offspring is produced, the reproduction process is repeated, with the same parents, until a good offspring is produced or a predetermined number of attempts have been made. The specific semantic constraints that were checked were stack depth, variable type, and control flow.\par
-
-In order to clarify, let $\alpha$ and $\beta$ be sections of code of \texttt{A} and \texttt{B}, respectively, on which crossover is being applied.
-The following constraints in crossover are applied to assure that good offspring are produced:\par
-
-The stack and its frame must be type compatible. The the stack must have enough elements on it so that stack underflow does not occur. Stack underflow is an attempt to pop from an empty stack. Stack and frame compatibility is accomplished by assuring that stack pops of $\beta$ have identical types than $\alpha$, and that stack pushes of $\alpha$ have identical types than stack pushes of $\beta$\footnote{In Orlov et al.,~\cite{FINCH2:2009} the constraints are more sophisticated. See \cite{FINCH2:2009} for more details.}. \par
-
-When inserting $\alpha$ into $\beta$, variables written before and after must be compatible with the change. Variables written by $\alpha$ must have identical types that are read after $\beta$. All variables read after $\beta$ and not written by $\alpha$ must be written before $\beta$. Finally, all variables read by $\alpha$ must be written before $\beta$.\par
-
-All jumps within the bytecode should not cause the program to break. There must be no jumps into $\beta$ and no jumps out of $\alpha$ since there is a high probability that such a jump would break the code. For example, even though a jump out of $\alpha$ is assured to go to an existing line of code in \texttt{A}, it is not assured do go to an existing line of code in \texttt{B} when replacing $\beta$.
-
-These checks, simply put, make sure that all the variables will be written before read, will be type-compatible, and will not cause stack underflow\cite{FINCH2:2009}. In Figure~\ref{crossover}, for example, FINCH would not accept the bytecode sequence ``Bad Offspring'' since it would fail the checks for stack and frame depth\mycomment{say why in caption? explained in next section. Since I merged these two sections I need to change this paragraph and remove the figure 4 reference.}.
-
 
 \begin{figure}
 \begin{tabular}{|c|l|l|l|l|}
@@ -259,10 +244,22 @@ Line&Parent 1&Parent 2&Good&Bad\\
 8&\textbf{ireturn}&ireturn&ireturn&ireturn\\
 \hline
 \end{tabular}
-\caption{This is an example of two possible outcomes of performing unrestricted crossover on parent 1 and 2. The bold in the good parent and bad parent represent the code from parent 1 replacing code in parent 2.}
+\caption{This is an example of two possible outcomes of performing unrestricted crossover on parent 1 and 2. The bold in the good and bad offspring represent the code from parent 1 replacing code in parent 2. The bad offspring breaks at \texttt{istore\_2} since there is nothing on the stack to pop.}
 \label{crossover}
   
 \end{figure}
+
+Evolving Java bytecode reduces but does not remove the possibility of producing non-executable bytecode. Even though Java bytecode has a simpler syntax than source code, it still continues to have syntactical constraints. Orlov et al.,~\cite{FINCH2:2009} address this issue by checking if an offspring is executable before letting it join the evolved population, thus ensuring offspring produced through crossover contain valid bytecode. If an illegal offspring is produced, the reproduction process is repeated, with the same parents, until a good offspring is produced or a predetermined number of attempts have been made. The specific semantic constraints that were checked were stack depth, variable type, and control flow.\par
+
+In order to clarify, let $\alpha$ and $\beta$ be sections of code of \texttt{A} and \texttt{B}, respectively, on which crossover is being applied.
+The following constraints are applied to assure that good offspring are produced:\par
+
+The stack and its frame must be type compatible. The the stack must have enough elements on it so that stack underflow does not occur. Stack underflow is an attempt to pop from an empty stack. Stack and frame compatibility is accomplished by assuring that stack pops of $\beta$ have identical types than $\alpha$, and that stack pushes of $\alpha$ have identical types than stack pushes of $\beta$\footnote{In Orlov et al.,~\cite{FINCH2:2009} the constraints are more sophisticated. See \cite{FINCH2:2009} for more details.}. \par
+
+When inserting $\alpha$ into $\beta$, variables written before and after must be compatible with the change. Variables written by $\alpha$ must have identical types that are read after $\beta$. All variables read after $\beta$ and not written by $\alpha$ must be written before $\beta$. Finally, all variables read by $\alpha$ must be written before $\beta$.\par
+
+All jumps within the bytecode should not cause the program to break. There must be no jumps into $\beta$ and no jumps out of $\alpha$ since there is a high probability that such a jump would break the code. For example, even though a jump out of $\alpha$ is assured to go to an existing line of code in \texttt{A}, it is not assured do go to an existing line of code in \texttt{B} when replacing $\beta$.
+
 As previously stated, crossover is a genetic operator that takes a section of code from one parent and replaces it with a section of code from another parent. Orlov, et al.,~\cite{FINCH:2011} would perform cross over and then check if the resulting offspring passed all the constraints previously mentioned.\par 
 
 Figure~\ref{crossover} is an example of unrestricted crossover resulting in both a good and a bad offspring. Let $\alpha$ be the opcode \texttt{iload\_2} from parent 1 and $\beta$ be \texttt{iload\_1} from parent 2. Replacing $\beta$ with $\alpha$ in parent 2 results in a good a crossover. This is because the value at index 2 on the frame is an integer which respects the type constraints. Now, let $\alpha$ be lines
@@ -279,10 +276,10 @@ Figure~\ref{crossover} is an example of unrestricted crossover resulting in both
                     istore_1
 \end{verbatim}}
 \noindent 
-in parent 2. In this case, replacing $\beta$ with $\alpha$ in parent 2 results in a bad offspring. Only one integer is saved on the frame and at line 3 \texttt{istore\_2} tries to pop from an empty stack causing stack underflow\mycomment{clarify}.
+in parent 2. In this case, replacing $\beta$ with $\alpha$ in parent 2 results in a bad offspring. Only one integer is pushed to the stack which is proceeded by too many istore calls. This results in stack underflow at line 3 where there is an attempt to pop from an empty stack. This offspring would fail the stack depth constraint.
 
 \subsection{Non-Halting Offspring}
-An problem that arises from evolving unrestricted bytecode is that the resulting program might enter a non-halting state. The previously mentioned checks for good offspring, in Section 4.1, do not check for this issue. This is because it is a runtime error. This, especially becomes a concern when evolving programs that contain loops and recursion.
+An problem that arises from evolving unrestricted bytecode is that the resulting program might enter a non-halting state. The previously mentioned checks for good offspring, in Section 4.1, do not check for this issue. This is because it is a run time error. This, especially becomes a concern when evolving programs that contain loops and recursion.
 \cite{FINCH:2011} deal with this by counting how many calls are made to each function while running the program. An exception is thrown if too many calls are made to a function. The lowest possible fitness is assigned to an individual who fails this test.\par
 
 \cite{FINCH:2011} chose to count the calls to each function to avoid having to either run each program on a separate thread or set a run time limit. They decided against running each program on a separate thread because killing a thread can be unreliable and unsafe for the GP as a whole. They also decided against setting a time limit due to the difficulty of defining how long a program should run, since this could vary greatly depending on the program being run and the CPU load.
@@ -331,7 +328,7 @@ class SymbolicRegression{
 }
 \end{verbatim}
 }
-\caption{Example of a possible starting program to evolve and solve symbolic regression.}
+\caption{Example of a possible starting program,before compilation, that could be used to solve a symbolic regression problem.}
 \label{regression}
 \end{figure}
 \subsubsection{Symbolic Regression}
@@ -352,7 +349,7 @@ Each experiment started off with an offspring of fitness zero and usually with a
 \begin{figure}
 \centering
 \psfig{file=recsolution.pdf}
-\caption{FINCH's solution to the intial program presented in Figure~\ref{initial rec}}
+\caption{FINCH's decompiled solution to the initial program presented in Figure~\ref{initial rec}}
 \label{final rec}
 \end{figure}
 
@@ -383,7 +380,7 @@ Evolving entire programs at the instruction-level is easier than at the source c
 
 %ACKNOWLEDGMENTS are optional
 \section{Acknowledgments}
-Nic Mcphee, Elena Machkasova
+A special acknowledgment to Nic McPhee and Elena Machkasova for their time and knowledge. Also, thanks to Debra Dogotch  for her detailed feedback and to Chris Thomas for his help on Section 3.2. 
 
 %
 % The following two commands are all you need in the
