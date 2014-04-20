@@ -14,6 +14,8 @@
 \citation{FINCH2:2009}
 \citation{JVMspec:2013}
 \citation{Oracle:2013}
+\citation{FINCH:2011}
+\citation{FINCH:2011}
 \citation{Oracle:2013}
 \citation{Assembly:2010}
 \citation{FINCH:2011}
@@ -35,13 +37,13 @@
 \citation{FINCH2:2009}
 \citation{FINCH:2011}
 \citation{FINCH2:2009}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Both (a) and (b) are valid code syntactically however (b) is not valid semantically. This is because \texttt  {y} is uninitialized before the being used in the if statement. Also, assigning a float to an int violates type constraints and \texttt  {z} in the print statement is undefined.}}{\thepage }}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Both (a) and (b) are valid code syntactically however (b) is not valid semantically. This is because \texttt  {y} is uninitialized before the being used in the if statement. Also, assigning a float to an int violates type constraints and \texttt  {z} in the print statement is undefined. Adapted from\nobreakspace  {}\cite  {FINCH:2011}.}}{\thepage }}
 \newlabel{semantics}{{3}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces This is a simple example of how traditional GP typically only evolves small sections of code. In this example everything before and after \texttt  {robotSpeed()} is already written and is not evolved. The only thing that the EA modifies is the variable \texttt  {evolvedVariable} which is assigned some value determined by the EA.}}{\thepage }}
 \newlabel{traditional}{{4}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Instruction-Level Code Benefits}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {4}FINCH}{\thepage }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Crossover and Selecting Offspring}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Crossover and Validating Offspring}{\thepage }}
 \citation{FINCH2:2009}
 \citation{FINCH2:2009}
 \citation{FINCH:2011}
@@ -50,11 +52,11 @@
 \citation{Assembly:2010}
 \citation{Assembly:2010}
 \citation{Assembly:2010}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces This is an example of two possible outcomes of performing unrestricted crossover on parent 1 and 2. The bold in the good and bad offspring represent the code from parent 1 replacing code in parent 2. The bad offspring breaks at \texttt  {istore\_2} since there is nothing on the stack to pop.}}{\thepage }}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces This is an example of two possible outcomes of performing unrestricted crossover on parents 1 and 2. The bold in the good and bad offspring represent the code from parent 1 replacing code in parent 2. The bad offspring breaks at \texttt  {istore\_2} since there is nothing on the stack to pop.}}{\thepage }}
 \newlabel{crossover}{{5}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Non-Halting Offspring}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Automated Bug Repair}{\thepage }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Selecting Offspring }{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Validating Offspring}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Genetic Operators}{\thepage }}
 \citation{Assembly:2010}
 \citation{Assembly:2010}
@@ -69,16 +71,18 @@
 \citation{FINCH:2011}
 \citation{koza:1992}
 \citation{FINCH:2011}
+\citation{FINCH:2011}
+\citation{FINCH:2011}
+\citation{FINCH:2011}
+\citation{FINCH:2011}
+\citation{FINCH:2011}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Non-Halting Offspring}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Results}{\thepage }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}FINCH}{\thepage }}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Example of a possible starting program,before compilation, that could be used to solve a symbolic regression problem.}}{\thepage }}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Example of a possible starting program,before compilation, for a symbolic regression problem.}}{\thepage }}
 \newlabel{regression}{{6}{\thepage }}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Initial population function, for array sum, that enters into infinite recursion in the if statement}}{\thepage }}
-\newlabel{initial rec}{{7}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}FINCH}{\thepage }}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.1}Symbolic Regression}{\thepage }}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2}Array Sum}{\thepage }}
-\citation{Assembly:2010}
 \citation{Assembly:2010}
 \citation{Forrest:2009}
 \citation{Forrest:2009}
@@ -93,12 +97,14 @@
 \bibcite{Forrest:2009}{3}
 \bibcite{koza:1992}{4}
 \bibcite{FINCH2:2009}{5}
-\bibcite{FINCH:2011}{6}
-\bibcite{Assembly:2010}{7}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces FINCH's decompiled solution to the initial program presented in Figure\nobreakspace  {}7\hbox {}}}{\thepage }}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Initial population function, for the array sum problem, before being compiled to Java bytecode to be evolved.This function enters into infinite recursion in the if statement. Taken from \nobreakspace  {}\cite  {FINCH:2011}.}}{\thepage }}
+\newlabel{initial rec}{{7}{\thepage }}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces FINCH's decompiled solution to the initial program presented in Figure\nobreakspace  {}7\hbox {}. Taken from \nobreakspace  {}\cite  {FINCH:2011}.}}{\thepage }}
 \newlabel{final rec}{{8}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Automated Bug Repair}{\thepage }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Future Work}{\thepage }}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{\thepage }}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Acknowledgments}{\thepage }}
-\@writefile{toc}{\contentsline {section}{\numberline {9}References}{\thepage }}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusions and Future Work}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Future Work}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Conclusion}{\thepage }}
+\@writefile{toc}{\contentsline {section}{\numberline {8}References}{\thepage }}
+\bibcite{FINCH:2011}{6}
+\bibcite{Assembly:2010}{7}

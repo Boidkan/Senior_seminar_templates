@@ -126,9 +126,9 @@ Traditional genetic programming (GP) has not yet been able to perform unrestrict
 \section{Introduction}
 GP is a set of techniques used to automate computer problem solving. This is done by evolving programs with an evolutionary algorithm (EA) that imitates natural selection in order to find a solution. Traditional GP has commonly been used to evolve specific parts of programs instead of full-fledged programs. This is because traditionally we have to understand the structure of the program being evolved. An EA is usually designed for a specific program with knowledge about how the program works. Being able to evolve an entire program without knowing its structure would allow for more flexibility in GP. Evolving bytecode and assembly, instead of source code, is a method that allows for this flexibility. This is possible because bytecode and assembly languages are less restrictive syntactically than source code. We discuss this issue further in Section 3.\par 
 
-Orlov et al.,~\cite{FINCH2:2009} propose a method for applying GP to full-fledged programs that requires a program to be in Java bytecode. Schulte et al.,~\cite{Assembly:2010} apply a similar method with both Java bytecode and x86 assembly. Orlov et al.,~\cite{FINCH:2011} focused on evolving simple programs as a whole while Schulte et al.,~\cite{Assembly:2010} focused on automated bug repair in programs.\par
+Orlov and Sipper~\cite{FINCH2:2009} propose a method for applying GP to full-fledged programs that requires a program to be in Java bytecode. Schulte et al.,~\cite{Assembly:2010} apply a similar method with both Java bytecode and x86 assembly. Orlov and Sipper~\cite{FINCH:2011} focused on evolving simple programs as a whole while Schulte et al.,~\cite{Assembly:2010} focused on automated bug repair in programs.\par
 	
-This paper is organized as follows: Section 2 covers the background needed for understanding the application of GP to bytecode and assembly. It contains information on Evolutionary Computation (EC), Java bytecode, and the Java Virtual Machine. Section 3 describes the benefits of evolving assembly and bytecode. Section 4 discusses how Orlov, et al.,~\cite{FINCH:2011} evolved Java bytecode. Section 5 explores how Schulte et al.,~\cite{Assembly:2010} evolved both x86 assembly and Java bytecode. Section 6 summarizes some of the experimental results from \cite{FINCH:2011} and \cite{Assembly:2010}.  Possible future work and ideas is also discussed.  
+This paper is organized as follows: Section 2 covers the background needed for understanding the application of GP to bytecode and assembly. It contains information on Evolutionary Computation (EC), Java bytecode, and the Java Virtual Machine. Section 3 describes the benefits of evolving assembly and bytecode. Section 4 discusses how Orlov and Sipper~\cite{FINCH:2011} evolved Java bytecode. Section 5 explores how Schulte, et al.,~\cite{Assembly:2010} evolved both x86 assembly and Java bytecode. Section 6 summarizes some of the experimental results from \cite{FINCH:2011} and \cite{Assembly:2010}.  Possible future work and ideas is also discussed.  
 	
 	
 
@@ -195,7 +195,7 @@ System.out.println(x);
 
 \end{verbatim}
 }
-\caption{Both (a) and (b) are valid code syntactically however (b) is not valid semantically. This is because \texttt{y} is uninitialized before the being used in the if statement. Also, assigning a float to an int violates type constraints and \texttt{z} in the print statement is undefined.}
+\caption{Both (a) and (b) are valid code syntactically however (b) is not valid semantically. This is because \texttt{y} is uninitialized before the being used in the if statement. Also, assigning a float to an int violates type constraints and \texttt{z} in the print statement is undefined. Adapted from~\cite{FINCH:2011}.}
 \label{semantics}
 \end{figure}
 
@@ -203,7 +203,7 @@ System.out.println(x);
 
 \section{Constraints and Benefits}
 
-While it would be useful, it is difficult to evolve an entire program in source code due to semantic constraints. However, Instruction-level code can deal with these constraints in a more graceful manner. This section will explore why it is difficult for source code to deal with semantic constraints and why it is easier at the instruction-level. We will discuss some of the benefits that arise from being able to deal with these constraints and evolving at the instruction-level.
+While it would be useful, it is difficult to evolve an entire program in source code due to semantic constraints. However, instruction-level code can deal with these constraints in a more graceful manner. This section will explore why it is difficult for source code to deal with semantic constraints and why it is easier at the instruction-level. We will discuss some of the benefits that arise from being able to deal with these constraints and evolving at the instruction-level.
 
 \subsection{Source Code Constraints}
 There is a high risk of producing a non-compilable program when evolving programs at the source code level. This is due to the fact that high-level programming languages are designed to simplify reading and writing programs. Most high-level programming languages are defined by using grammars which are used to represent the syntax of the programming language~\cite{Oracle:2013,Assembly:2010}. The grammar does not represent the semantic constraints of a program. It does not capture the languages type system, variable visibility and accessibility, or other constraints ~\cite{FINCH:2011}. For example, in Figure~\ref{semantics} both \ref{semantics}(a) and \ref{semantics}(b) comply with the syntactical rules of Java but 3(b) breaks the semantic rules and thus is illegal code. In \ref{semantics}(b), variable \texttt{y} is uninitialized before the test in the if statement, assigning \texttt{y} to \texttt{x} violates a type constraint, and variable \texttt{z} is not defined. In order to write a program to evolve source code we would have to deal with all these constraints. While this task is possible, it would require creating a full-scale compiler to check for these semantic constraints~\cite{FINCH:2011}.\par
@@ -220,11 +220,13 @@ class Robot{
 
 ...
 
-    double robotSpeed(){	
-        double evolvedVariable = valueFromEA;	
-        return evolvedVariable;
-    }
-    
+  double robotSpeed(){	
+      double evolvedVariable = valueFromEA;
+      double speed;
+      speed = (robot.location * evolvedVariable)/2;
+      return speed;
+  }
+
 ...
 
 }
@@ -238,7 +240,7 @@ class Robot{
 
 In traditional GP it is common to evolve expressions or formulae within an existing program structure~\cite{FINCH:2011}. This is due to the difficulty of dealing with semantic constrains in source code. As a work around, it has been common to evolve only specific areas in a program in order to avoid dealing with too many semantic constraints. A side effect of this is that an understanding of the program's structure is needed. This usually results in most of the program being written before, and remaining the same after, evolution. Figure~\ref{traditional} is an example of how GP typically evolves source code.\par
 
-Instruction-level code generally consists of a smaller set of instructions than source code~\cite{Assembly:2010}. For example, Java bytecode consists of two hundred and two instructions where as the Java source code grammar alphabet is much larger~\cite{JVMspec:2013, Oracle:2013}.\footnote{\cite{Oracle:2013} contains information on the Java grammars in Chapters 2 and 3} Because of its smaller instruction size, instruction-level code is simpler syntactically and there are less semantic constraints to violate. There is a lower risk of producing a non-executable program during evolution and it is easier to design an EA that deals with the semantic constraints. Thus, it is easier to evolve whole programs at the instruction-level.\par
+Instruction-level code generally consists of a smaller set of instructions than source code~\cite{Assembly:2010}. For example, Java bytecode consists of two hundred and two instructions where as the Java source code grammar alphabet is much larger~\cite{JVMspec:2013, Oracle:2013}.\footnote{\cite{Oracle:2013} Contains information on the Java grammars in Chapters 2 and 3} Because of its smaller instruction size, instruction-level code is simpler syntactically and there are less semantic constraints to violate. There is a lower risk of producing a non-executable program during evolution and it is easier to design an EA that deals with the semantic constraints. Thus, it is easier to evolve whole programs at the instruction-level.\par
 
 One of the benefits from being able to perform unrestricted evolution on a program is that an understanding of the structure of the program is not required. The only requirement is that it is in instruction-level code~\cite{FINCH2:2009, Assembly:2010}. The EA does not have to focus on a specific part of the program in order to perform evolution. Also, when evolving instruction-level code the initial population of programs do not have to contain a great deal of code in order to find a solution. An EA can evolve a minimal amount of code into a full-scale working program.\par
 
@@ -246,9 +248,9 @@ Typically, when an EA is developed for source code it only works for a single hi
 
 
 \section{FINCH}
-FINCH is a program developed by Orlov et al.,~\cite{FINCH2:2009,FINCH:2011} that evolves Java bytecode programs. FINCH uses crossover to evolve Java bytecode. It takes two programs \texttt{A} and \texttt{B} and identifies randomly chosen sections $\alpha$ and $\beta$ respectively. It then takes section $\alpha$ and inserts it into the previous location of $\beta$. Then, the resulting program is analyzed to see if it is executable.
+FINCH is a program developed by Orlov and Sipper~\cite{FINCH2:2009,FINCH:2011} that evolves Java bytecode programs. FINCH uses crossover to evolve Java bytecode. It takes two programs \texttt{A} and \texttt{B} and identifies randomly chosen sections $\alpha$ and $\beta$ respectively. It then takes section $\alpha$ and inserts it into the previous location of $\beta$. Then, the resulting program is analyzed to see if it is executable.
 
-\subsection{Crossover and Selecting Offspring}
+\subsection{Crossover and Validating Offspring}
 
 \begin{figure}
 \begin{tabular}{|c|l|l|l|l|}
@@ -266,23 +268,23 @@ Line&Parent 1&Parent 2&Good&Bad\\
 8&\textbf{ireturn}&ireturn&ireturn&ireturn\\
 \hline
 \end{tabular}
-\caption{This is an example of two possible outcomes of performing unrestricted crossover on parent 1 and 2. The bold in the good and bad offspring represent the code from parent 1 replacing code in parent 2. The bad offspring breaks at \texttt{istore\_2} since there is nothing on the stack to pop.}
+\caption{This is an example of two possible outcomes of performing unrestricted crossover on parents 1 and 2. The bold in the good and bad offspring represent the code from parent 1 replacing code in parent 2. The bad offspring breaks at \texttt{istore\_2} since there is nothing on the stack to pop.}
 \label{crossover}
   
 \end{figure}
 
-Evolving Java bytecode reduces but does not remove the possibility of producing non-executable bytecode. Even though Java bytecode has a simpler syntax than source code, it still continues to have syntactical constraints. Orlov et al.,~\cite{FINCH2:2009} address this issue by checking if an offspring is executable before letting it join the evolved population, thus ensuring offspring produced through crossover contain valid bytecode. If an illegal offspring is produced, the reproduction process is repeated, with the same parents, until a good offspring is produced or a predetermined number of attempts have been made. The specific semantic constraints that were checked were stack depth, variable type, and control flow.\par
+Evolving Java bytecode reduces but does not remove the possibility of producing non-executable bytecode. Even though Java bytecode has a simpler syntax than source code, it still continues to have syntactical constraints. Orlov and Sipper~\cite{FINCH2:2009} address this issue by checking if an offspring is executable before letting it join the evolved population, thus ensuring offspring produced through crossover contain valid bytecode. If an illegal offspring is produced, the reproduction process is repeated, with the same parents, until a good offspring is produced or a predetermined number of attempts have been made. The specific semantic constraints that were checked were stack depth, variable type, and control flow.\par
 
-In order to clarify, let $\alpha$ and $\beta$ be sections of code of \texttt{A} and \texttt{B}, respectively, on which crossover is being applied.
+In order to clarify, let $\alpha$ and $\beta$ be sections of code of two parents \texttt{A} and \texttt{B}, respectively, on which crossover is being applied.
 The following constraints are applied to assure that good offspring are produced:\par
 
-The stack and its frame must be type compatible. The the stack must have enough elements on it so that stack underflow does not occur. Stack underflow is an attempt to pop from an empty stack. Stack and frame compatibility is accomplished by assuring that stack pops of $\beta$ have identical types than $\alpha$, and that stack pushes of $\alpha$ have identical types than stack pushes of $\beta$\footnote{In Orlov et al.,~\cite{FINCH2:2009} the constraints are more sophisticated. See \cite{FINCH2:2009} for more details.}. \par
+The stack and its frame must be type compatible. The the stack must have enough elements on it so that stack underflow does not occur. Stack underflow is an attempt to pop from an empty stack. Stack and frame compatibility is accomplished by assuring that stack pops of $\beta$ have identical types than $\alpha$, and that stack pushes of $\alpha$ have identical types than stack pushes of $\beta$.\footnote{In~\cite{FINCH2:2009} the constraints are more sophisticated. See \cite{FINCH2:2009} for more details.} \par
 
 When inserting $\alpha$ into $\beta$, variables written before and after must be compatible with the change. Variables written by $\alpha$ must have identical types that are read after $\beta$. All variables read after $\beta$ and not written by $\alpha$ must be written before $\beta$. Finally, all variables read by $\alpha$ must be written before $\beta$.\par
 
 All jumps within the bytecode should not cause the program to break. There must be no jumps into $\beta$ and no jumps out of $\alpha$ since there is a high probability that such a jump would break the code. For example, even though a jump out of $\alpha$ is assured to go to an existing line of code in \texttt{A}, it is not assured do go to an existing line of code in \texttt{B} when replacing $\beta$.
 
-As previously stated, crossover is a genetic operator that takes a section of code from one parent and replaces it with a section of code from another parent. Orlov, et al.,~\cite{FINCH:2011} would perform cross over and then check if the resulting offspring passed all the constraints previously mentioned.\par 
+As previously stated, crossover is a genetic operator that takes a section of code from one parent and replaces it with a section of code from another parent. Orlov and Sipper~\cite{FINCH:2011} would perform crossover and then check if the resulting offspring passed all the constraints previously mentioned.\par 
 
 Figure~\ref{crossover} is an example of unrestricted crossover resulting in both a good and a bad offspring. Let $\alpha$ be the opcode \texttt{iload\_2} from parent 1 and $\beta$ be \texttt{iload\_1} from parent 2. Replacing $\beta$ with $\alpha$ in parent 2 results in a good a crossover. This is because the value at index 2 on the frame is an integer which respects the type constraints. Now, let $\alpha$ be lines
 {\tt
@@ -308,35 +310,35 @@ An problem that arises from evolving unrestricted bytecode is that the resulting
 
 
 \section{Automated Bug Repair}
-Schulte, et al.,~\cite{Assembly:2010} focused evolving x86 assembly and Java bytecode for the purpose of program repair and debugging. In their tests they took medium to large sized programs in Java, C, and Haskell that contained a bug. The types of bugs they used were common human errors such as having a for loop index off by one. Most of their experiments focused on evolving a small section of the program. 
-\subsection{Selecting Offspring } 
-Schulte et al.,~\cite{Assembly:2010} chose not to assure that their offspring were valid instruction-level code. Instead, they decided to let all produced offspring into the next generation. This produced a considerable number of individuals with a fitness of zero due to being non-compilable.
+Schulte, et al.,~\cite{Assembly:2010} focused on evolving x86 assembly and Java bytecode for the purpose of program repair and debugging. In their tests they took medium to large sized programs in Java, C, and Haskell that contained a bug. These bugs were common human errors such as having a for-loop index off by one. 
+\subsection{Validating Offspring} 
+Schulte et al.,~\cite{Assembly:2010} chose not to assure that their offspring were valid instruction-level code. Instead, they decided to let all produced offspring into the next generation. This produced a considerable number of individuals with a fitness of zero due to being non-executable.
 
-Test cases were used to calculate the fitness of each individual. The test cases consisted of a set of \textit{positive} tests and one \textit{negative} test; positive meaning already passing tests and negative meaning a failing test. The negative test was used to check if an offspring fixed the bug. The positive tests were used to make sure the program retained functionality. Each offspring was compiled into either an executable binary(x86) or a class file (Java bytecode). If the program failed to compile, it obtained a fitness of zero. If the program did compile, it was run against the tests. The fitness score was calculated as the weighted sum of tests passed; the negative test being worth more. A greater weight was placed on the negative test since that was the main goal.
+Test cases were used to calculate the fitness of each individual. The test cases consisted of a set of \textit{positive} tests and one \textit{negative} test. Positive tests were already passing tests and the negative test was the initially failing test. The negative test was used to check if an offspring fixed the bug. The positive tests were used to make sure the program retained functionality. Each offspring was assembled and linked to either an executable binary(x86) or a class file (Java bytecode). If the program failed to assemble, it obtained a fitness of zero. If the program did assemble, it was run against the tests. The fitness score was calculated as the weighted sum of tests passed; the negative test being worth more. A greater weight was placed on the negative test since that was the main goal.
 
 \subsection{Genetic Operators}
-Schulte et al.,~\cite{Assembly:2010} used mutation on 90\% of each population and crossover on the rest to produce the offspring population. Multiple tournaments consisting of three individuals were performed to select fit individuals for reproduction. Mutation was used over crossover 90\% of the time because it produced better results for the type of problems being solved. Since each bug only required a minor change, such as changing a zero to a one, using a large amount of crossover or more complex operators generally lengthened the search time.
+Schulte et al.,~\cite{Assembly:2010} used mutation on 90\% of the population and crossover on the rest to produce the offspring population. Multiple tournaments consisting of three individuals were performed to select fit individuals for reproduction. Mutation was used over crossover 90\% of the time because they found it produced better results for the type of problems being solved. Since each bug only required a minor change, such as changing a zero to a one, using a large amount of crossover or more complex operators generally lengthened the search time.
 
-Many of the programs being evolved where very large; consisting of thousands of lines of instruction-level code. Because of this ~\cite{Assembly:2010} used a ``weighted path'' to select what lines of instruction to apply mutation and crossover to. Each line of instruction-level code was given a weight that was calculated by checking which tests had executed that instruction. This weight was used to indicate how relevant that line of code was too the bug. A path weight of 1.0 was assigned if the instruction was only executed by the negative test case. A weight of .1 was given if the instruction was executed by both the negative test case and atleast one positive test case. For all other cases a path weight of 0 was given.
+Many of the programs being evolved where very large, consisting of thousands of lines of instruction-level code. Because of this ~\cite{Assembly:2010} used a ``weighted path'' to select what sections of code to apply mutation and crossover to. Each line of instruction-level code was given a weight that was calculated by checking which tests had executed that instruction. This weight was used to indicate how relevant that line of code was to the bug. A path weight of 1.0 was assigned if the instruction was only executed by the negative test case. A weight of .1 was given if the instruction was executed by both the negative test case and at least one positive test case. For all other cases a path weight of 0 was given.
 
 Three mutation operators were used in the experiments: mutate-insert, mutate-delete, and mutate-swap. Mutate-insert selected an instruction based on its positive weight. Mutate-delete selected an instruction based on its negative weight and deleted it. Mutate-swap selected two instructions based on their negative weight and swapped them. The probability of mutation for each path was calculated by multiplying the mutation rate and the weighted path. The higher the product, the more likely that path was chosen for mutation. Since paths that were not executed by the negative test case received a weight of zero, they had a probability of zero of being selected for mutation.\par
 
-A simple version of crossover was also implement that swapped sections from two programs and then would create two new offspring.
+A simple version of crossover was also implemented that swapped sections from two programs and then would create two new offspring.
 
 \subsection{Non-Halting Offspring}
 
-Schulte, et al.,~\cite{Assembly:2010} also chose a different approach than that of Orlov, et al.,~\cite{FINCH:2011} when dealing with non-halting offspring. They decided to not check for non-halting cases and instead run each individual on a virtual machine (VM) with an eight second timeout on the process. A problem with programs not responding to termination requests was noted. There were also issues with stack buffer overflow which occurs when there is an attempt to write to a memory address outside of a data structures size. This can cause the program and system as a whole to crash. However, this was expected since one of the bugs that Schulte et al.~\cite{Assembly:2010} were trying to fix was buffer overflow. Since each individual was run on a VM, buffer overflow was not a significant problem.
+Schulte, et al.,~\cite{Assembly:2010} chose a different approach than that of Orlov and Sipper~\cite{FINCH:2011} when dealing with non-halting offspring. They decided to not check for non-halting cases and instead ran each individual on a virtual machine (VM) with an eight second timeout on the process. A problem with programs not responding to termination requests was noted, which supports Orlov and Sipper's claim that terminating threads is unreliable. There were also issues with buffer overflow which occurs when there is an attempt to write to a memory address outside of a data structure's legal memory. This can cause the program and system as a whole to crash. However, this was expected since one of the types of bugs that Schulte et al.~\cite{Assembly:2010} were trying to fix was buffer overflow. Since each individual was ran on a VM if buffer overflow did cause the system to crash only the VM would crash and not the EA.
 
 
 
 
 \section{Results}
-Both Orlov et al., and Schulte et al., ~\cite{FINCH:2011, Assembly:2010} where able to evolve programs successfully at the instruction-level. The different designs of their EAs was due to the type of problems they were trying to solve. \cite{FINCH:2011} focused on evolving simple programs that performed a specific task while \cite{Assembly:2010} focused on debugging programs through evolution.
+Orlov, Sipper, and Schulte et al., ~\cite{FINCH:2011, Assembly:2010} where able to evolve programs successfully at the instruction-level. The different designs of their EAs was due to the type of problems they were trying to solve. Orlov and Sipper~\cite{FINCH:2011} focused on evolving simple programs that performed a specific task while Schulte et al.,~\cite{Assembly:2010} focused on debugging programs through evolution.
 
 \subsection{FINCH}
-The five problems that Orlov et al.~\cite{Assembly:2010} focused on were symbolic regression, artificial ant, intertwined spirals, array sum, and tic-tac-toe. We will discuss their results from the symbolic regression and array sum problems. FINCH was able to evolve programs that solved each of these problems.
+The five problems that Orlov and Sipper~\cite{Assembly:2010} focused on were symbolic regression, artificial ant, intertwined spirals, array sum, and tic-tac-toe. We will discuss their results from the symbolic regression and array sum problems. FINCH was able to evolve programs that solved each of these problems.
 
-In each test, FINCH was given a program that had a zero fitness. The elements included in the programs were the minimal components to successfully evolve and solve the problem. For example, if the problem consisted of adding all the elements in an array, then a loop or a recursive call was provided along with one variable of each type needed.
+In each test, FINCH was given a program that had a zero fitness. The elements included in the programs were the minimal components needed to successfully evolve and solve the problem. For example, if the problem consisted of adding all the elements in an array, then a loop or a recursive call was provided along with one variable of each type needed. Figure~\ref{regression} is an example of this. Only one variable of type \texttt{double} was proved along with a the small function set of \{+, *\}.
 
 \begin{figure}
 \centering
@@ -350,58 +352,59 @@ class SymbolicRegression{
 }
 \end{verbatim}
 }
-\caption{Example of a possible starting program,before compilation, that could be used to solve a symbolic regression problem.}
+\caption{Example of a possible starting program,before compilation, for a symbolic regression problem.}
 \label{regression}
 \end{figure}
 \subsubsection{Symbolic Regression}
-Symbolic regression is a method of finding a mathematical function that best fits a a set of points between two intervals. Orlov, et al.,~\cite{FINCH:2011} chose to use 20 random points, between -1 and 1, from various polynomials. Fitness was calculated as the number of points hit by the function. The function set \{+, -, *, \%, sin, cos, $e$, $ln$\}\footnote{$e$ is not being referred as the constant but as the function in the java.lang.Math library.}\footnote{\% and $ln$ are protected division and logarithm. This means that if there some type of computation that results in DNE the EA avoids the computation and outputs some pre-selected value such as 1. Orlov et al.~\cite{FINCH:2011} do not specify how they deal this.} was used for most of the experiments. This was done in order to mimic previous experimentation~\cite{koza:1992} and to compare the results to traditional GP.
+Symbolic regression is a method of finding a mathematical function that best fits a finite set of points. Orlov and Sipper~\cite{FINCH:2011} chose to use 20 random points, between ${-1}$ and 1, from various polynomials. Fitness was calculated as the number of points hit by the function. The function set ${\{+, -, *, \%, sin, cos, e, ln\}}$\footnote{$e$ is being referred to as the function in the java.lang.Math library. Also, $\%$ and $ln$ are protected division and logarithm. This means that if division by zero or $ln(n)$, $n \le 0$, occur the result is set to a pre-selected value such as 1. Orlov and Sipper~\cite{FINCH:2011} do not specify how they deal this.} was used for most of the experiments. This was done in order to mimic previous experimentation~\cite{koza:1992} and to compare the results to traditional GP.
 
-Each experiment started off with an offspring of fitness zero and usually with a minimal amount of code, such as in Figure~\ref{regression}. Figure~\ref{regression} only contains a simple function set of \{+,*\} and a number object. It was found possible  to evolve minimalist programs to full-fledged working programs that solved symbolic regression of up to 9-degree polynomials. This demonstrates how little content is needed to find a solution.\par
+Each experiment started off with an individual of fitness zero and usually with a minimal amount of code, such as in Figure~\ref{regression}. Figure~\ref{regression} only contains a simple function set of \{+,*\} and a number object. Orlov and Sipper~\cite{FINCH:2011} found it possible  to evolve minimalist programs,such as in Figure~\ref{regression}, to full-fledged working programs that solved symbolic regression of up to 9-degree polynomials. This demonstrates how little content is needed to find a solution.\par
 
-\cite{FINCH:2011} evolved programs with a 90\% crossover by using a simple fitness algorithm. 99\% of the time a maximum fitness individual was found. With a more complex fitness algorithm a maximum fitness individual was found 100\% of the time.
-
+In \cite{FINCH:2011} they evolved programs with a chance of 90\% crossover using a simple fitness algorithm. With a maximum of fifty-one generation 99\% of the time a maximum fitness individual was found. With a more complex fitness algorithm, that allowed for a small margin of error when calculating each point, an individual with a maximum fitness was always found. 
 
 \begin{figure}
 \centering
 \psfig{file=infrec.pdf}
-\caption{Initial population function, for array sum, that enters into infinite recursion in the if statement}
+\caption{Initial population function, for the array sum problem, before being compiled to Java bytecode to be evolved.This function enters into infinite recursion in the if statement. Taken from ~\cite{FINCH:2011}.}
 \label{initial rec}
 \end{figure}
 
 \begin{figure}
 \centering
 \psfig{file=recsolution.pdf}
-\caption{FINCH's decompiled solution to the initial program presented in Figure~\ref{initial rec}}
+\caption{FINCH's decompiled solution to the initial program presented in Figure~\ref{initial rec}. Taken from ~\cite{FINCH:2011}.}
 \label{final rec}
 \end{figure}
 
 \subsubsection{Array Sum}
-The array sum problem consists of adding up all the values in an array. This problem is important because it requires evolving a loop or recursion to find a solution. This would show that FINCH is capable of evolving more complex programs. FINCH was able to produce a solution to this problem for both recursion and loops. It was also shown that FINCH was able to apply evolution to different list abstractions such as List and ArrayList.
+The array sum problem consists of adding up all the values in an array. This problem is important because it requires evolving a loop or recursion to find a solution. This would show that FINCH is capable of evolving more complex programs. FINCH was able to produce a solution to this problem using both recursion and loops. It was also shown that FINCH was able to apply evolution to different list abstractions such as List and ArrayList.
 
 When evolving array sum with recursion the initial population consisted of an individual who entered infinite recursion as shown in Figure \ref{initial rec}. Due to the way FINCH deals with non-halting programs, this was not a problem and evolution ensued. The resulting code from evolving Figure \ref{initial rec} is shown in Figure \ref{final rec}.
 
 
 \subsection{Automated Bug Repair}
 
-Schulte et al.,~\cite{Assembly:2010} were able to show that it is possible to fix human programming errors by evolving instruction-level code. \cite{Assembly:2010} were able to successfully debug various programs containing bugs such as infinite loops and remote buffer overflows. The interesting thing about these experiments was that they were performed on real programs and at times the programs consisted of thousands of lines of code. Some of the bugs that were fixed through instruction-level code were not possible in previous work~\cite{Forrest:2009} with source code\mycomment{talk more about this.}. This shows that a wider array of bugs can be repaired by using instruction-level code.
+Schulte et al.,~\cite{Assembly:2010} were able to show that it is possible to fix human programming errors by evolving instruction-level code. They were able to successfully debug various programs containing bugs such as infinite loops and buffer overflow. The interesting thing about these experiments was that they were performed on programs written by software developers and at times the programs consisted of thousands of lines of code. Some bugs that were fixed through the evolution of instruction-level code were not possible in their previous work~\cite{Forrest:2009} with source code. For example, their EA in their previous work was not capable of fixing incorrect type declarations. This suggests it is easier to repair a wider array of bugs by evolving instruction-level code.
 
-Although a considerable amount of offspring with a fitness of zero were produced, this did not seem to damage the result. The average number of fitness evaluations required to produce an offspring that passed all the tests was 74.4 for assembly compared to 63.6 for C from previous work~\cite{Forrest:2009}. This indicates that computational work needed to to evolve repairs in assembly is comparable to that of source code. Even programs that contained thousands of lines of code only required a few runs. Thus, evolving programs in instruction-level code is feasible.
+Although a considerable number of offspring with a fitness of zero were produced, this did not seem to damage the result. The average number of fitness evaluations required to produce an offspring that passed all the tests was 74.4 for assembly compared to 63.6 for C from previous work~\cite{Forrest:2009}. This indicates that computational work needed to evolve repairs in assembly is comparable to that of source code. Even programs that contained thousands of lines of code only required a few generations. Thus, using instruction-level evolution to automate bug repair is feasible.
  
+
+\section{Conclusions and Future Work}
 
 \subsection{Future Work}
 
 
-Future work may include evolving programs whose solutions are much longer and complicated. Orlov et al.,~\cite{FINCH:2011} proved that by applying GP to bytecode it is possible to solve many simple problems. However, most of the problems only consisted of a small number of lines of code. It would be exciting to see something more complex be evolved. Also, as shown in Figure~\ref{final rec} a solution given by FINCH might not be clearly legible once decompiled back to source code. Refactoring would have to be done to make the code more readable and maintainable.
+Future work may include evolving programs whose solutions are much longer and more complicated. Orlov and Sipper~\cite{FINCH:2011} proved that by applying GP to bytecode it is possible to solve many simple problems. However, most of the solutions only consisted of a small number of lines of code. It would be exciting to see something more complex be evolved. Also, as shown in Figure~\ref{final rec} a solution given by FINCH might not be clearly legible once decompiled back to source code. Refactoring would have to be done to make the code more readable and maintainable.
 
-An extension of future work, using the research by \cite{Assembly:2010}, could include debugging on less focused areas, such as attempting to fix bugs that require more fixes throughout the code rather than simply one line. Also, there is the question of how applicable automated bug repair is in a real world situation. In most real world scenarios test coverage is very minimal and would rarely cover the entire code base.
+An extension of future work, using the research in \cite{Assembly:2010}, could include debugging on less focused areas, such as attempting to fix bugs that require multiple fixes throughout the code rather than simply altering one line. Also, there is the question of how applicable automated bug repair is in a real world situation. In most real world scenarios test coverage is very minimal and would rarely cover the entire code base. Some changes to a program could cause it to break. If test cases do not cover that case then a fix to the original bug could contain a different bug. 
 
 
-\section{Conclusion}
-Evolving entire programs at the instruction-level is easier than at the source code level. No assumptions of the program being evolved is needed, and it is easier to deal with the semantic constraints. Schulte et al., and Orlov et al.,~\cite{Assembly:2010, FINCH:2011} showed that evolving instruction-level code is just as good as source code and at times even better, such as for debugging incorrect type declaration. In conclusion, evolving instruction-level code is feasible and exciting for the field of EC. It opens up many possibilities that were once unavailable.
+\subsection{Conclusion}
+Evolving entire programs at the instruction-level is possible at the source code level. No assumptions about the program being evolved is needed, and it is easier to deal with the semantic constraints. Schulte et al., and ~\cite{Assembly:2010, FINCH:2011} showed that evolving instruction-level code is just as feasible as source code and at times better, such as for debugging incorrect type declarations. In conclusion, evolving instruction-level code is feasible and exciting for the field of EC. It opens up many possibilities that were once unavailable.
 %\end{document}  % This is where a 'short' article might terminate
 
 %ACKNOWLEDGMENTS are optional
-\section{Acknowledgments}
+\section*{Acknowledgments}
 A special acknowledgment to Nic McPhee and Elena Machkasova for their time and knowledge. Also, thanks to Debra Dogotch, Chris Thomas, Peter Dolan, and Tim Snyder.
 
 %
