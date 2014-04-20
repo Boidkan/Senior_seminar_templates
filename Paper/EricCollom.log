@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.13 (TeX Live 2013/dev) (format=pdflatex 2013.9.23)  18 APR 2014 14:45
+This is pdfTeX, Version 3.1415926-2.5-1.40.13 (TeX Live 2013/dev) (format=pdflatex 2013.9.23)  19 APR 2014 23:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -354,7 +354,7 @@ Package pdftex.def Info: ECdiagram.pdf used on input line 142.
 
 
 ]
-<stackBytecode.pdf, id=15, 379.4175pt x 490.83376pt>
+<stackBytecode.pdf, id=14, 379.4175pt x 490.83376pt>
 File: stackBytecode.pdf Graphic file (type pdf)
  <use stackBytecode.pdf>
 Package pdftex.def Info: stackBytecode.pdf used on input line 162.
@@ -381,51 +381,47 @@ Overfull \hbox (1.42033pt too wide) in paragraph at lines 209--209
  []
 
 [2 <./ECdiagram.pdf> <./stackBytecode.pdf>]
-Overfull \hbox (9.57335pt too wide) in paragraph at lines 252--252
+Overfull \hbox (9.57335pt too wide) in paragraph at lines 274--274
 \T1/aer/m/n/9 pos-si-bil-ity of pro-duc-ing non-executable byte-code. Even thou
 gh
  []
 
-[3] [4]
-Underfull \vbox (badness 3250) has occurred while \output is active []
-
-
-<infrec.pdf, id=174, 252.79866pt x 95.38315pt>
+[3] [4] <infrec.pdf, id=174, 252.79866pt x 95.38315pt>
 File: infrec.pdf Graphic file (type pdf)
  <use infrec.pdf>
-Package pdftex.def Info: infrec.pdf used on input line 344.
+Package pdftex.def Info: infrec.pdf used on input line 366.
 (pdftex.def)             Requested size: 252.79803pt x 95.3829pt.
 
-Overfull \hbox (12.79803pt too wide) in paragraph at lines 344--345
+Overfull \hbox (12.79803pt too wide) in paragraph at lines 366--367
  [][] 
  []
 
 <recsolution.pdf, id=175, 258.1348pt x 104.72134pt>
 File: recsolution.pdf Graphic file (type pdf)
  <use recsolution.pdf>
-Package pdftex.def Info: recsolution.pdf used on input line 351.
+Package pdftex.def Info: recsolution.pdf used on input line 373.
 (pdftex.def)             Requested size: 258.13416pt x 104.72108pt.
 
-Overfull \hbox (18.13416pt too wide) in paragraph at lines 351--352
+Overfull \hbox (18.13416pt too wide) in paragraph at lines 373--374
  [][] 
  []
 
-[5 <./infrec.pdf> <./recsolution.pdf>]
-Overfull \hbox (25.22469pt too wide) in paragraph at lines 383--384
+[5 <./infrec.pdf>]
+Overfull \hbox (25.22469pt too wide) in paragraph at lines 405--406
 []\T1/aer/m/n/9 A spe-cial ac-knowl-edg-ment to Nic McPhee and Elena Machkasova
 
  []
 
-(./EricCollom.bbl) [6] (./EricCollom.aux)
+(./EricCollom.bbl) [6 <./recsolution.pdf>] (./EricCollom.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 3366 strings out of 495063
- 43606 string characters out of 3182194
- 116942 words of memory out of 3000000
- 6454 multiletter control sequences out of 15000+200000
+ 3364 strings out of 495063
+ 43563 string characters out of 3182194
+ 117940 words of memory out of 3000000
+ 6452 multiletter control sequences out of 15000+200000
  53306 words of font info for 72 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  41i,11n,28p,1252b,291s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -441,7 +437,7 @@ usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
 rw/times/utmri8a.pfb>
-Output written on EricCollom.pdf (6 pages, 966808 bytes).
+Output written on EricCollom.pdf (6 pages, 967485 bytes).
 PDF statistics:
  350 PDF objects out of 1000 (max. 8388607)
  224 compressed objects within 3 object streams

@@ -1,4 +1,4 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{1}
 
 \bibitem{Oracle:2013}
 {\em The Java Language Specification}.
@@ -42,21 +42,5 @@ E.~Schulte, S.~Forrest, and W.~Weimer.
 \newblock In {\em Proceedings of the IEEE/ACM International Conference on
   Automated Software Engineering}, ASE '10, pages 313--316, New York, NY, USA,
   2010. ACM.
-
-\bibitem{x86tomachine:2013}
-Wikibooks.
-\newblock X86 assembly/machine language conversion --- wikibooks{,} the free
-  textbook project, 2013.
-\newblock [Online; accessed 23-March-2014].
-
-\bibitem{JavaBytecode:2014}
-Wikipedia.
-\newblock Java bytecode --- wikipedia{,} the free encyclopedia, 2014.
-\newblock [Online; accessed 5-April-2014].
-
-\bibitem{x86assembly:2014}
-Wikipedia.
-\newblock X86 assembly language --- wikipedia{,} the free encyclopedia, 2014.
-\newblock [Online; accessed 23-March-2014].
 
 \end{thebibliography}
