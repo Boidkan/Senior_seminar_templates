@@ -14,8 +14,6 @@
 \citation{FINCH2:2009}
 \citation{JVMspec:2013}
 \citation{Oracle:2013}
-\citation{FINCH:2011}
-\citation{FINCH:2011}
 \citation{Oracle:2013}
 \citation{Assembly:2010}
 \citation{FINCH:2011}
@@ -27,6 +25,8 @@
 \newlabel{stack}{{2}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Constraints and Benefits}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Source Code Constraints}{\thepage }}
+\citation{FINCH:2011}
+\citation{FINCH:2011}
 \citation{FINCH:2011}
 \citation{Assembly:2010}
 \citation{JVMspec:2013}
@@ -42,6 +42,8 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces This is a simple example of how traditional GP typically only evolves small sections of code. In this example everything before and after \texttt  {robotSpeed()} is already written and is not evolved. The only thing that the EA modifies is the variable \texttt  {evolvedVariable} which is assigned some value determined by the EA.}}{\thepage }}
 \newlabel{traditional}{{4}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Instruction-Level Code Benefits}{\thepage }}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces This is an example of two possible outcomes of performing unrestricted crossover on parents 1 and 2. The bold in the good and bad offspring represent the code from parent 1 replacing code in parent 2. The bad offspring breaks at \texttt  {istore\_2} since there is nothing on the stack to pop.}}{\thepage }}
+\newlabel{crossover}{{5}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {4}FINCH}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Crossover and Validating Offspring}{\thepage }}
 \citation{FINCH2:2009}
@@ -52,13 +54,11 @@
 \citation{Assembly:2010}
 \citation{Assembly:2010}
 \citation{Assembly:2010}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces This is an example of two possible outcomes of performing unrestricted crossover on parents 1 and 2. The bold in the good and bad offspring represent the code from parent 1 replacing code in parent 2. The bad offspring breaks at \texttt  {istore\_2} since there is nothing on the stack to pop.}}{\thepage }}
-\newlabel{crossover}{{5}{\thepage }}
+\citation{Assembly:2010}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Non-Halting Offspring}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Automated Bug Repair}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Validating Offspring}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Genetic Operators}{\thepage }}
-\citation{Assembly:2010}
 \citation{Assembly:2010}
 \citation{FINCH:2011}
 \citation{Assembly:2010}
@@ -81,6 +81,8 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.1}FINCH}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Example of a possible starting program,before compilation, for a symbolic regression problem.}}{\thepage }}
 \newlabel{regression}{{6}{\thepage }}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Initial population function, for the array sum problem, before being compiled to Java bytecode to be evolved.This function enters into infinite recursion in the if statement. Taken from \nobreakspace  {}\cite  {FINCH:2011}.}}{\thepage }}
+\newlabel{initial rec}{{7}{\thepage }}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.1}Symbolic Regression}{\thepage }}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2}Array Sum}{\thepage }}
 \citation{Assembly:2010}
@@ -98,8 +100,7 @@
 \bibcite{koza:1992}{4}
 \bibcite{FINCH2:2009}{5}
 \bibcite{FINCH:2011}{6}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Initial population function, for the array sum problem, before being compiled to Java bytecode to be evolved.This function enters into infinite recursion in the if statement. Taken from \nobreakspace  {}\cite  {FINCH:2011}.}}{\thepage }}
-\newlabel{initial rec}{{7}{\thepage }}
+\bibcite{Assembly:2010}{7}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces FINCH's decompiled solution to the initial program presented in Figure\nobreakspace  {}7\hbox {}. Taken from \nobreakspace  {}\cite  {FINCH:2011}.}}{\thepage }}
 \newlabel{final rec}{{8}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Automated Bug Repair}{\thepage }}
@@ -107,4 +108,3 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Future Work}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Conclusion}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {8}References}{\thepage }}
-\bibcite{Assembly:2010}{7}
