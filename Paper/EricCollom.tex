@@ -377,9 +377,6 @@ Although a considerable number of offspring with a fitness of zero were produced
 
 \section{Future Work and Conclusions}
 
-\subsection{Future Work}
-
-
 Future work may include evolving programs whose solutions are much longer and more complicated. Orlov and Sipper~\cite{FINCH:2011} proved that, by applying GP to bytecode, it is possible to solve many simple problems. However, most of the solutions only consisted of a small number of lines of code. It would be exciting to see something more complex be evolved. Also, as shown in Figure~\ref{final rec}, a solution given by FINCH might not be clearly legible once decompiled back to source code. Refactoring would have to be done to make the code more readable and maintainable.
 
 An extension of future work, using the research in \cite{Assembly:2010}, could include debugging on less focused areas, such as attempting to fix bugs that require multiple fixes throughout the code rather than simply altering one line. Also, there is the question of how applicable automated bug repair is in a real world situation. In most real world scenarios, test coverage is very minimal and would rarely cover the entire code base. Some changes to a program could cause it to break. If test cases do not cover that case, then a fix to the original bug could contain a different bug. 
