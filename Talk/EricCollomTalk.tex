@@ -77,23 +77,16 @@
 
 \begin{frame}
   \frametitle{The big picture}
-  
-  \begin{columns}
-  \begin{column}{0.6\textwidth}
-  \begin{itemize}
-  	\item 
-	\item 
-	\item 
-	\item 
-	\item 
+
+  \begin{itemize}  
+  	\item Evolving whole programs is hard to do with source code.
+	\item Evolving whole programs with bytecode and assembly is not as hard.
   \end{itemize}
-  \end{column}
-  \begin{column}{0.4\textwidth}
+
 %   \includegraphics[width=0.95\textwidth]{Illustrations/Empty_cocoon_crop_by_Bluedrakon_from_Flickr.jpg}
 %       \\
 %    \only{\tiny{Bluedrakon \\ \url{http://tr.im/pWUi} }}
-  \end{column}
-  \end{columns}
+
 \end{frame}
 
 \subsection*{Outline}
@@ -108,9 +101,106 @@
 \subsection[EC]{EC}
 
 \begin{frame}
-  \frametitle{Evolutionary Computation}
+  \frametitle{What is Evolutionary Computation?}
+  \begin{columns}
+  \begin{column}{0.6\textwidth}
+  \begin{itemize}
+  	\item EC is a a technique that is used to automate computer problem solving.
+  	\item Loosely emulates evolutionary biology.
+  \end{itemize}
+  \end{column}
+  \begin{column}{0.4\textwidth}
+   \includegraphics[width=0.95\textwidth]{Illustrations/darwin.jpg}
+       \\
+    \only{\tiny{Charles Darwin \\ \url{http://tinyurl.com/lqwj3wt} }}
+  \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{How does it work}
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\begin{itemize}	
+	\item Continuous Optimization
+	\item Selection is driven by the \textit{fitness} of individuals
+	\item Genetic Operators mimic sexual reproduction and mutation
+	
+\end{itemize}
+\end{column}
+\begin{column}{0.4\textwidth}
+   \includegraphics[height=0.90\textheight]{Illustrations/ECdiagram.pdf}
+       \\
+   \only{\tiny{The Evolutionary Computation Process}}
+\end{column}
+\end{columns}
 
 \end{frame}
+
+\begin{frame}
+	\frametitle{Genetic Programming}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{itemize}	
+	\item Uses the EC technique to evolve programs
+	\item The population is programs
+	
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+   \includegraphics[height=0.90\textheight]{Illustrations/GP1.pdf}
+       \\
+   \only{\tiny{The Evolutionary Computation Process}}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Genetic Programming}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{itemize}	
+	\item Tournament Selection
+	
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+   \includegraphics[height=0.90\textheight]{Illustrations/GP2.pdf}
+       \\
+   \only{\tiny{The Evolutionary Computation Process}}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Genetic Programming}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{itemize}	
+	\item Crossover
+	\item Mutation
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+   \includegraphics[height=0.90\textheight]{Illustrations/GP3.pdf}
+       \\
+   \only{\tiny{The Evolutionary Computation Process}}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Crossover}
+
+   \includegraphics[width=1\textwidth]{Illustrations/crossover.pdf}
+       \\
+   \only{\tiny{Crossover with Java Bytecode}}
+
+\end{frame}
+
 
 \subsection[Bytecode and Assembly]{Java Bytecode and x86 Assembly}
 \begin{frame}
