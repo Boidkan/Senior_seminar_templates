@@ -10,7 +10,7 @@
 \usepackage[english]{babel}
 \usepackage[latin1]{inputenc}
 \usepackage{times}
-\usepackage[T1]{fontenc} 
+\usepackage{fontenc} 
 % Or whatever. Note that the encoding and the font should match. If T1
 % does not look nice, try deleting the line with the fontenc.
 \usepackage{amsmath}
@@ -232,7 +232,7 @@
 
 
 \begin{frame}
-\frametitle{Bytcode}
+\frametitle{Java Bytcode and Frames}
 \begin{columns}
 \begin{column}{0.5\textwidth}
 \begin{itemize}	
@@ -242,18 +242,9 @@
 \end{column}
 
 \begin{column}{0.5\textwidth}
-\includegraphics[height=1\textheight]{Illustrations/opcodes.pdf}
+\includegraphics[height=.8\textheight]{Illustrations/stackBytecode.pdf}
 \end{column}
 \end{columns}
-\end{frame}
-
-\begin{frame}
-\frametitle{Bytecode and the Stack}
-
-   \includegraphics[width=.4\textwidth]{Illustrations/stackBytecode.pdf}
-       \\
-   \only{\tiny{How the stack and Java bytecode works}}
-
 \end{frame}
 
 \section[Why Instruction-level code]{Why Evolve Instruction-level Code}
