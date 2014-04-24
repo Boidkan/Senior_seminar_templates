@@ -215,17 +215,24 @@
 
 
 
-\subsection[Bytecode and Assembly]{Java Bytecode and x86 Assembly}
+\subsection[Bytecode and Assembly]{Java Bytecode and the JVM}
 
 \begin{frame}
 	\frametitle{Java Virtual Machine}
-
+\begin{columns}
+\begin{column}{0.5\textwidth}
 \begin{itemize}	
 \item Frames
 \item Array of local variables
 \item Operand Stack
-
 \end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\includegraphics[width=1\textwidth]{Illustrations/frame.pdf}
+\end{column}
+\end{columns}
+
+
 
 \end{frame}
 
@@ -247,14 +254,58 @@
 \end{columns}
 \end{frame}
 
+
+
+
 \section[Why Instruction-level code]{Why Evolve Instruction-level Code}
 
 \begin{frame}
 	\frametitle{Source Code Constraints}
+	\begin{itemize}
+		\item While it would be useful, it is difficult to apply evolution to an entire program in source code
+		\begin{itemize}
+			\item Source code is made to simplify reading and writing programs
+			\item Source code does not represent the semantic constraints of the program.
+		\end{itemize}
+	\end{itemize}		
+	
+	
 \end{frame}
 
 \begin{frame}
-	\frametitle{Flexibility}
+	\frametitle{Source Code Constraints}
+   \includegraphics[width=1\textwidth]{Illustrations/semantics.pdf}
+       \\
+   \only{\tiny{Both (a) and (b) are valid syntactically. However (b) is invalid semantically.}}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Source Code Constraints}
+	\begin{itemize}
+		\item EAs are usually designed to avoid dealing with semantic constraints
+	\end{itemize}		
+\includegraphics[height=.5\textheight]{Illustrations/traditialGP.pdf}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Instruction-Level Code Constraints}
+	\begin{itemize}
+		\item Consists of a smaller alphabets
+		\item Simpler syntactically
+		\item Less semantic constraints to violate
+	\end{itemize}		
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Instruction-level Code Benefits}
+	\begin{itemize}
+		\item Do not need to understand the structure of the program being evolved
+		\item Can evolve a lot from a little
+		\item If there is a compiler for it we can evolve it
+	\end{itemize}		
+
 \end{frame}
 
 \section[FINCH]{FINCH:Evolving Programs}
