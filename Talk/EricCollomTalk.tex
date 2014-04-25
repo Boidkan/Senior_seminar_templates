@@ -257,7 +257,7 @@
 
 
 
-\section[Why Instruction-level code]{Why Evolve Instruction-level Code}
+\section[Why Instruction-level code]{Why Evolve Instruction-Level Code}
 
 \begin{frame}
 	\frametitle{Source Code Constraints}
@@ -313,49 +313,92 @@
 \subsection[How it works]{How it Works}
 \begin{frame}
   \frametitle{Selecting Offspring}
-  
-  \begin{columns}
-  \begin{column}{0.6\textwidth}
+
   \begin{itemize}
   	\item There is still a chance to produce non-compilable code
-	\item Solution: Add restrictions to code selection.
+	\item Solution: add restrictions to code selection
+	\begin{itemize}
 	\item Stack and Frame Depth
 	\item Variable Types
 	\item Control Flow
+	\end{itemize}
+
   \end{itemize}
-  \end{column}
-  \begin{column}{0.4\textwidth}
-	  \includegraphics[width=0.95\textwidth]{talk.pdf}
-  \end{column}
-	  
-  
-  \end{columns}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Crossover}
+  \frametitle{Good Crossover}
+  \includegraphics[height=.5\textheight]{Illustrations/goodCrossover.pdf}
 \end{frame}
 
 \begin{frame}
-\frametitle{Non-Halting Offspring}
+  \frametitle{Bad Crossover}
+  \includegraphics[height=.5\textheight]{Illustrations/badCrossover.pdf}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Results}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+\item The array sum problem
+\begin{itemize}
+\item Started with a zero fitness seed program
+\item Counted function calls to check for a non-halting state
+\end{itemize}
+
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\includegraphics[height=.38\textheight]{Illustrations/seedRec.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Results}
+
+\includegraphics[height=.38\textheight]{Illustrations/solutionRec.pdf}
+
 \end{frame}
 
 \subsection[Results]{Results}
 
 
-\section[Evolving Assembly]{Using Instruction-level code to automate bug repair}
+\section[Evolving Assembly]{Using Instruction-level Code to Automate Bug Repair}
 
 \subsection{How it Works}
 \begin{frame}
   \frametitle{Selecting Offspring}
+  \begin{itemize}
+  \item Debugging programs that consist of thousands of lines of code
+  \item Uses a weighted path due to size of programs
+  \item No checks if executable instruction-level code is produced
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Genetic Operators}
+  \frametitle{Selecting Offspring}
+  \begin{itemize}
+  \item Each instruction is given a weight
+  \item The weight is determined by what tests execute that instruction
+  \item Each experiment started with one negative test case and multiple positive test cases
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Non-Halting Offspring}
+  
+    \begin{itemize}
+  	\item Only executed by failing test: weight = 1.0
+  	\item Executed by negative test and one positive: weight = 0.1
+  	\item Not executed by negative test case: weight = 0
+  \end{itemize}
 \end{frame}
 
 \subsection[Results]{Results}
