@@ -105,7 +105,7 @@
   \begin{columns}
   \begin{column}{0.6\textwidth}
   \begin{itemize}
-  	\item EC is a a technique that is used to automate computer problem solving.
+  	\item Evolutionary Computation (EC) is a a technique that is used to automate computer problem solving.
   	\item Loosely emulates evolutionary biology.
   \end{itemize}
   \end{column}
@@ -123,9 +123,9 @@
 \begin{columns}[T]
 \begin{column}{0.6\textwidth}
 \begin{itemize}
-	\item Continuous Optimization \\
+	\item Continuous optimization \\
 	\item Selection is driven by the \textit{fitness} of individuals
-	\item Genetic Operators mimic sexual reproduction and mutation
+	\item Genetic operators mimic sexual reproduction and mutation
 	
 \end{itemize}
 \end{column}
@@ -144,6 +144,7 @@
 \begin{column}{0.5\textwidth}
 \begin{itemize}	
 	\item Uses the EC process to evolve programs
+	\item This done by using Evolutionary Algorithm (EA)
 	\item The population consists of programs
 	
 \end{itemize}
@@ -168,7 +169,7 @@
 	\item Tournament Selection
 	\\
 	\begin{itemize}
-	\item Randomomly select a specified number of programs
+	\item Randomly select a specified number of programs
 	\item Pick the program with the highest fitness
 	\item That program then is selected for reproduction
 	
@@ -263,14 +264,14 @@
 
 
 \begin{frame}
-	\frametitle{Source Code Constraints}
+	\frametitle{Syntax vs Semantics}
    \includegraphics[width=1\textwidth]{Illustrations/semantics.pdf}
        \\
    \only{\tiny{Both (a) and (b) are valid syntactically. However (b) is invalid semantically.}}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Source Code Constraints}
+	\frametitle{WHAT TITLE DO I GIVE THIS SLIDE??????}
 	\begin{itemize}
 		\item EAs are usually designed to avoid dealing with semantic constraints
 	\end{itemize}		
@@ -346,17 +347,18 @@
 	\frametitle{What is FINCH?}
 	\begin{itemize}
 		\item FINCH is an EA developed by M. Orlov and M. Sipper	
-		\item It evolves Java bytecode using crossover
-		\item It is a good example of dealing with semantic constraints
+		\item It evolves Java bytecode
+		\item It deals with semantic constraints
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Selecting Offspring}
+  \frametitle{Dealing With Semantic Constraints}
 
   \begin{itemize}
-  	\item There is still a chance to produce non-compilable code
+  	\item There is still a chance to produce non-executable code
 	\item Solution: check if offspring follows semantic constraints
+	\\
 	\begin{itemize}
 	\item Stack and Frame Depth
 	\item Variable Types
@@ -367,6 +369,7 @@
 \end{frame}
 
 \begin{frame}
+\frametitle{Dealing With Semantic Constraints}
 \begin{enumerate}
 \item Apply crossover to two parents
 \item Check if they comply to semantic constraints
@@ -397,6 +400,7 @@
 \begin{column}{0.5\textwidth}
 \begin{itemize}
 \item The array sum problem
+\\
 \begin{itemize}
 \item Started with a zero fitness seed program
 \item Counted function calls to check for a non-halting state
@@ -435,11 +439,16 @@
 
 \subsection{How it Works}
 \begin{frame}
-  \frametitle{Selecting Offspring}
+  \frametitle{Automating Bug Repair}
   \begin{itemize}
-  \item Debugging programs that consist of thousands of lines of code
+  \item Schulte et al., designed EAs that fixes bugs in x86 assembly and Java bytecode
+  \\
+  \begin{itemize}
+   \item Programs at times consist of thousands of lines of code
   \item Uses a weighted path due to size of programs
   \item No checks if executable instruction-level code is produced
+  \end{itemize}
+
   \end{itemize}
 \end{frame}
 
