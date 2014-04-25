@@ -98,7 +98,7 @@
 
 \section[Background]{Evolutionary Computation}
 
-\subsection[EC]{EC}
+\subsection[Evolutionary Computation]{What is it?}
 
 \begin{frame}
   \frametitle{What is Evolutionary Computation?}
@@ -116,39 +116,40 @@
   \end{column}
   \end{columns}
 \end{frame}
+\subsection[Evolutionary Computation]{How does it work?}
 
 \begin{frame}
 	\frametitle{How does it work}
-\begin{columns}
+\begin{columns}[T]
 \begin{column}{0.6\textwidth}
 \begin{itemize}
-	\item Continuous Optimization
+	\item Continuous Optimization \\
 	\item Selection is driven by the \textit{fitness} of individuals
 	\item Genetic Operators mimic sexual reproduction and mutation
 	
 \end{itemize}
 \end{column}
 \begin{column}{0.4\textwidth}
-   \includegraphics[height=0.90\textheight]{Illustrations/ECdiagram.pdf}
+   \includegraphics[height=0.85\textheight]{Illustrations/ECdiagram.pdf}
        \\
    \only{\tiny{The Evolutionary Computation Process}}
 \end{column}
 \end{columns}
 
 \end{frame}
-
+\subsection[Genetic Programming]{Genetic Programming}
 \begin{frame}
 	\frametitle{Genetic Programming}
-\begin{columns}
+\begin{columns}[T]
 \begin{column}{0.5\textwidth}
 \begin{itemize}	
-	\item Uses the EC technique to evolve programs
-	\item The population is programs
+	\item Uses the EC process to evolve programs
+	\item The population consists of programs
 	
 \end{itemize}
 \end{column}
 \begin{column}{0.5\textwidth}
-   \includegraphics[height=0.90\textheight]{Illustrations/GP1.pdf}
+   \includegraphics[height=0.85\textheight]{Illustrations/GP1.pdf}
        \\
    \only{\tiny{The Evolutionary Computation Process}}
 \end{column}
@@ -158,15 +159,25 @@
 
 \begin{frame}
 	\frametitle{Genetic Programming}
-\begin{columns}
+
+\begin{columns}[T]
+
 \begin{column}{0.5\textwidth}
-\begin{itemize}	
+
+\begin{itemize}
 	\item Tournament Selection
+	\\
+	\begin{itemize}
+	\item Randomomly select a specified number of programs
+	\item Pick the program with the highest fitness
+	\item That program then is selected for reproduction
+	
+	\end{itemize}
 	
 \end{itemize}
 \end{column}
 \begin{column}{0.5\textwidth}
-   \includegraphics[height=0.90\textheight]{Illustrations/GP2.pdf}
+   \includegraphics[height=0.85\textheight]{Illustrations/GP2.pdf}
        \\
    \only{\tiny{The Evolutionary Computation Process}}
 \end{column}
@@ -176,15 +187,26 @@
 
 \begin{frame}
 	\frametitle{Genetic Programming}
-\begin{columns}
+
+\begin{columns}[T]
 \begin{column}{0.5\textwidth}
+
 \begin{itemize}	
 	\item Crossover
+	\\
+	\begin{itemize}
+		\item Sexual reproduction
+	\end{itemize}
 	\item Mutation
+	\\
+	\begin{itemize}
+		\item Asexual reproduction
+		\item Can be used along with crossover
+	\end{itemize}
 \end{itemize}
 \end{column}
 \begin{column}{0.5\textwidth}
-   \includegraphics[height=0.90\textheight]{Illustrations/GP3.pdf}
+   \includegraphics[height=0.85\textheight]{Illustrations/GP3.pdf}
        \\
    \only{\tiny{The Evolutionary Computation Process}}
 \end{column}
@@ -214,17 +236,31 @@
 \section[Why Instruction-level code]{Why Evolve Instruction-Level Code}
 
 \begin{frame}
-	\frametitle{Source Code Constraints}
+	\frametitle{Source Code Drawbacks}
 	\begin{itemize}
 		\item While it would be useful, it is difficult to apply evolution to an entire program in source code
+			\\
 		\begin{itemize}
 			\item Source code is made to simplify reading and writing programs
 			\item Source code does not represent the semantic constraints of the program.
 		\end{itemize}
-	\end{itemize}		
-	
-	
+	\end{itemize}	
 \end{frame}
+
+\begin{frame}
+	\frametitle{Syntax vs Semantics}
+\begin{itemize}
+\item Even though a sentence follows all the rules of the English language it still might be true.
+	\\
+\begin{description}
+
+\item[Semantically Wrong] The sun rises in the West  
+\item[Semantically Correct] The sun rises in the East
+\end{description}
+\end{itemize}
+
+\end{frame}
+
 
 \begin{frame}
 	\frametitle{Source Code Constraints}
