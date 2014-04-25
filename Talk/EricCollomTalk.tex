@@ -96,7 +96,7 @@
   \tableofcontents[hideallsubsections]
 \end{frame}
 
-\section[Background]{Background}
+\section[Background]{Evolutionary Computation}
 
 \subsection[EC]{EC}
 
@@ -121,7 +121,7 @@
 	\frametitle{How does it work}
 \begin{columns}
 \begin{column}{0.6\textwidth}
-\begin{itemize}	
+\begin{itemize}
 	\item Continuous Optimization
 	\item Selection is driven by the \textit{fitness} of individuals
 	\item Genetic Operators mimic sexual reproduction and mutation
@@ -211,52 +211,6 @@
 \end{frame}
 
 
-
-
-
-
-\subsection[Bytecode and Assembly]{Java Bytecode and the JVM}
-
-\begin{frame}
-	\frametitle{Java Virtual Machine}
-\begin{columns}
-\begin{column}{0.5\textwidth}
-\begin{itemize}	
-\item Frames
-\item Array of local variables
-\item Operand Stack
-\end{itemize}
-\end{column}
-\begin{column}{0.5\textwidth}
-\includegraphics[width=1\textwidth]{Illustrations/frame.pdf}
-\end{column}
-\end{columns}
-
-
-
-\end{frame}
-
-
-
-\begin{frame}
-\frametitle{Java Bytcode and Frames}
-\begin{columns}
-\begin{column}{0.5\textwidth}
-\begin{itemize}	
-\item Opcodes
-\item Prefix indicates type
-\end{itemize}
-\end{column}
-
-\begin{column}{0.5\textwidth}
-\includegraphics[height=.8\textheight]{Illustrations/stackBytecode.pdf}
-\end{column}
-\end{columns}
-\end{frame}
-
-
-
-
 \section[Why Instruction-level code]{Why Evolve Instruction-Level Code}
 
 \begin{frame}
@@ -308,15 +262,65 @@
 
 \end{frame}
 
-\section[FINCH]{FINCH:Evolving Programs}
+
+\section[Bytecode and Assembly]{Java Bytecode and the JVM}
+
+\begin{frame}
+	\frametitle{Java Virtual Machine}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{itemize}	
+\item Frames
+\item Array of local variables
+\item Operand Stack
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\includegraphics[width=1\textwidth]{Illustrations/frame.pdf}
+\end{column}
+\end{columns}
+
+
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Java Bytcode and Frames}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{itemize}	
+\item Opcodes
+\item Prefix indicates type
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\includegraphics[height=.8\textheight]{Illustrations/stackBytecode.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\section[FINCH]{FINCH:Evolving Java Bytecode}
 
 \subsection[How it works]{How it Works}
+\begin{frame}
+	\frametitle{What is FINCH?}
+	\begin{itemize}
+		\item FINCH is an EA developed by M. Orlov and M. Sipper	
+		\item It evolves Java bytecode using crossover
+		\item It is a good example of dealing with semantic constraints
+	\end{itemize}
+\end{frame}
+
 \begin{frame}
   \frametitle{Selecting Offspring}
 
   \begin{itemize}
   	\item There is still a chance to produce non-compilable code
-	\item Solution: add restrictions to code selection
+	\item Solution: check if offspring follows semantic constraints
 	\begin{itemize}
 	\item Stack and Frame Depth
 	\item Variable Types
@@ -327,8 +331,13 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Good Crossover}
-  \includegraphics[height=.5\textheight]{Illustrations/goodCrossover.pdf}
+\begin{enumerate}
+\item Apply crossover to two parents
+\item Check if they comply to semantic constraints
+\item If the program passes the constraint test then it proceeds to offspring generation
+\item If it fails the constrain check then another attempt is made with the same parents
+\end{enumerate}
+
 \end{frame}
 
 \begin{frame}
@@ -337,9 +346,17 @@
 \end{frame}
 
 
+\begin{frame}
+  \frametitle{Good Crossover}
+  \includegraphics[height=.5\textheight]{Illustrations/goodCrossover.pdf}
+\end{frame}
+
+
+
+\subsection[Results]{Results}
 
 \begin{frame}
-\frametitle{Results}
+\frametitle{Array Sum}
 \begin{columns}
 \begin{column}{0.5\textwidth}
 \begin{itemize}
@@ -361,13 +378,21 @@
 
 
 \begin{frame}
-\frametitle{Results}
+\frametitle{Array Sum}
 
 \includegraphics[height=.38\textheight]{Illustrations/solutionRec.pdf}
 
 \end{frame}
 
-\subsection[Results]{Results}
+
+
+
+
+
+
+
+
+
 
 
 \section[Evolving Assembly]{Using Instruction-level Code to Automate Bug Repair}
@@ -392,7 +417,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Non-Halting Offspring}
+  \frametitle{Instruction Weight}
   
     \begin{itemize}
   	\item Only executed by failing test: weight = 1.0
@@ -402,6 +427,17 @@
 \end{frame}
 
 \subsection[Results]{Results}
+\begin{frame}
+
+
+\frametitle{Bugs Fixed}
+\begin{itemize}
+
+\item Buffer overflow
+\item Infinite loops
+\end{itemize}
+\end{frame}
+
 
 \section[Conclusions]{Conclusions}
 
