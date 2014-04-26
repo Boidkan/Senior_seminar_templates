@@ -143,9 +143,9 @@
 \begin{columns}[T]
 \begin{column}{0.5\textwidth}
 \begin{itemize}	
-	\item Uses the EC process to evolve programs
-	\item This done by using Evolutionary Algorithm (EA)
-	\item The population consists of programs
+	\item Genetic programming (GP) uses the EC process to evolve \textbf{programs}
+	\item This done by using an Evolutionary Algorithm (EA)
+	
 	
 \end{itemize}
 \end{column}
@@ -168,12 +168,12 @@
 \begin{itemize}
 	\item Tournament Selection
 	\\
-	\begin{itemize}
+	\begin{enumerate}
 	\item Randomly select a specified number of programs
 	\item Pick the program with the highest fitness
 	\item That program then is selected for reproduction
-	
-	\end{itemize}
+	\end{enumerate}
+
 	
 \end{itemize}
 \end{column}
@@ -189,22 +189,13 @@
 \begin{frame}
 	\frametitle{Genetic Programming}
 
-\begin{columns}[T]
+\begin{columns}[C]
 \begin{column}{0.5\textwidth}
 
-\begin{itemize}	
-	\item Crossover
-	\\
-	\begin{itemize}
-		\item Sexual reproduction
-	\end{itemize}
-	\item Mutation
-	\\
-	\begin{itemize}
-		\item Asexual reproduction
-		\item Can be used along with crossover
-	\end{itemize}
-\end{itemize}
+
+Two genetic operators used in GP are \textit{crossover} and \textit{mutation}
+
+
 \end{column}
 \begin{column}{0.5\textwidth}
    \includegraphics[height=0.85\textheight]{Illustrations/GP3.pdf}
@@ -355,18 +346,14 @@
 
 \begin{frame}
   \frametitle{Dealing With Semantic Constraints}
+The semantic constraints that are checked for are
 
-  \begin{itemize}
-  	\item There is still a chance to produce non-executable code
-	\item Solution: check if offspring follows semantic constraints
-	\\
 	\begin{itemize}
 	\item Stack and Frame Depth
 	\item Variable Types
 	\item Control Flow
 	\end{itemize}
 
-  \end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -446,8 +433,7 @@
 \begin{frame}
   \frametitle{Automating Bug Repair}
   \begin{itemize}
-  \item Schulte et al., designed EAs that fixes bugs in x86 assembly and Java bytecode
-  \item Evolves Java bytecode and x86 Assembly
+  \item Schulte et al., automated bug repair by evolving Java bytecode and x86 assembly
   \item Does not check for semantic constraints 
 
 
@@ -485,14 +471,7 @@
 \subsection[Results]{Results}
 
 
-\begin{frame}
-\frametitle{Bugs Fixed}
-\begin{itemize}
 
-\item Buffer overflow
-\item Infinite loops
-\end{itemize}
-\end{frame}
 
 
 \section[Conclusions]{Conclusions}
