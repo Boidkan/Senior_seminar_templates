@@ -263,13 +263,7 @@ Two genetic operators used in GP are \textit{crossover} and \textit{mutation}
    \only{\tiny{Both (a) and (b) are valid syntactically. However (b) is invalid semantically.}}
 \end{frame}
 
-\begin{frame}
-	\frametitle{EAs and Source Code}
-	\begin{itemize}
-		\item EAs that evolve source code are usually designed to avoid dealing with semantic constraints
-	\end{itemize}		
-\includegraphics[height=.5\textheight]{Illustrations/traditialGP.pdf}
-\end{frame}
+
 
 
 \begin{frame}
@@ -282,15 +276,7 @@ Two genetic operators used in GP are \textit{crossover} and \textit{mutation}
 
 \end{frame}
 
-\begin{frame}
-	\frametitle{Instruction-level Code Benefits}
-	\begin{itemize}
-		\item Do not need to understand the structure of the program being evolved
-		\item Can evolve a lot from a little
-		\item If there is a compiler for it we can evolve it
-	\end{itemize}		
 
-\end{frame}
 
 
 \section[Bytecode and Assembly]{Java Bytecode and the JVM}
@@ -369,13 +355,20 @@ The semantic constraints that are checked for are
 
 \begin{frame}
   \frametitle{Bad Crossover}
+  \begin{center}
   \includegraphics[height=.5\textheight]{Illustrations/badCrossover.pdf}
+  \end{center}
+  
 \end{frame}
 
 
 \begin{frame}
+
   \frametitle{Good Crossover}
+  \begin{center}
   \includegraphics[height=.5\textheight]{Illustrations/goodCrossover.pdf}
+  \end{center}
+  
 \end{frame}
 
 
@@ -408,7 +401,7 @@ The semantic constraints that are checked for are
 \begin{frame}
 \frametitle{Array Sum}
 \begin{center}
-\textbf{Decompiled Solution} 
+Decompiled Solution
 \\
 \includegraphics[height=.38\textheight]{Illustrations/solutionRec.pdf}
 \end{center}
@@ -478,14 +471,14 @@ The semantic constraints that are checked for are
 
 \begin{frame}
 \frametitle{Conclusions}
-\end{frame}
-
-
-\begin{frame}
+{\only<1>{\color{white}}
 \cite{FINCH:2011}
 \cite{Assembly:2010}
-%\cite{JVMspec:2013}
+}
 \end{frame}
+
+
+
 
 \section*{References}
 
