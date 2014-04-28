@@ -15,6 +15,9 @@
 % does not look nice, try deleting the line with the fontenc.
 \usepackage{amsmath}
 
+
+\beamertemplatenavigationsymbolsempty
+
 \newcommand{\linespace}{\vskip 0.25cm}
 
 \definecolor{MyForestGreen}{rgb}{0,0.7,0} 
@@ -73,21 +76,6 @@
 
 \section*{Overview}
 
-\subsection*{The big picture}
-
-\begin{frame}
-  \frametitle{The big picture}
-
-  \begin{itemize}  
-  	\item Evolving whole programs is hard to do with source code.
-	\item Evolving whole programs with bytecode and assembly is not as hard.
-  \end{itemize}
-
-%   \includegraphics[width=0.95\textwidth]{Illustrations/Empty_cocoon_crop_by_Bluedrakon_from_Flickr.jpg}
-%       \\
-%    \only{\tiny{Bluedrakon \\ \url{http://tr.im/pWUi} }}
-
-\end{frame}
 
 \subsection*{Outline}
 
@@ -150,41 +138,13 @@
 \end{itemize}
 \end{column}
 \begin{column}{0.5\textwidth}
-   \includegraphics[height=0.85\textheight]{Illustrations/GP1.pdf}
-       \\
-   \only{\tiny{The Evolutionary Computation Process}}
-\end{column}
-\end{columns}
-
-\end{frame}
-
-\begin{frame}
-	\frametitle{Genetic Programming}
-
-\begin{columns}[T]
-
-\begin{column}{0.5\textwidth}
-
-\begin{itemize}
-	\item Tournament Selection
-	\\
-	\begin{enumerate}
-	\item Randomly select a specified number of programs
-	\item Pick the program with the highest fitness
-	\item That program then is selected for reproduction
-	\end{enumerate}
-
-	
-\end{itemize}
-\end{column}
-\begin{column}{0.5\textwidth}
    \includegraphics[height=0.85\textheight]{Illustrations/GP2.pdf}
-       \\
-   \only{\tiny{The Evolutionary Computation Process}}
+
 \end{column}
 \end{columns}
-
 \end{frame}
+
+
 
 \begin{frame}
 	\frametitle{Genetic Programming}
@@ -199,8 +159,7 @@ Two genetic operators used in GP are \textit{crossover} and \textit{mutation}
 \end{column}
 \begin{column}{0.5\textwidth}
    \includegraphics[height=0.85\textheight]{Illustrations/GP3.pdf}
-       \\
-   \only{\tiny{The Evolutionary Computation Process}}
+
 \end{column}
 \end{columns}
 
@@ -256,11 +215,14 @@ Two genetic operators used in GP are \textit{crossover} and \textit{mutation}
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}[fragile]
 	\frametitle{Syntax vs Semantics}
+	Both (a) and (b) are valid syntactically. However, (b) is invalid semantically.
+	
+	
    \includegraphics[width=1\textwidth]{Illustrations/semantics.pdf}
-       \\
-   \only{\tiny{Both (a) and (b) are valid syntactically. However (b) is invalid semantically.}}
+
+
 \end{frame}
 
 
@@ -271,7 +233,7 @@ Two genetic operators used in GP are \textit{crossover} and \textit{mutation}
 	\begin{itemize}
 		\item Consists of a smaller alphabets
 		\item Simpler syntactically
-		\item Less semantic constraints to violate
+		\item Fewer semantic constraints to violate
 	\end{itemize}		
 
 \end{frame}
@@ -287,6 +249,7 @@ Two genetic operators used in GP are \textit{crossover} and \textit{mutation}
 \begin{column}{0.5\textwidth}
 \begin{itemize}	
 \item A frame stores data and partial results as well as return values for methods
+\item Each method call has a frame
 
 \end{itemize}
 \end{column}
@@ -324,7 +287,7 @@ Two genetic operators used in GP are \textit{crossover} and \textit{mutation}
 \begin{frame}
 	\frametitle{What is FINCH?}
 	\begin{itemize}
-		\item FINCH is an EA developed by M. Orlov and M. Sipper	
+		\item FINCH is an EA developed by Orlov and Sipper	
 		\item It evolves Java bytecode
 		\item It deals with semantic constraints
 	\end{itemize}
@@ -348,7 +311,7 @@ The semantic constraints that are checked for are
 \item Apply crossover to two parents
 \item Check if they comply to semantic constraints
 \item If the program passes the constraint test then it proceeds to offspring generation
-\item If it fails the constrain check then another attempt is made with the same parents
+\item If it fails the constraint check then another attempt is made with the same parents
 \end{enumerate}
 
 \end{frame}
@@ -390,7 +353,7 @@ The semantic constraints that are checked for are
 \end{itemize}
 \end{column}
 \begin{column}{0.5\textwidth}
-\includegraphics[height=.38\textheight]{Illustrations/seedRec.pdf}
+\includegraphics[height=.65\textheight]{Illustrations/seedRec.pdf}
 \end{column}
 \end{columns}
 \end{frame}
@@ -403,21 +366,11 @@ The semantic constraints that are checked for are
 \begin{center}
 Decompiled Solution
 \\
-\includegraphics[height=.38\textheight]{Illustrations/solutionRec.pdf}
+\includegraphics[height=.9\textheight]{Illustrations/solutionRec.pdf}
 \end{center}
 
 
 \end{frame}
-
-
-
-
-
-
-
-
-
-
 
 
 \section[Evolving Assembly]{Using Instruction-level Code to Automate Bug Repair}
@@ -427,6 +380,7 @@ Decompiled Solution
   \frametitle{Automating Bug Repair}
   \begin{itemize}
   \item Schulte et al., automated bug repair by evolving Java bytecode and x86 assembly
+  \item Fixed bugs in real code
   \item Does not check for semantic constraints 
 
 
@@ -463,6 +417,18 @@ Decompiled Solution
 
 \subsection[Results]{Results}
 
+\begin{frame}
+\frametitle{What was debugged?}
+Schulte et al., were able to debug:
+\begin{itemize}
+\item Infinite loops
+\item Buffer overflows
+\item Incorrect type declarations
+
+\end{itemize}
+
+
+\end{frame}
 
 
 
@@ -471,10 +437,25 @@ Decompiled Solution
 
 \begin{frame}
 \frametitle{Conclusions}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{}
 {\only<1>{\color{white}}
 \cite{FINCH:2011}
 \cite{Assembly:2010}
 }
+\begin{center}
+coll0474@morris.umn.edu
+\\
+\linespace
+\linespace
+\color{blue}{\fontsize{1cm}{1}\selectfont Questions?}
+\end{center}
+
 \end{frame}
 
 
