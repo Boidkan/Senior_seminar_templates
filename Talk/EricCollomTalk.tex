@@ -184,9 +184,9 @@ Two genetic operators used in GP are \textit{crossover} and \textit{mutation}
 \end{frame}
 
 
-\section[Why]{Why Bytecode and Assembly?}
+\section[Why]{Why Evolve Bytecode and Assembly?}
 
-\subsection{Difficulties in Source Code}
+\subsection{Difficulties With Source Code}
 \begin{frame}
 	\frametitle{Source Code Semantic Constraints}
 	\begin{itemize}
@@ -227,7 +227,7 @@ Two genetic operators used in GP are \textit{crossover} and \textit{mutation}
 
 
 
-
+\subsection{Instruction-Level Code}
 \begin{frame}
 	\frametitle{Instruction-Level Code Constraints}
 	\begin{itemize}
@@ -235,7 +235,6 @@ Two genetic operators used in GP are \textit{crossover} and \textit{mutation}
 		\item Simpler syntactically
 		\item Fewer semantic constraints to violate
 	\end{itemize}		
-
 \end{frame}
 
 
@@ -344,7 +343,7 @@ The semantic constraints that are checked for are
 
 \begin{frame}
 \frametitle{Array Sum}
-\begin{columns}
+\begin{columns}[T]
 \begin{column}{0.5\textwidth}
 \begin{itemize}
 \item The array sum problem
@@ -401,11 +400,13 @@ Decompiled Solution
 \end{frame}
 
 \begin{frame}
+\frametitle{Weighted Path}
 \begin{itemize}
+
    \item Programs at times consist of thousands of lines of code  
    \item Uses a weighted path due to size of programs
-   \item The weighted path was determined by what tests execute that instruction
-\end{itemize}
+   \item The weighted path was determined by the instructions that were executed by the tests
+   \end{itemize}
 \end{frame}
 
 
@@ -413,9 +414,9 @@ Decompiled Solution
   \frametitle{Instruction Weight}
   
     \begin{itemize}
-  	\item Only executed by failing test: weight = 1.0
-  	\item Executed by negative test and one positive: weight = 0.1
-  	\item Not executed by negative test case: weight = 0
+  	\item Each instruction executed by only by the failing test: weight = 1.0
+  	\item Executed by the negative test and one positive: weight = 0.1
+  	\item Not executed by the negative test case: weight = 0
   \end{itemize}
 \end{frame}
 
@@ -444,8 +445,7 @@ Schulte et al., were able to debug:
 \begin{itemize}
 \item It is difficult to evolve entire programs in source code due to semantic constraints
 \item It is easier to deal with semantic constraints with instruction-level code
-\item It is possible to evolve loops and recursion with instruction-level code
-\item It is  fix bugs such as buffer overflows and incorrect type declaration
+\item It is feasible to not deal with semantic constraints in some situations
 
 \end{itemize}
 
