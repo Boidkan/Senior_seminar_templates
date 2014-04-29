@@ -308,7 +308,7 @@ The semantic constraints that are checked for are
 \frametitle{Dealing With Semantic Constraints}
 \begin{enumerate}
 \item Apply crossover to two parents
-\item Check if they comply to semantic constraints
+\item Check if the offspring complies to semantic constraints
 \item If the program passes the constraint test then it proceeds to offspring generation
 \item If it fails the constraint check then another attempt is made with the same parents
 \end{enumerate}
@@ -384,19 +384,8 @@ Decompiled Solution
   \begin{itemize}
   \item Schulte et al., automated bug repair by evolving Java bytecode and x86 assembly
   \item Fixed bugs in real code
-  \item Does not check for semantic constraints 
-
-
+  \item Did not check for semantic constraints 
   \end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Tests and Fitness}
-\begin{itemize}
-	\item Fitness was determined by tests
-	\item Test consisted of one \textit{negative} test and multiple \textit{positive} tests
-	\item The negative test was used to check if the bug was fixed
-\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -405,8 +394,20 @@ Decompiled Solution
 
    \item Programs at times consist of thousands of lines of code  
    \item Uses a weighted path due to size of programs
-   \item The weighted path was determined by the instructions that were executed by the tests
+   \item The weight of a path was determined by the instructions that were executed by tests
+
    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Weighted Path}
+\begin{itemize}
+
+\item Test were provided that consisted of one \textit{negative} test and multiple \textit{positive} tests
+   	\item The negative test was used to represent the bug and check if it was fixed
+	\item The positive tests were used to retain functionality
+	
+\end{itemize}
 \end{frame}
 
 
@@ -414,9 +415,9 @@ Decompiled Solution
   \frametitle{Instruction Weight}
   
     \begin{itemize}
-  	\item Each instruction executed by only by the failing test: weight = 1.0
-  	\item Executed by the negative test and one positive: weight = 0.1
-  	\item Not executed by the negative test case: weight = 0
+  	\item Each instruction executed by only by the failing test was given a  weight of 1.0
+  	\item An instruction executed by the negative test and atleast one positive was given a weight of 0.1
+  	\item If an instruction was not executed by the negative test case a weight of 0 was assigned 
   \end{itemize}
 \end{frame}
 
