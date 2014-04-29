@@ -349,7 +349,7 @@ The semantic constraints that are checked for are
 \item The array sum problem
 \\
 \begin{itemize}
-\item Started with a zero fitness seed program
+\item Started with a worst case fitness seed program
 \item Counted function calls to check for a non-halting state
 \end{itemize}
 
@@ -382,7 +382,7 @@ Decompiled Solution
 \begin{frame}
   \frametitle{Automating Bug Repair}
   \begin{itemize}
-  \item Schulte et al., automated bug repair by evolving Java bytecode and x86 assembly
+  \item Schulte, et al., automated bug repair by evolving Java bytecode and x86 assembly
   \item Fixed bugs in real code
   \item Did not check for semantic constraints 
   \end{itemize}
@@ -447,6 +447,7 @@ Schulte et al., were able to debug:
 \item It is difficult to evolve entire programs in source code due to semantic constraints
 \item It is easier to deal with semantic constraints with instruction-level code
 \item It is feasible to not deal with semantic constraints in some situations
+\item It is possible to evolve small programs and fix simple bugs using instruction level code
 
 \end{itemize}
 
