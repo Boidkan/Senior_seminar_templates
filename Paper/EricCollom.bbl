@@ -12,7 +12,8 @@
 
 \bibitem{Forrest:2009}
 S.~Forrest, T.~Nguyen, W.~Weimer, and C.~Le~Goues.
-\newblock A genetic programming approach to automated software repair.
+\newblock A {G}enetic {P}rogramming {A}pproach to {A}utomated {S}oftware
+  {R}epair.
 \newblock In {\em Proceedings of the 11th Annual Conference on Genetic and
   Evolutionary Computation}, GECCO '09, pages 947--954, New York, NY, USA,
   2009. ACM.
@@ -25,20 +26,22 @@ J.~Koza.
 
 \bibitem{FINCH2:2009}
 M.~Orlov and M.~Sipper.
-\newblock Genetic programming in the wild: Evolving unrestricted bytecode.
+\newblock {G}enetic {P}rogramming in the {W}ild: {E}volving {U}nrestricted
+  {B}ytecode.
 \newblock In {\em Proceedings of the 11th Annual Conference on Genetic and
   Evolutionary Computation}, GECCO '09, pages 1043--1050, New York, NY, USA,
   2009. ACM.
 
 \bibitem{FINCH:2011}
 M.~Orlov and M.~Sipper.
-\newblock Flight of the finch through the java wilderness.
+\newblock {F}light of the {FINCH} {T}hrough the {J}ava {W}ilderness.
 \newblock {\em Evolutionary Computation, IEEE Transactions on}, 15(2):166--182,
   April 2011.
 
 \bibitem{Assembly:2010}
 E.~Schulte, S.~Forrest, and W.~Weimer.
-\newblock Automated program repair through the evolution of assembly code.
+\newblock {A}utomated {P}rogram {R}epair {T}hrough the {E}volution of
+  {A}ssembly {C}ode.
 \newblock In {\em Proceedings of the IEEE/ACM International Conference on
   Automated Software Engineering}, ASE '10, pages 313--316, New York, NY, USA,
   2010. ACM.
