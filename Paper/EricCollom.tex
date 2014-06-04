@@ -203,7 +203,7 @@ System.out.println(x);
 
 \end{verbatim}
 }
-\caption{Both (a) and (b) are valid code syntactically however (b) is not valid semantically. This is because \texttt{y} is uninitialized before the being used in the if statement. Also, assigning a float to an int violates type constraints and \texttt{z} in the print statement is undefined. Adapted from~\cite{FINCH:2011}.}
+\caption{Both (a) and (b) are valid code syntactically however (b) is not valid semantically. This is because \texttt{y} is uninitialized before when called in the if statement. Also, assigning a float to an int violates type constraints and \texttt{z} in the print statement is undefined. Adapted from~\cite{FINCH:2011}.}
 \label{semantics}
 \end{figure}
 
@@ -364,7 +364,7 @@ int sumlistrec(List list){
 \end{verbatim}
 }
 
-\caption{Initial population function, for the array sum problem, before being compiled to Java bytecode to be evolved. This function enters into infinite recursion in the if statement. Derived from~\cite{FINCH:2011}.}
+\caption{An initial population function, used for the array sum problem, before being compiled to Java bytecode to be evolved. This function enters into infinite recursion in the if statement. Derived from~\cite{FINCH:2011}.}
 \label{initial rec}
 \end{figure}
 
