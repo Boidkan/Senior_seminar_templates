@@ -203,7 +203,7 @@ System.out.println(x);
 
 \end{verbatim}
 }
-\caption{Both (a) and (b) are valid code syntactically however (b) is not valid semantically. This is because \texttt{y} is uninitialized before when called in the if statement. Also, assigning a float to an int violates type constraints and \texttt{z} in the print statement is undefined. Adapted from~\cite{FINCH:2011}.}
+\caption{Both (a) and (b) are valid code syntactically however (b) is not valid semantically. This is because \texttt{y} is uninitialized and then called in the if statement. Also, assigning a float to an int violates type constraints and \texttt{z} in the print statement is undefined. Adapted from~\cite{FINCH:2011}.}
 \label{semantics}
 \end{figure}
 
@@ -337,7 +337,7 @@ class SymbolicRegression{
 }
 \end{verbatim}
 }
-\caption{Example of a possible starting program,before compilation, for a symbolic regression problem.}
+\caption{Example of a possible starting program, before compilation, for a symbolic regression problem.}
 \label{regression}
 \end{figure}
 \subsubsection{Symbolic Regression}
